@@ -3,11 +3,21 @@ console.log("Starting plugin!");
 //Load the document and isolate the actual feed
 var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 
-function myFunction(str) {
-	console.log("Print: " + str);
+function myFunction(url, pageLink) {
+	console.log("Image \"" + url + "\", taken from " + pageLink);
+	window.open(pageLink, "_self");
 }
 
 function refreshNodes(){
+
+	//Remove all previous dl buttons
+	var element = document.getElementsByTagName("idl_button"), index;
+
+	for (index = element.length - 1; index >= 0; index--) {
+	    element[index].parentNode.removeChild(element[index]);
+	}
+
+
 	//Get all the nodes again
 	feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 
@@ -16,12 +26,12 @@ function refreshNodes(){
 		try{
 			var currentNode = feedNodeList.item(i);
 			imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
-			//var buttonLink = '<idl_button><a href="' + imageURL + '"><img src="https://raw.githubusercontent.com/JakeGuy11/image-archive/main/icons/icon.png" width=32 height=32></a></idl_button>';
+			//var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 			var buttonLink = '<idl_button><a><img src="https://raw.githubusercontent.com/JakeGuy11/image-archive/main/icons/icon.png" width=32 height=32></a></idl_button>';
 			currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).innerHTML += buttonLink;
 
 			var idl_downloader = currentNode.getElementsByTagName("img")[0];
-			idl_downloader.addEventListener("click", myFunction.bind(null, imageURL), false);
+			idl_downloader.addEventListener("click", myFunction.bind(null, imageURL, linkToPost), false);
 		}
 		catch (err) {	}
 	
@@ -32,4 +42,4 @@ function refreshNodes(){
 
 refreshNodes();
 
-//var intervalId = setInterval(refreshNodes, 1000);
+var intervalId = setInterval(refreshNodes, 1500);
