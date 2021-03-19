@@ -26,7 +26,7 @@ function refreshNodes(){
 		try{
 			var currentNode = feedNodeList.item(i);
 			imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
-			//var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
+			var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 			var buttonLink = '<idl_button><a><img src="https://raw.githubusercontent.com/JakeGuy11/image-archive/main/icons/icon.png" width=32 height=32></a></idl_button>';
 			currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).innerHTML += buttonLink;
 
