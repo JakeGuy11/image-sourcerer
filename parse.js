@@ -3,8 +3,8 @@ console.log("Starting plugin!");
 //Load the document and isolate the actual feed
 var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 
-function printTEST() {
-	console.log("print test!!!");
+function myFunction(str) {
+	console.log("Print: " + str);
 }
 
 function refreshNodes(){
@@ -21,7 +21,7 @@ function refreshNodes(){
 			currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).innerHTML += buttonLink;
 
 			var idl_downloader = currentNode.getElementsByTagName("img")[0];
-			idl_downloader.addEventListener("click", printTEST, false);
+			idl_downloader.addEventListener("click", myFunction.bind(null, imageURL), false);
 		}
 		catch (err) {	}
 	
