@@ -5,7 +5,7 @@ var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0
 
 function myFunction(url, pageLink) {
 	console.log("Image \"" + url + "\", taken from " + pageLink);
-	window.open(pageLink, "_self");
+	//window.open(url, "_self");
 }
 
 function refreshNodes(){
@@ -32,9 +32,12 @@ function refreshNodes(){
 			currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 
 			console.log(currentNode);
+			console.log(imageURL);
 
-			var idl_downloader = currentNode.getElementsByTagName("img")[0];
+			var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+			console.log(idl_downloader);
 			idl_downloader.addEventListener("click", myFunction.bind(null, imageURL, linkToPost), false);
+			console.log("Added click listener");
 		}
 		catch (err) {	}
 	
