@@ -5,7 +5,16 @@ var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0
 var oldListSize = 0;
 function myFunction(url, pageLink) {
 	console.log("Image \"" + url + "\", taken from " + pageLink + ". Sending to background script.");
-	browser.runtime.sendMessage({"url": url, "saveName": "testSaveName.png"});
+	var extention = "";
+	if(url.includes(".jpg")){
+		extention = ".jpg";
+	} else if(url.includes(".png")) {
+		extention = ".png";
+	} else {
+		console.log("Extention could not be found.");
+		return;
+	}
+	browser.runtime.sendMessage({"url": url, "saveName": "mySaveName", "ext": extention});
 }
 
 function refreshNodes(){
