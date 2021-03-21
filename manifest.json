@@ -10,11 +10,27 @@
     "198": "icons/icon.png"
   },
 
+  "permissions": [
+    "<all_urls>",
+    "activeTab",
+    "downloads",
+    "downloads.open"
+  ],
+
   "content_scripts": [
     {
       "matches": ["*://www.reddit.com/*"],
       "js": ["parse.js"]
     }
+  ],
+
+  "background": {
+    "scripts": ["download.js"]
+  },
+
+
+  "web_accessible_resources": [
+    "icons/icon.png"
   ]
 
 }

@@ -4,8 +4,8 @@ console.log("Starting plugin!");
 var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 var oldListSize = 0;
 function myFunction(url, pageLink) {
-	console.log("Image \"" + url + "\", taken from " + pageLink);
-	//window.open(url, "_self");
+	console.log("Image \"" + url + "\", taken from " + pageLink + ". Sending to background script.");
+	browser.runtime.sendMessage({"url": url, "saveName": "testSaveName.png"});
 }
 
 function refreshNodes(){
@@ -30,8 +30,7 @@ function refreshNodes(){
 				var currentNode = feedNodeList.item(i);
 				imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
 				var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
-				var buttonLink = '<idl_button align="right"><a><img src="https://raw.githubusercontent.com/JakeGuy11/image-archive/main/icons/icon.png" width=32 height=32></a></idl_button>';
-				//currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).innerHTML += buttonLink;
+				var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("icons/icon.png") + '" width=32 height=32></a></idl_button>';
 				currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 
 				var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
