@@ -17,6 +17,12 @@
     "downloads.open"
   ],
 
+  "browser_action": {
+    "default_icon": "icons/icon.png",
+    "default_title": "image-archive",
+    "default_popup": "popup-res/popup.html"
+  },
+
   "content_scripts": [
     {
       "matches": ["*://www.reddit.com/*"],

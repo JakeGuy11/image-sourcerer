@@ -1,0 +1,21 @@
+body {
+	border-style: none;
+	background-color: #00000000;
+}
+
+.fadingButton {
+	background-color: #CECECE;
+	border-radius: 10px;
+	border: none;
+	color: black;
+	padding: 8px 16px;
+	text-align: center;
+	font-size: 12px;
+	margin: 4px 2px;
+	transition: 0.4s;
+}
+
+.fadingButton:hover {
+  background-color: #000000;
+  color: white;
+}
