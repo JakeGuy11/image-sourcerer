@@ -14,7 +14,12 @@ function myFunction(url, pageLink) {
 		console.log("Extention could not be found.");
 		return;
 	}
-	browser.runtime.sendMessage({"url": url, "saveName": "mySaveName", "ext": extention});
+	var saveName = prompt("Enter the path (relative to ~/Downloads/image-downloader/) and filename you would like to save the image under","");
+	if(saveName.includes("..")){
+		alert("Your saveName cannot include '..'");
+		return;
+	}
+	browser.runtime.sendMessage({"url": url, "saveName": "image-downloader/" + saveName, "ext": extention});
 }
 
 function refreshNodes(){
