@@ -20,12 +20,12 @@
   "content_scripts": [
     {
       "matches": ["*://www.reddit.com/*"],
-      "js": ["parse.js"]
+      "js": ["page-scripts/reddit.js"]
     }
   ],
 
   "background": {
-    "scripts": ["download.js"]
+    "scripts": ["util-scripts/download.js"]
   },
 
 
@@ -34,3 +34,4 @@
   ]
 
 }
+

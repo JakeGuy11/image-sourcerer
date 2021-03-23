@@ -37,8 +37,10 @@ function refreshNodes(){
 		for(var i = 0; i < feedNodeList.length; i++) {
 			try{
 				var currentNode = feedNodeList.item(i);
+				console.log(currentNode);
 				imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
 				var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
+				var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
 				var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("icons/icon.png") + '" width=32 height=32></a></idl_button>';
 				currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 
