@@ -5,6 +5,7 @@ console.log("=========================");
 //Load the document and isolate the actual feed
 var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 var oldListSize = 0;
+
 function myFunction(url, pageLink) {
 	console.log("Image \"" + url + "\", taken from " + pageLink + ". Sending to background script.");
 	var extention = "";
@@ -12,6 +13,8 @@ function myFunction(url, pageLink) {
 		extention = ".jpg";
 	} else if(url.includes(".png")) {
 		extention = ".png";
+	} else if(url.includes(".gif")) {
+		extention = ".gif";
 	} else {
 		console.log("Extention could not be found.");
 		return;
@@ -43,9 +46,9 @@ function refreshNodes(){
 		//For ever node in the list
 		for(var i = 0; i < feedNodeList.length; i++) {
 			try{
+				//Regular Image Post. No links, gifs, slides.
 				var currentNode = feedNodeList.item(i);
-				console.log(currentNode);
-				imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
+				var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
 				var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 				var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
 				var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("icons/download.png") + '" width=32 height=32></a></idl_button>';
@@ -54,7 +57,20 @@ function refreshNodes(){
 				var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
 				idl_downloader.addEventListener("click", myFunction.bind(null, imageURL, linkToPost), false);
 			}
-			catch (err) {	}
+			catch (err){
+				try {
+					//GIF post. No links or slides.
+					var currentNode = feedNodeList.item(i);
+					var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(0).nodeValue;
+					var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
+					var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
+					var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("icons/download.png") + '" width=32 height=32></a></idl_button>';
+					currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
+
+					var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+					idl_downloader.addEventListener("click", myFunction.bind(null, imageURL, linkToPost), false);
+				} catch (err2) {		}
+			}
 		
 		}
 
