@@ -2,6 +2,7 @@ console.log("=========================");
 console.log("Starting Reddit Script...");
 console.log("=========================");
 
+//A test message to send at the start
 browser.runtime.sendMessage({ "message": "This is my message" });
 
 //Load the document and isolate the actual feed

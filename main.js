@@ -4,8 +4,6 @@ console.log("=======================");
 
 browser.runtime.onMessage.addListener(saveImage);
 
-function saveImage() {
-	console.log("Yo");
+function saveImage(msg) {
+	console.log("Message SaveName: " + msg.saveName);
 }
-
-console.log("Finished adding [main.js] listener");
