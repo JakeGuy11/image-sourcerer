@@ -2,12 +2,14 @@ console.log("=========================");
 console.log("Starting Reddit Script...");
 console.log("=========================");
 
+browser.runtime.sendMessage({ "message": "This is my message" });
+
 //Load the document and isolate the actual feed
 var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 var oldListSize = 0;
 
 function myFunction(url, pageLink) {
-	console.log("Image \"" + url + "\", taken from " + pageLink + ". Sending to background script.");
+	console.log("Image \"" + url + "\", taken from " + pageLink + ".");
 	var extention = "";
 	if(url.includes(".jpg")){
 		extention = ".jpg";
@@ -62,7 +64,7 @@ function refreshNodes(){
 					//GIF post. No links or slides.
 					var currentNode = feedNodeList.item(i);
 					var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(0).nodeValue;
-					if(imageURL.includes(".m3u8")) throw new Error("Extention not supported");
+					if(!imageURL.includes(".gif")) throw new Error("Extention not supported");
 					var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 					var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
 					var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("icons/download.png") + '" width=32 height=32></a></idl_button>';

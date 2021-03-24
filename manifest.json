@@ -25,6 +25,10 @@
 
   "content_scripts": [
     {
+      "matches": ["<all_urls>"],
+      "js": ["main.js"]
+    },
+    {
       "matches": ["*://www.reddit.com/*"],
       "js": ["page-scripts/reddit.js"]
     },
@@ -35,7 +39,7 @@
   ],
 
   "background": {
-    "scripts": ["util-scripts/download.js"]
+    "scripts": ["util-scripts/download.js", "util-scripts/relay.js"]
   },
 
 
