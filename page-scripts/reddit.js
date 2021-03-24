@@ -14,12 +14,12 @@ function myFunction(url, pageLink) {
 		console.log("Extention could not be found.");
 		return;
 	}
-	var saveName = prompt("Enter the path (relative to ~/Downloads/image-downloader/) and filename you would like to save the image under","");
+	var saveName = prompt("Enter the path (relative to ~/Downloads/Image-Sourcerer/) and filename you would like to save the image under","");
 	if(saveName.includes("..")){
 		alert("Your saveName cannot include '..'");
 		return;
 	}
-	browser.runtime.sendMessage({"url": url, "saveName": "image-downloader/" + saveName, "ext": extention});
+	browser.runtime.sendMessage({"url": url, "saveName": "Image-Sourcerer/" + saveName, "ext": extention});
 }
 
 function refreshNodes(){
@@ -46,7 +46,7 @@ function refreshNodes(){
 				imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
 				var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 				var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
-				var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("icons/icon.png") + '" width=32 height=32></a></idl_button>';
+				var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("icons/download.png") + '" width=32 height=32></a></idl_button>';
 				currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 
 				var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];

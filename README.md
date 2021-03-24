@@ -1,5 +1,5 @@
-# *image-archive*
-*image-archive* is a browser extension (currently tested only on FireFox) that is designed to download, tag and track images from supported sites. Once complete, this application will help users download images from sites like Reddit and Twitter, letting them control how it is organized and keeping track of the original creators.
+# *Image Sourcerer*
+*Image Sourcerer* is a browser extension (currently tested only on FireFox) that is designed to download, tag and track images from supported sites. Once complete, this application will help users download images from sites like Reddit and Twitter, letting them control how it is organized and keeping track of the original creators.
 
 # Contents
 - [Installation](#Installation)
@@ -8,11 +8,11 @@
 
 # Installation
 To install on FireFox:
-1. Download and extract the [latest release](https://github.com/JakeGuy11/image-archive/releases) OR download the lasted commit:
+1. Download and extract the [latest release](https://github.com/JakeGuy11/image-sourcerer/releases) OR download the lasted commit:
 ```bash
-git clone https://github.com/JakeGuy11/image-archive.git
+git clone https://github.com/JakeGuy11/image-sourcerer.git
 # or
-git clone git@github.com:JakeGuy11/image-archive.git
+git clone git@github.com:JakeGuy11/image-sourcerer.git
 ```
 2. Navigate to `about:debugging` in your browser. On the panel on the left hand side, click "This Firefox"
 3. Click "Load Temporary Add-on..." and navigate to where you saved the repository. Select `manifest.json`

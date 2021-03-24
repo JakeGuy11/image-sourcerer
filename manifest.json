@@ -1,13 +1,13 @@
 {
 
   "manifest_version": 2,
-  "name": "image-archive",
+  "name": "Image Sourcerer",
   "version": "0.1",
 
-  "description": "Download images with accurate metadata and information",
+  "description": "Download, organize and track images from supported sites",
 
   "icons": {
-    "198": "icons/icon.png"
+    "512": "icons/icon-512.png"
   },
 
   "permissions": [
@@ -18,8 +18,8 @@
   ],
 
   "browser_action": {
-    "default_icon": "icons/icon.png",
-    "default_title": "image-archive",
+    "default_icon": "icons/icon-512.png",
+    "default_title": "Image Sourcerer",
     "default_popup": "popup-res/popup.html"
   },
 
@@ -36,7 +36,7 @@
 
 
   "web_accessible_resources": [
-    "icons/icon.png"
+    "icons/download.png"
   ]
 
 }
