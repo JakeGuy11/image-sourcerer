@@ -1,15 +1,24 @@
 body {
 	border-style: none;
-	background-color: #00000000;
-	height: 375px;
-	width: 300px;
+	background-color: #C3809B;
+	height: 530px;
+	width: 310px;
+}
+
+h1 {
+	color: #490415;
+}
+
+.t {
+	color: #490415;
+	font-family: 'Open Sans', sans-serif;
 }
 
 .fadingButton {
-	background-color: #CECEDF;
+	background-color: #542538;
 	border-radius: 10px;
 	border: none;
-	color: black;
+	color: #C3809B;
 	padding: 8px 16px;
 	text-align: center;
 	font-size: 12px;
