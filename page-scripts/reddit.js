@@ -1,4 +1,6 @@
-console.log("Starting plugin!");
+console.log("=========================");
+console.log("Starting Reddit Script...");
+console.log("=========================");
 
 //Load the document and isolate the actual feed
 var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;

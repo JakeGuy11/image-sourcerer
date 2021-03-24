@@ -1,4 +1,6 @@
-console.log("Starting plugin!");
+console.log("===========================");
+console.log("Starting Download Script...");
+console.log("===========================");
 
 browser.runtime.onMessage.addListener(saveImage);
 
