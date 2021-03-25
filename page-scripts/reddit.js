@@ -1,16 +1,13 @@
-console.log("=========================");
-console.log("Starting Reddit Script...");
-console.log("=========================");
-
-//A test message to send at the start
-browser.runtime.sendMessage({ "message": "This is my message" });
+sleep(1000);
+notifySignal({ "intent": "relay", "content": "==================" });
+notifySignal({ "intent": "relay", "content": "Starting Reddit.js" });
+notifySignal({ "intent": "relay", "content": "==================" });
 
 //Load the document and isolate the actual feed
 var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 var oldListSize = 0;
 
 function myFunction(url, pageLink) {
-	console.log("Image \"" + url + "\", taken from " + pageLink + ".");
 	var extention = "";
 	if(url.includes(".jpg")){
 		extention = ".jpg";
@@ -19,7 +16,7 @@ function myFunction(url, pageLink) {
 	} else if(url.includes(".gif")) {
 		extention = ".gif";
 	} else {
-		console.log("Extention could not be found.");
+		notifySignal({ "intent": "relay", "content": "Extention could not be found." });
 		return;
 	}
 	var saveName = prompt("Enter the path (relative to ~/Downloads/Image-Sourcerer/) and filename you would like to save the image under","");
@@ -27,7 +24,7 @@ function myFunction(url, pageLink) {
 		alert("Your saveName cannot include '..'");
 		return;
 	}
-	browser.runtime.sendMessage({ "action": "download", "sender": "reddit.js", "url": url, "saveName": "Image-Sourcerer/" + saveName, "ext": extention });
+	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention });
 }
 
 function refreshNodes(){
@@ -36,7 +33,7 @@ function refreshNodes(){
 	feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 
 	if(oldListSize < feedNodeList.length) {
-		console.log("Posts updated from " + oldListSize + " to " + feedNodeList.length);
+		notifySignal({ "intent": "relay", "content": "Posts updated from " + oldListSize + " to " + feedNodeList.length });
 		oldListSize = feedNodeList.length;
 
 		//Remove all previous dl buttons
@@ -85,3 +82,17 @@ function refreshNodes(){
 refreshNodes();
 
 var intervalId = setInterval(refreshNodes, 3000);
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+
+function notifySignal(msg) {
+	msg.sender = "reddit.js";
+	if(!("intent" in msg)) msg.intent = "undefined_intent";
+	browser.runtime.sendMessage(msg);
+}

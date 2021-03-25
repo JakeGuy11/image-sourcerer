@@ -5,8 +5,10 @@ console.log("===========================");
 browser.runtime.onMessage.addListener(saveImage);
 
 function saveImage(message){
-	browser.downloads.download({
-		url: message.url,
-		filename: message.saveName + message.ext
-	});
+	if(message.intent == "download") {
+		browser.downloads.download({
+			url: message.target_url,
+			filename: message.save_name + message.ext
+		});
+	}
 }
