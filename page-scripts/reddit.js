@@ -7,6 +7,13 @@ notifySignal({ "intent": "relay", "content": "======================" });
 var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 var oldListSize = 0;
 
+//Inject the CSS for a floating button
+const linkInjection = document.createElement('link');
+linkInjection.rel = "stylesheet";
+linkInjection.type = "css";
+linkInjection.href = browser.runtime.getURL("popup-res/floating_button.css");
+document.head.append(linkInjection);
+
 function myFunction(url, pageLink, upvoteButton) {
 	upvoteButton.click();
 	var extention = "";
@@ -49,14 +56,26 @@ function refreshNodes(){
 			try{
 				//Regular Image Post. No links, gifs, slides.
 				var currentNode = feedNodeList.item(i);
-				var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
-				var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
-				var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
-				var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("icons/download.png") + '" width=32></a></idl_button>';
-				currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
+
+				try {
+					var imgList = currentNode.getElementsByTagName("img");
+					for(var imageNum in currentNode.getElementsByTagName("img")) {
+						var image = imgList.item(0);
+						var parentElement = image.parentNode;
+						parentElement.getElementsByTagName("img").item(0).remove();
+					}
+				} catch (error) {
+					notifySignal({ "intent": "relay", "content": error });
+				}
+
+				//var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
+				//var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
+				//var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
+				//var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("icons/download.png") + '" width=32></a></idl_button>';
+				//currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 				
-				var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-				idl_downloader.addEventListener("click", myFunction.bind(null, imageURL, linkToPost, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0)), false);
+				//var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+				//idl_downloader.addEventListener("click", myFunction.bind(null, imageURL, linkToPost, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0)), false);
 			}
 			catch (err){
 				try {
