@@ -1,9 +1,19 @@
-console.log("=======================");
-console.log("Starting Main Script...");
-console.log("=======================");
+console.log("[main.js]: =======================");
+console.log("[main.js]: Starting Main Script...");
+console.log("[main.js]: =======================");
 
-browser.runtime.onMessage.addListener(saveImage);
+browser.runtime.onMessage.addListener(messageRecieved);
 
-function saveImage(msg) {
-	console.log("Message SaveName: " + msg.saveName);
+function messageRecieved(msg) {
+	switch (msg.action) {
+		case "relay":
+			console.log("[" + msg.sender + "]: " + msg.content);
+		break;
+		case "download":
+			console.log("[" + msg.sender + "]: Downloading " + msg.target_url);
+		break;
+		default:
+			console.log("[main.js]: Untagged message recieved:");
+			console.log(msg);
+	}
 }

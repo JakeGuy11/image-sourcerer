@@ -27,7 +27,7 @@ function myFunction(url, pageLink) {
 		alert("Your saveName cannot include '..'");
 		return;
 	}
-	browser.runtime.sendMessage({"url": url, "saveName": "Image-Sourcerer/" + saveName, "ext": extention});
+	browser.runtime.sendMessage({ "action": "download", "sender": "reddit.js", "url": url, "saveName": "Image-Sourcerer/" + saveName, "ext": extention });
 }
 
 function refreshNodes(){
