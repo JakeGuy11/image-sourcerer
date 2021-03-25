@@ -1,0 +1,14 @@
+.floating_button {
+       float: left;
+       position: absolute;
+       left: 0px;
+       top: 0px;
+       z-index: 1000;
+       background-color: #92AD40;
+       padding: 5px;
+       color: #FFFFFF;
+       font-weight: bold;
+}
+.image_container {
+       position: fixed;
+}
