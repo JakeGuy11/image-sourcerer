@@ -1,4 +1,4 @@
-# *Image Sourcerer*
+<img src="/icons/logo-large.png" alt="Image Sourcerer" width=1024>
 *Image Sourcerer* is a browser extension (currently tested only on FireFox) that is designed to download, tag and track images from supported sites. Once complete, this application will help users download images from sites like Reddit and Twitter, letting them control how it is organized and keeping track of the original creators.
 
 # Contents
