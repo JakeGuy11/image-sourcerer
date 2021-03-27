@@ -7,7 +7,7 @@
   "description": "Download, organize and track images from supported sites",
 
   "icons": {
-    "512": "icons/icon-512.png"
+    "512": "res/icons/icon-512.png"
   },
 
   "permissions": [
@@ -18,9 +18,9 @@
   ],
 
   "browser_action": {
-    "default_icon": "icons/icon-512.png",
+    "default_icon": "res/icons/icon-512.png",
     "default_title": "Image Sourcerer",
-    "default_popup": "popup-res/popup.html"
+    "default_popup": "res/popup.html"
   },
 
   "content_scripts": [
@@ -44,7 +44,7 @@
 
 
   "web_accessible_resources": [
-    "icons/download.png"
+    "res/icons/download.png"
   ]
 
 }
