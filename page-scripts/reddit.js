@@ -39,9 +39,17 @@ function handleSwipePost(nodeNumber){
 	console.log("On post: " + nodeNumber);
 	var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 	var currentNode = feedNodeList.item(nodeNumber);
-	var slideNum = prompt("Enter the number of the post you would like to download:","");
-	console.log("SlideNum: " + slideNum);
-	console.log(currentNode);
+	var desiredSlide = prompt("Enter the number of the post you would like to download:","");
+	if(desiredSlide === null) return;
+	var desiredSlideNum = parseInt(desiredSlide);
+	console.log("SlideNum: " + desiredSlide);
+	if(desiredSlideNum === parseInt(desiredSlide, 10)){
+		console.log("The slide value you entered is a number: " + desiredSlide);
+		var postNodeList = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes;
+		console.log(postNodeList.item(desiredSlide - 1));
+	}else{
+		alert("The slide value you entered in not a number");
+	}
 }
 
 function refreshNodes(){
