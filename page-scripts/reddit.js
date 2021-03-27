@@ -44,9 +44,13 @@ function handleSwipePost(nodeNumber){
 	var desiredSlideNum = parseInt(desiredSlide);
 	console.log("SlideNum: " + desiredSlide);
 	if(desiredSlideNum === parseInt(desiredSlide, 10)){
-		console.log("The slide value you entered is a number: " + desiredSlide);
-		var postNodeList = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes;
-		console.log(postNodeList.item(desiredSlide - 1));
+		try {
+			var postNodeList = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes;
+			var wantedImageNode = postNodeList.item(desiredSlide - 1);
+			console.log(wantedImageNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.src.nodeValue);
+		} catch (err) {
+			alert("The image at the selected index has not been loaded yet");
+		}
 	}else{
 		alert("The slide value you entered in not a number");
 	}
