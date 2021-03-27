@@ -7,13 +7,6 @@ notifySignal({ "intent": "relay", "content": "======================" });
 var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 var oldListSize = 0;
 
-//Inject the CSS for a floating button
-const linkInjection = document.createElement('link');
-linkInjection.rel = "stylesheet";
-linkInjection.type = "css";
-linkInjection.href = browser.runtime.getURL("popup-res/floating_button.css");
-document.head.append(linkInjection);
-
 function startDownload(url, pageLink, upvoteButton) {
 	upvoteButton.click();
 	var extention = "";
@@ -137,18 +130,6 @@ function refreshNodes(){
 									var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
 									idl_downloader.addEventListener("click", handleSwipePost.bind(null, i), false);
 								}
-								
-								//var interestedNode = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0);
-								//var leftButton = interestedNode.childNodes.item(1).childNodes.item(0);
-								//var rightButton = interestedNode.childNodes.item(2).childNodes.item(0);
-								//var imagesToCheck = interestedNode.parentNode.childNodes.item(1).childNodes.item(2).textContent;
-
-								//
-								//var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
-								
-								
-								//var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-								//idl_downloader.addEventListener("click", startDownload.bind(null, imageURL, linkToPost, ), false);
 							} catch (err5) {	}
 						}
 					}
