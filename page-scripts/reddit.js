@@ -26,6 +26,7 @@ function startDownload(url, pageLink, upvoteButton) {
 		return;
 	}
 	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention });
+	notifySignal({ "intent": "log", "pageLink": pageLink, "save_name": saveName, "site": "reddit.com" });
 }
 
 function handleSwipePost(nodeNumber){
