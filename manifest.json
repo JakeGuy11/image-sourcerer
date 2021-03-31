@@ -12,6 +12,7 @@
 
   "permissions": [
     "<all_urls>",
+    "storage",
     "activeTab",
     "downloads",
     "downloads.open"

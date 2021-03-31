@@ -2,7 +2,20 @@ console.log("[main.js]: =======================");
 console.log("[main.js]: Starting Main Script...");
 console.log("[main.js]: =======================");
 
-browser.runtime.onMessage.addListener(messageRecieved);
+chrome.extension.onRequest.addListener(messageRecieved);
+
+var userLog = localStorage.getItem('log');
+
+userLog = new Array();
+
+//try {
+//	if(userLog === "" || userLog === null){
+//		userLog = [];
+//		localStorage.setItem('log', userLog);
+//	}
+//} catch (err){
+//	console.log(err);
+//}
 
 function messageRecieved(recMsg) {
 	switch (recMsg.intent) {
@@ -19,7 +32,23 @@ function messageRecieved(recMsg) {
 			console.log("[" + recMsg.sender + "][Intent not specified]: " + recMsg.content);
 			break;
 		case "log":
-			
+			try {
+				//var userLogStr = localStorage.getItem('log');
+				//console.log(userLogStr);
+				//userLog = JSON.parse(userLogStr);
+				//console.log(typeof userLog);
+				var elementToAdd = {
+					site: recMsg.pageLink,
+					name: recMsg.save_name
+				};
+				console.log(elementToAdd);
+				console.log(JSON.stringify(elementToAdd));
+				userLog.push(elementToAdd);
+				console.log(userLog);
+				localStorage.setItem('log', userLog);
+			} catch (err) {
+				console.log(err);
+			}
 			break;
 		default:
 			console.log("[main.js]: Untagged message recieved:");
@@ -30,5 +59,5 @@ function messageRecieved(recMsg) {
 function notifySignal(msg) {
 	msg.sender = "reddit.js";
 	if(!("intent" in msg)) msg.intent = "undefined_intent";
-	browser.runtime.sendMessage(msg);
+	chrome.runtime.sendMessage(msg);
 }

@@ -26,18 +26,16 @@ function startDownload(url, pageLink, upvoteButton) {
 		return;
 	}
 	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention });
-	notifySignal({ "intent": "log", "pageLink": pageLink, "save_name": saveName, "site": "reddit.com" });
+	notifySignal({ "intent": "log", "pageLink": pageLink, "save_name": saveName });
 }
 
 function handleSwipePost(nodeNumber){
-	console.log("On post: " + nodeNumber);
 	var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 	var currentNode = feedNodeList.item(nodeNumber);
 	var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 	var desiredSlide = prompt("Enter the number of the post you would like to download:","");
 	if(desiredSlide === null) return;
 	var desiredSlideNum = parseInt(desiredSlide);
-	console.log("SlideNum: " + desiredSlide);
 	if(desiredSlideNum === parseInt(desiredSlide, 10)){
 		try {
 			var postNodeList = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes;
@@ -76,7 +74,7 @@ function refreshNodes(){
 				var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
 				var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 				var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
-				var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("res/icons/download.png") + '" height=24></a></idl_button>';
+				var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("res/icons/download.png") + '" height=24></a></idl_button>';
 				currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 				
 				var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
@@ -90,7 +88,7 @@ function refreshNodes(){
 					if(!imageURL.includes(".gif")) throw new Error("Extention not supported");
 					var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 					var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
-					var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("res/icons/download.png") + '" height=24></a></idl_button>';
+					var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("res/icons/download.png") + '" height=24></a></idl_button>';
 					currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 
 					var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
@@ -102,7 +100,7 @@ function refreshNodes(){
 						var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.src.nodeValue;
 						var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 						var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
-						var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("res/icons/download.png") + '" height=24></a></idl_button>';
+						var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("res/icons/download.png") + '" height=24></a></idl_button>';
 						currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 						
 						var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
@@ -114,7 +112,7 @@ function refreshNodes(){
 							var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(3).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.src.nodeValue;
 							var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 							var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
-							var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("res/icons/download.png") + '" height=24></a></idl_button>';
+							var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("res/icons/download.png") + '" height=24></a></idl_button>';
 							currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 							
 							var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
@@ -125,7 +123,7 @@ function refreshNodes(){
 								var currentNode = feedNodeList.item(i);
 								var multiPostIndicator = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1);
 								if(multiPostIndicator != null) {
-									var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("res/icons/download.png") + '" height=24></a></idl_button>';
+									var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("res/icons/download.png") + '" height=24></a></idl_button>';
 									currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 									
 									var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
@@ -158,5 +156,5 @@ function sleep(milliseconds) {
 function notifySignal(msg) {
 	msg.sender = "reddit.js";
 	if(!("intent" in msg)) msg.intent = "undefined_intent";
-	browser.runtime.sendMessage(msg);
+	chrome.runtime.sendMessage(msg);
 }
