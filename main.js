@@ -36,10 +36,16 @@ function messageRecieved(recMsg) {
 			}
 			break;
 		case "download_log": 
-			userLog = JSON.parse(localStorage.getItem('log'));
-			var logBlob = new Blob(userLog, {type: "text/plain"});
-			var blobUrl = URL.createObjectURL(logBlob);
-			notifySignal({ "intent": "download", "target_url": blobUrl, "save_name": "userLog", "ext": ".txt" });
+			try {
+				userLog = JSON.parse(localStorage.getItem('log'));
+				console.log("Starting String: " + JSON.stringify(userLog));
+				//var logBlob = new Blob([{ "log": JSON.stringify(userLog) }], {type: "text/plain"});
+				var logBlob = new Blob([JSON.stringify(userLog)], {type: "text/plain"});
+				var blobUrl = URL.createObjectURL(logBlob);
+				notifySignal({ "intent": "download", "target_url": blobUrl, "save_name": "userLog", "ext": ".txt" });
+			} catch (err) {
+				console.log(err);
+			}
 			break;
 		default:
 			console.log("[main.js]: Untagged message recieved:");
