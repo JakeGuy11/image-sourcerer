@@ -35,6 +35,12 @@ function messageRecieved(recMsg) {
 				console.log(err);
 			}
 			break;
+		case "download_log": 
+			userLog = JSON.parse(localStorage.getItem('log'));
+			var logBlob = new Blob(userLog, {type: "text/plain"});
+			var blobUrl = URL.createObjectURL(logBlob);
+			notifySignal({ "intent": "download", "target_url": blobUrl, "save_name": "userLog", "ext": ".txt" });
+			break;
 		default:
 			console.log("[main.js]: Untagged message recieved:");
 			console.log(recMsg);
