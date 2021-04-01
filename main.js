@@ -6,16 +6,7 @@ chrome.extension.onRequest.addListener(messageRecieved);
 
 var userLog = localStorage.getItem('log');
 
-userLog = new Array();
-
-//try {
-//	if(userLog === "" || userLog === null){
-//		userLog = [];
-//		localStorage.setItem('log', userLog);
-//	}
-//} catch (err){
-//	console.log(err);
-//}
+userLog = [ { } ];
 
 function messageRecieved(recMsg) {
 	switch (recMsg.intent) {
@@ -33,19 +24,13 @@ function messageRecieved(recMsg) {
 			break;
 		case "log":
 			try {
-				//var userLogStr = localStorage.getItem('log');
-				//console.log(userLogStr);
-				//userLog = JSON.parse(userLogStr);
-				//console.log(typeof userLog);
+				userLog = JSON.parse(localStorage.getItem('log'));
 				var elementToAdd = {
 					site: recMsg.pageLink,
 					name: recMsg.save_name
 				};
-				console.log(elementToAdd);
-				console.log(JSON.stringify(elementToAdd));
 				userLog.push(elementToAdd);
-				console.log(userLog);
-				localStorage.setItem('log', userLog);
+				localStorage.setItem('log', JSON.stringify(userLog));
 			} catch (err) {
 				console.log(err);
 			}
