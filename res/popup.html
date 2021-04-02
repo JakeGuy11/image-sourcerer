@@ -4,7 +4,6 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com">
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400&display=swap" rel="stylesheet"> 
 	<body>
-		<script src="popup.js"></script>
 		<center><img src="icons/logo-small.png" width=66%></center>
 		<center><b><p class="t">Overview</p></b></center>
 		<p class="t">
@@ -16,10 +15,11 @@
 		</p>
 		<center><div><b><p class="t">Links</p></b></div></center>
 		<center>
-			<button type="button" onclick="openGithubPage();" class="fadingButton">Open GitHub Page</button>
-			<button type="button" onclick="openGithubTemplate();" class="fadingButton">Open Script Template</button>
+			<button type="button" id="openGithubPageButton" class="fadingButton">Open GitHub Page</button>
+			<button type="button" id="openGithubTemplateButton" class="fadingButton">Open Script Template</button>
 			<br>
-			<button type="button" onclick="downloadLog();" class="fadingButton">Export Log</button>
+			<button type="button" id="downloadLogButton" class="fadingButton">Export Log</button>
 	</center>
+	<script src="popup.js"></script>
 	</body>
 </html>

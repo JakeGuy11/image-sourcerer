@@ -2,6 +2,10 @@ notifySignal({ "intent": "relay", "content": "=====================" });
 notifySignal({ "intent": "relay", "content": "Starting Popup Script" });
 notifySignal({ "intent": "relay", "content": "=====================" });
 
+document.getElementById("openGithubPageButton").addEventListener("click", openGithubPage);
+document.getElementById("openGithubTemplateButton").addEventListener("click", openGithubTemplate);
+document.getElementById("downloadLogButton").addEventListener("click", downloadLog);
+
 function openGithubPage(){
 	chrome.tabs.create({
 		active: true,

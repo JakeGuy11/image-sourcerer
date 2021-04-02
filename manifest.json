@@ -4,8 +4,6 @@
   "name": "Image Sourcerer",
   "version": "0.4",
 
-  "description": "Download, organize and track images from supported sites",
-
   "icons": {
     "512": "res/icons/icon-512.png"
   },
@@ -45,7 +43,8 @@
 
 
   "web_accessible_resources": [
-    "res/icons/download.png"
+    "res/icons/download.png",
+    "res/popup.js"
   ]
 
 }
