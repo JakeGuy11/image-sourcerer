@@ -2,6 +2,8 @@
 
 *Image Sourcerer* is a browser extension supported on Chrome and Firefox that is designed to download, sort and track images from supported sites. Once complete, this application will help users download images from content-rich sites, letting them control how it is organized and keeping track of the original creators for future reference.
 
+We are currently looking for beta testers! Find out more [here](https://github.com/JakeGuy11/image-sourcerer/blob/main/beta-testing.md)!
+
 # Contents
 - [Installation](#Installation)
 - [Supported Sites](#Supported-Sites)
