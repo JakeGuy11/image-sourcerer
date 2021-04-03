@@ -13,20 +13,27 @@ function messageRecieved(recMsg) {
 				console.log("[" + recMsg.sender + "]: " + recMsg.content);
 				break;
 			case "queue_download":
-				if(recMsg.cors_risk == true){
-					alert("CORS Risk");
-				}
 				toDataURL(recMsg.target_url, function(dataUrl) {
 					console.log(dataUrl.length);
 					var lastChars = dataUrl.substr(-10);
 					var firstChars = dataUrl.substr(0, dataUrl.length - 10);
 					console.log(firstChars);
 					console.log(lastChars);
-					for (var x = lastChars.length; x >= 0; x--)
+					var equalsCount = 0;
+					for (var x = lastChars.length-1; x >= 0; x--)
 					{
 					    var c = lastChars.charAt(x);
-					    console.log(c);
+					    if(c == "="){
+					    	equalsCount++;
+					    }
 					}
+					console.log("Equals Count: " + equalsCount);
+					var lastCharsPreEquals = lastChars.slice(0, 10-equalsCount);
+					var lastCharsPostEquals = "";
+					for (var i = 0; i < equalsCount; i++){
+						lastCharsPostEquals += "=";
+					}
+					console.log(lastCharsPreEquals + "datahere" + lastCharsPostEquals);
 					//console.log("[" + recMsg.sender + "]: Downloading \"" + recMsg.target_url + "\" as ~/Downloads/" + recMsg.save_name + recMsg.ext);
 					//notifySignal({ "intent": "download", "target_url": recMsg.target_url, "save_name": recMsg.save_name, "ext": recMsg.ext });
 				});
