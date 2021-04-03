@@ -25,7 +25,11 @@ function startDownload(url, pageLink, upvoteButton) {
 		alert("Your saveName cannot include '..'");
 		return;
 	}
-	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention });
+	var CORSRisk = false;
+	if(url.includes("i.redd.it")){
+		CORSRisk = true;
+	}
+	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "cors_risk": CORSRisk });
 }
 
 function handleSwipePost(nodeNumber){

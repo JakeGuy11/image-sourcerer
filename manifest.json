@@ -12,6 +12,8 @@
     "<all_urls>",
     "https://*/",
     "http://*/",
+    "https://preview.redd.it/",
+    "https://i.redd.it/",
     "storage",
     "activeTab",
     "downloads",
