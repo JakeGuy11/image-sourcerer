@@ -3,6 +3,7 @@ Also, this is just in case anyone is wondering, I designed all art. I used inksc
 
 ### Fonts:
 - Z003 for the logo (came with inkscape by default)
+  - I just found out this is actually called "Zapf Chancery Medium Italic"
 
 ### Colour Codes:
 - #542538 for the title logo
