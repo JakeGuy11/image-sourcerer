@@ -14,11 +14,8 @@ function messageRecieved(recMsg) {
 				break;
 			case "queue_download":
 				toDataURL(recMsg.target_url, function(dataUrl) {
-					console.log(dataUrl.length);
 					var lastChars = dataUrl.substr(-10);
 					var firstChars = dataUrl.substr(0, dataUrl.length - 10);
-					console.log(firstChars);
-					console.log(lastChars);
 					var equalsCount = 0;
 					for (var x = lastChars.length-1; x >= 0; x--)
 					{
@@ -27,13 +24,13 @@ function messageRecieved(recMsg) {
 					    	equalsCount++;
 					    }
 					}
-					console.log("Equals Count: " + equalsCount);
 					var lastCharsPreEquals = lastChars.slice(0, 10-equalsCount);
 					var lastCharsPostEquals = "";
 					for (var i = 0; i < equalsCount; i++){
 						lastCharsPostEquals += "=";
 					}
-					console.log(lastCharsPreEquals + "datahere" + lastCharsPostEquals);
+
+					console.log(firstChars + lastCharsPreEquals + "datahere" + lastCharsPostEquals);
 					//console.log("[" + recMsg.sender + "]: Downloading \"" + recMsg.target_url + "\" as ~/Downloads/" + recMsg.save_name + recMsg.ext);
 					//notifySignal({ "intent": "download", "target_url": recMsg.target_url, "save_name": recMsg.save_name, "ext": recMsg.ext });
 				});
@@ -53,21 +50,21 @@ function messageRecieved(recMsg) {
 }
 
 function toDataURL(url, callback) {
-	try{
-		var xhr = new XMLHttpRequest();
-		xhr.onload = function() {
-			var reader = new FileReader();
-			reader.onloadend = function() {
-				callback(reader.result);
-			}
-			reader.readAsDataURL(xhr.response);
-		};
-		xhr.open('GET', url);
-		xhr.responseType = 'blob';
-		xhr.send();
-	} catch (err) {
-		console.log("caught in function");
-	}
+	var xhr = new XMLHttpRequest();
+	xhr.onload = function() {
+		var reader = new FileReader();
+		reader.onloadend = function() {
+			callback(reader.result);
+		}
+		reader.readAsDataURL(xhr.response);
+	};
+	xhr.onerror = (e) => alert("Due to the CORS policy of the image,\n\
+								it could not be downloaded. It is\n\
+								recommended that you download the chrome\n\
+								extension \"Allow CORS\" and try again.");
+	xhr.open('GET', url);
+	xhr.responseType = 'blob';
+	xhr.send();
 }
 
 function sleep(milliseconds) {
