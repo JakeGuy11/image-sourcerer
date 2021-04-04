@@ -15,6 +15,8 @@ function messageRecieved(recMsg) {
 			case "queue_download":
 				toDataURL(recMsg.target_url, function(dataUrl) {
 					var lastChars = dataUrl.substr(-10);
+					lastChars = lastChars.replace(/\/\//g, "/");
+					lastChars = lastChars.replace(/\+\+/g, "+");
 					var firstChars = dataUrl.substr(0, dataUrl.length - 10);
 					var equalsCount = 0;
 					for (var x = lastChars.length-1; x >= 0; x--)
@@ -32,10 +34,9 @@ function messageRecieved(recMsg) {
 					//The data will be THISISUNIQUE[tag version];&&;[post url];&&;[save name and path]THISISUNIQUE
 					//Everything between the THISISUNIQUE tags will be encoded in b64
 					var dataToInject = "v001" + ";&&;" + recMsg.post_src + ";&&;" + recMsg.save_name + recMsg.ext;
-					var encodedData = btoa(dataToInject);
+					var encodedData = btoa(dataToInject).replace(/=/g, "");
 					var injectionContent = "THISISUNIQUE" + encodedData + "THISISUNIQUE";
-					injectedDataURL = firstChars + lastCharsPreEquals + injectionContent + lastCharsPostEquals;
-					//console.log("[" + recMsg.sender + "]: Downloading \"" + recMsg.target_url + "\" as ~/Downloads/" + recMsg.save_name + recMsg.ext);
+					injectedDataURL = firstChars + lastCharsPreEquals + injectionContent;
 					notifySignal({ "intent": "download", "target_url": injectedDataURL, "save_name": recMsg.save_name, "ext": recMsg.ext });
 				});
 				break;
@@ -62,10 +63,7 @@ function toDataURL(url, callback) {
 		}
 		reader.readAsDataURL(xhr.response);
 	};
-	xhr.onerror = (e) => alert("Due to the CORS policy of the image,\n\
-								it could not be downloaded. It is\n\
-								recommended that you download the chrome\n\
-								extension \"Allow CORS\" and try again.");
+	xhr.onerror = (e) => alert("Due to the CORS policy of the image,\nit could not be downloaded. It is\nrecommended that you download the chrome\nextension \"Allow CORS\" and try again.");
 	xhr.open('GET', url);
 	xhr.responseType = 'blob';
 	xhr.send();
