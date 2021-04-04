@@ -29,10 +29,14 @@ function messageRecieved(recMsg) {
 					for (var i = 0; i < equalsCount; i++){
 						lastCharsPostEquals += "=";
 					}
-
-					console.log(firstChars + lastCharsPreEquals + "datahere" + lastCharsPostEquals);
+					//The data will be THISISUNIQUE[tag version];&&;[post url];&&;[save name and path]THISISUNIQUE
+					//Everything between the THISISUNIQUE tags will be encoded in b64
+					var dataToInject = "v001" + ";&&;" + recMsg.post_src + ";&&;" + recMsg.save_name + recMsg.ext;
+					var encodedData = btoa(dataToInject);
+					var injectionContent = "THISISUNIQUE" + encodedData + "THISISUNIQUE";
+					injectedDataURL = firstChars + lastCharsPreEquals + injectionContent + lastCharsPostEquals;
 					//console.log("[" + recMsg.sender + "]: Downloading \"" + recMsg.target_url + "\" as ~/Downloads/" + recMsg.save_name + recMsg.ext);
-					//notifySignal({ "intent": "download", "target_url": recMsg.target_url, "save_name": recMsg.save_name, "ext": recMsg.ext });
+					notifySignal({ "intent": "download", "target_url": injectedDataURL, "save_name": recMsg.save_name, "ext": recMsg.ext });
 				});
 				break;
 			case "download":

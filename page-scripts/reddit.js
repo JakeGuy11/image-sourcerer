@@ -29,7 +29,7 @@ function startDownload(url, pageLink, upvoteButton) {
 	if(url.includes("i.redd.it")){
 		CORSRisk = true;
 	}
-	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "cors_risk": CORSRisk });
+	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink , "cors_risk": CORSRisk });
 }
 
 function handleSwipePost(nodeNumber){
