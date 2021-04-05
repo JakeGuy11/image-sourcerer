@@ -1,6 +1,6 @@
 <img src="res/icons/logo-large.png" alt="Image Sourcerer" width=1024>
 
-*Image Sourcerer* is a browser extension supported on Chrome and Firefox that is designed to download, sort and track images from supported sites. Once complete, this application will help users download images from content-rich sites, letting them control how it is organized and keeping track of the original creators for future reference.
+*Image Sourcerer* is a browser extension supported on Chrome and Chrome extension based browsers that is designed to download, sort and track images from supported sites. Once complete, this application will help users download images from content-rich sites, letting them control how it is organized and keeping track of the original creators for future reference.
 
 We are currently looking for beta testers! Find out more [here](https://github.com/JakeGuy11/image-sourcerer/blob/main/beta-testing.md)!
 
@@ -21,16 +21,6 @@ git clone git@github.com:JakeGuy11/image-sourcerer.git
 3. Click "Load Unpacked", navigate to where you saved the repository and select open.
 5. Open any supported site. The extension should now be functional.
 6. Steps 2 through 5 must be repeated every time the browser is restarted until an official release is uploaded.
-
-### To install on FireFox<sup>1</sup>:
-1. Download and extract the [latest release](https://github.com/JakeGuy11/image-sourcerer/releases) for Firefox
-2. Navigate to `about:debugging` in your browser. On the panel on the left hand side, click "This Firefox"
-3. Click "Load Temporary Add-on..." and navigate to where you saved the repository. Select `manifest.json`
-5. Open any supported site. The extension should now be functional.
-6. Steps 2 through 5 must be repeated every time the browser is restarted until an official release is uploaded.
-
-<sup>1</sup> Up until v0.0.3, Firefox was the primary taget. However, far more browsers support Chrome-style, so the target browser is now Chrome. That said, Firefox will still be supported. Under the folder `firefox` in this repo is the same code but using the Firefox API instead. This folder *will not be updated* during regular commits, only during releases. It will usually be tested, and if it is not, that will be disclosed in the release notes. 
-
 # Supported Sites
 - [Reddit](https://www.reddit.com/)
 
