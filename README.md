@@ -20,7 +20,6 @@ git clone git@github.com:JakeGuy11/image-sourcerer.git
 2. Navigate to `chrome://extensions` in your browser. Other brosers that support chrome extensions will usually redirect you to their specific extension pages.
 3. Click "Load Unpacked", navigate to where you saved the repository and select open.
 5. Open any supported site. The extension should now be functional.
-6. Steps 2 through 5 must be repeated every time the browser is restarted until an official release is uploaded.
 # Supported Sites
 - [Reddit](https://www.reddit.com/)
 
