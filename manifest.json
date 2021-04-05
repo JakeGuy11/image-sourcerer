@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Image Sourcerer",
-  "version": "0.4",
+  "version": "0.5",
 
   "icons": {
     "512": "res/icons/icon-512.png"
