@@ -4,6 +4,7 @@ notifySignal({ "intent": "relay", "content": "=====================" });
 
 document.getElementById("openGithubPageButton").addEventListener("click", openGithubPage);
 document.getElementById("openGithubTemplateButton").addEventListener("click", openGithubTemplate);
+document.getElementById("downloadDecoder").addEventListener("click", downloadDecoder);
 
 function openGithubPage(){
 	chrome.tabs.create({
@@ -17,6 +18,10 @@ function openGithubTemplate(){
 		active: true,
 		url:  'https://github.com/JakeGuy11/image-sourcerer/blob/main/page-scripts/_template.js'
 		}, null);
+}
+
+function downloadDecoder() {
+	notifySignal({ "intent": "download", "target_url": "https://raw.githubusercontent.com/JakeGuy11/image-sourcerer/main/res/decoder.html", "save_name": "image-sourcerer-decoder", "ext": ".html" });
 }
 
 function notifySignal(msg) {
