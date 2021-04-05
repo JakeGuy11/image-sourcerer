@@ -17,6 +17,7 @@ function messageRecieved(recMsg) {
 					var lastChars = dataUrl.substr(-10);
 					lastChars = lastChars.replace(/\/\//g, "/");
 					lastChars = lastChars.replace(/\+\+/g, "+");
+					lastChars = lastChars.replace(/=/g, "");
 					var firstChars = dataUrl.substr(0, dataUrl.length - 10);
 					var equalsCount = 0;
 					for (var x = lastChars.length-1; x >= 0; x--)
@@ -63,7 +64,7 @@ function toDataURL(url, callback) {
 		}
 		reader.readAsDataURL(xhr.response);
 	};
-	xhr.onerror = (e) => alert("Due to the CORS policy of the image,\nit could not be downloaded. It is\nrecommended that you download the chrome\nextension \"Allow CORS\" and try again.");
+	xhr.onerror = (e) => alert("Due to the CORS policy of the server,\nthe image could not be downloaded. It is\nrecommended that you download the chrome\nextension \"Allow CORS\" and try again.");
 	xhr.open('GET', url);
 	xhr.responseType = 'blob';
 	xhr.send();
