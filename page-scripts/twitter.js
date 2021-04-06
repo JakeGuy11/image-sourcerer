@@ -3,22 +3,31 @@ notifySignal({ "intent": "relay", "content": "=======================" });
 notifySignal({ "intent": "relay", "content": "Starting Twitter Script" });
 notifySignal({ "intent": "relay", "content": "=======================" });
 
-//Load the feed here. If there are multiple types of feeds to check (ex. home feed, profile feed, single post w details, etc.), put all node parsing in a try statement
-//var feedNodeList = feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0);
-//Create a var for the last feed size so the page isn't actually updated every 3 seconds
 var oldListSize = 0;
 
-//Add a function to handle downloads. Although not required, it is **HIGHLY** recommended that you provide the user with a prompt to let them choose the download location
-//This is the actual download command:
-//notifySignal({
-//	"intent": "queue_download",
-//	"target_url": "this is the url of the actual image",
-//	"post_src": "the link to the actual post, not the raw image",
-//	"save_name": "the name and path relative to ~/Downloads/Image-Sourcerer/ to save the file under",
-//	"ext": "a simple '.jpg', '.png', etc. depending on the image",
-//	"cors_risk": "[OPTIONAL] whether or not this image could be at risk for being blocked by the CORS. This doesn't do anything yet"
-	//Eventually, more things like author will be implemented, but this is it for now
-//});
+function startDownload(url, pageLink, likeButton) {
+	likeButton.click();
+	var extention = "";
+	url = url.replace("name=small", "name=large");
+	if(url.includes("format=jpg")){
+		extention = ".jpg";
+	} else if(url.includes("format=png")) {
+		extention = ".png";
+	} else {
+		notifySignal({ "intent": "relay", "content": "Extention could not be found." });
+		return;
+	}
+	var saveName = prompt("Enter the path (relative to ~/Downloads/Image-Sourcerer/) and filename you would like to save the image under","");
+	if(saveName.includes("..")){
+		alert("Your saveName cannot include '..'");
+		return;
+	}
+	var CORSRisk = false;
+	if(url.includes("i.redd.it")){
+		CORSRisk = true;
+	}
+	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink , "cors_risk": CORSRisk });
+}
 
 function refreshNodes() {
 
@@ -39,11 +48,9 @@ function refreshNodes() {
 		for(var i = 0; i < feedNodeList.length; i++) {
 			try {
 				var currentNode = feedNodeList.item(i);
-				var linkToImage = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1);
-				console.log(linkToImage);
-				//Navigate to the post in the current node
-				//Get all needed information, like the image url, title, source for tracking, etc.
-				//Create the html to inject for the button. Don't change too much here, stick to trivial things like the height and align
+				var linkToImage = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1).src;
+				var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).href;
+
 				var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("icons/download.png") + '" width=32></a></idl_button>';
 				//Now inject the button
 
