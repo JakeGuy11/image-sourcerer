@@ -2,8 +2,8 @@ notifySignal({ "intent": "relay", "content": "=====================" });
 notifySignal({ "intent": "relay", "content": "Starting Popup Script" });
 notifySignal({ "intent": "relay", "content": "=====================" });
 
-document.getElementById("openGithubPageButton").addEventListener("click", openGithubPage);
-document.getElementById("reportIssueButton").addEventListener("click", reportIssue);
+document.getElementById("openGithubPageButton").addEventListener("click", openLink.bind(null, "https://github.com/JakeGuy11/image-archive"));
+document.getElementById("reportIssueButton").addEventListener("click", openLink.bind(null, "https://github.com/JakeGuy11/image-sourcerer/issues/new"));
 document.getElementById("openDecoder").addEventListener("click", openDecoder);
 
 //This next chunk is just a copy/paste from the decoding document
@@ -40,20 +40,6 @@ function openLink(url){
 		url:  url
 		}, null);
 	window.close();
-}
-
-function openGithubPage(){
-	chrome.tabs.create({
-		active: true,
-		url:  'https://github.com/JakeGuy11/image-archive'
-		}, null);
-}
-
-function reportIssue(){
-	chrome.tabs.create({
-		active: true,
-		url:  'https://github.com/JakeGuy11/image-sourcerer/issues/new'
-		}, null);
 }
 
 function notifySignal(msg) {
