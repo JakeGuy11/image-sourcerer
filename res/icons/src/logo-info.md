@@ -6,7 +6,7 @@ Also, this is just in case anyone is wondering, I designed all art. I used inksc
   - I just found out this is actually called "Zapf Chancery Medium Italic"
 
 ### Colour Codes:
-- #542538 for the title logo
+- #542538 for the title text and popup text
 - #C30B38 for the title accents
 - #C3809B for the popup background
 
