@@ -48,6 +48,7 @@
 
   "web_accessible_resources": [
     "res/icons/download.png",
+    "res/icons/download-coloured.png",
     "res/popup.js"
   ]
 
