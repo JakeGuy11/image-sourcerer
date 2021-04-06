@@ -6,6 +6,7 @@ document.getElementById("openGithubPageButton").addEventListener("click", openLi
 document.getElementById("reportIssueButton").addEventListener("click", openLink.bind(null, "https://github.com/JakeGuy11/image-sourcerer/issues/new"));
 document.getElementById("openDecoder").addEventListener("click", openDecoder);
 document.getElementById("goBackButton").addEventListener("click", closeDecoder);
+document.getElementById("goBackButtonColoured").addEventListener("click", closeDecoder);
 
 //This next chunk is just a copy/paste from the decoding document
 

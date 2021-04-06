@@ -49,8 +49,19 @@ h1 {
   color: white;
 }
 
-#goBackButton:hover {
-	-webkit-filter: invert(1);
-	filter: invert(1);
+#goBackButtonColoured {
+	display: none;
+}
+
+#goBackButtonColoured:hover {
+	display: block;
 	transition: 0.3s;
+}
+
+#goBackButton:hover + #goBackButtonColoured { display: block; transition: 0.3s; }
+
+#goBackButton:hover {
+
+	transition: 0.3s;
+	display: none;
 }
