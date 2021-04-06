@@ -18,6 +18,18 @@ h1 {
 	font-family: 'Open Sans', sans-serif;
 }
 
+.buttonContainer {
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+
+.buttonInContainer {
+  color: white;
+  text-align: center;
+}
+
 .fadingButton {
 	background-color: #542538;
 	border-radius: 10px;
@@ -28,6 +40,8 @@ h1 {
 	font-size: 12px;
 	margin: 4px 2px;
 	transition: 0.4s;
+	height: 75%;
+	width: 95%;
 }
 
 .fadingButton:hover {
