@@ -3,8 +3,9 @@
 //**IMPORTANT**: Make sure you read all the comments. They explain what main.js is expecting for downloading and how to pass it.
 
 //It is a template that will tell you how to create your own page script supported by the extension
-//This template will not work for every site, it is just a template to explain how it's basicaly done
+//This will not work for every site, it is just a template to explain how it's basicaly done
 //Implementation instructions will be added in the future
+
 //Wait a little so main.js can get listening before we send messages
 sleep(1000);
 notifySignal({ "intent": "relay", "content": "==========================" });
@@ -21,9 +22,11 @@ var oldListSize = 0;
 notifySignal({
 	"intent": "queue_download",
 	"target_url": "this is the url of the actual image",
+	"post_src": "the link to the actual post, not the raw image",
 	"save_name": "the name and path relative to ~/Downloads/Image-Sourcerer/ to save the file under",
-	"ext": "a simple '.jpg', '.png', etc. depending on the image"
-	//Eventually, things like src and author will be implemented, but this is it for now
+	"ext": "a simple '.jpg', '.png', etc. depending on the image",
+	"cors_risk": "[OPTIONAL] whether or not this image could be at risk for being blocked by the CORS. This doesn't do anything yet"
+	//Eventually, more things like author will be implemented, but this is it for now
 });
 
 function refreshNodes() {
@@ -51,7 +54,7 @@ function refreshNodes() {
 				//Navigate to the post in the current node
 				//Get all needed information, like the image url, title, source for tracking, etc.
 				//Create the html to inject for the button. Don't change too much here, stick to trivial things like the height and align
-				var buttonLink = '<idl_button align="right"><a><img src="' + browser.runtime.getURL("icons/download.png") + '" width=32></a></idl_button>';
+				var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("icons/download.png") + '" width=32></a></idl_button>';
 				//Now inject the button
 
 				//Get that button you just injected as a DOM element so we can add a listener
@@ -68,6 +71,7 @@ function refreshNodes() {
 //This assumes the site updates the feed programmatically as you scroll
 //If it does not, just call refreshNodes();
 refreshNodes();
+
 var intervalId = setInterval(refreshNodes, 3000);
 
 //Touch NOTHING below here
@@ -84,5 +88,5 @@ function sleep(milliseconds) {
 function notifySignal(msg) {
 	msg.sender = "reddit.js";
 	if(!("intent" in msg)) msg.intent = "undefined_intent";
-	browser.runtime.sendMessage(msg);
+	chrome.runtime.sendMessage(msg);
 }
