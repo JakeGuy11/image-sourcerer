@@ -38,6 +38,8 @@ function messageRecieved(recMsg) {
 					var encodedData = btoa(dataToInject).replace(/=/g, "");
 					var injectionContent = "THISISUNIQUE" + encodedData + "THISISUNIQUE";
 					injectedDataURL = firstChars + lastCharsPreEquals + injectionContent;
+					console.log(injectedDataURL);
+					console.log(injectedDataURL.split("/")[injectedDataURL.split("/").length-1].length % 4);
 					notifySignal({ "intent": "download", "target_url": injectedDataURL, "save_name": recMsg.save_name, "ext": recMsg.ext });
 				});
 				break;
