@@ -46,7 +46,7 @@ function messageRecieved(recMsg) {
 			case "download":
 				break;
 			case "undefined_intent":
-				console.log("[" + recMsg.sender + "][Intent not specified]: " + recMsg.content);
+				console.log("[" + recMsg.sender + "][Intent not specified]: " + JSON.stringify(recMsg));
 				break;
 			default:
 				console.log("[main.js]: Untagged message recieved:");
@@ -73,7 +73,7 @@ function toDataURL(url, callback) {
 }
 
 function notifySignal(msg) {
-	msg.sender = "reddit.js";
+	msg.sender = "main.js";
 	if(!("intent" in msg)) msg.intent = "undefined_intent";
 	chrome.runtime.sendMessage(msg);
 }
