@@ -22,8 +22,8 @@ var oldListSize = 0;
 
 function refreshNodes() {
 
-	var feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0);
-	
+	var feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+
 	if(oldListSize < feedNodeList.length) {
 		
 		notifySignal({ "intent": "relay", "content": "Posts updated from " + oldListSize + " to " + feedNodeList.length });
@@ -38,6 +38,9 @@ function refreshNodes() {
 		
 		for(var i = 0; i < feedNodeList.length; i++) {
 			try {
+				var currentNode = feedNodeList.item(i);
+				var linkToImage = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1);
+				console.log(linkToImage);
 				//Navigate to the post in the current node
 				//Get all needed information, like the image url, title, source for tracking, etc.
 				//Create the html to inject for the button. Don't change too much here, stick to trivial things like the height and align
@@ -46,7 +49,7 @@ function refreshNodes() {
 
 				//Get that button you just injected as a DOM element so we can add a listener
 				//To add the listener (each item after null will be passed as an argument):
-				youtButtonElement.addEventListener("click", yourFunctionForDownloading.bind(null, arg1, arg2, argn), false);
+				//youtButtonElement.addEventListener("click", yourFunctionForDownloading.bind(null, arg1, arg2, argn), false);
 			} catch (err1) {
 				//In each catch, add parsing for a different type of post, ex. image posts vs. gif posts vs. link posts etc.
 			}
@@ -54,13 +57,10 @@ function refreshNodes() {
 	}
 }
 
-//Refresh the nodes every 3 seconds
-//This assumes the site updates the feed programmatically as you scroll
-//If it does not, just call refreshNodes();
-var intervalId = setInterval(refreshNodes, 5000);
 
-//Touch NOTHING below here
-//A simple sleep function. Don't use this, it's only for a small delay at the start
+setTimeout(function() {
+		var intervalId = setInterval(refreshNodes, 3000);
+	}, 7500);
 function sleep(milliseconds) {
   const date = Date.now();
   let currentDate = null;
@@ -69,7 +69,6 @@ function sleep(milliseconds) {
   } while (currentDate - date < milliseconds);
 }
 
-//Send a message to everything. It will be picked up by relay.js and sent to main.js
 function notifySignal(msg) {
 	msg.sender = "twitter.js";
 	if(!("intent" in msg)) msg.intent = "undefined_intent";
