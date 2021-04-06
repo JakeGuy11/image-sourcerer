@@ -21,6 +21,7 @@ git clone git@github.com:JakeGuy11/image-sourcerer.git
 5. Open any supported site. The extension should now be functional.
 # Supported Sites
 - [Reddit](https://www.reddit.com/)
+- [Twitter](https://twitter.com/home)
 
 # Contact Me
 If you have any feedback, suggestions, errors or just general comments, please email me at Jake_Guy_11@protonmail.ch, or open an error through GitHub. If you have inquiries about *beta testing specifically*, read the [beta testing document](https://github.com/JakeGuy11/image-sourcerer/blob/main/beta-testing.md).
