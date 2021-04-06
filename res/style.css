@@ -48,3 +48,9 @@ h1 {
   background-color: #000000;
   color: white;
 }
+
+#goBackButton:hover {
+	-webkit-filter: invert(1);
+	filter: invert(1);
+	transition: 0.3s;
+}

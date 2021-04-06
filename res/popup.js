@@ -5,6 +5,7 @@ notifySignal({ "intent": "relay", "content": "=====================" });
 document.getElementById("openGithubPageButton").addEventListener("click", openLink.bind(null, "https://github.com/JakeGuy11/image-archive"));
 document.getElementById("reportIssueButton").addEventListener("click", openLink.bind(null, "https://github.com/JakeGuy11/image-sourcerer/issues/new"));
 document.getElementById("openDecoder").addEventListener("click", openDecoder);
+document.getElementById("goBackButton").addEventListener("click", closeDecoder);
 
 //This next chunk is just a copy/paste from the decoding document
 
@@ -22,12 +23,17 @@ fileInput.onchange = function(event) {
        var splitFileSecond = splitFile[1].split("THISISUNIQUA");
        var encodedData = splitFileSecond[0];
        var dataArray = atob(encodedData).split(";&&;");
-       document.getElementById("dataContainer").innerHTML += dataArray[2] + "<br><a id=\"postLink\" href=\"\">Source Post</a><br><br>";
+       document.getElementById("dataContainer").innerHTML += "<br>~/Downloads/" + dataArray[2] + "<br><a id=\"postLink\" href=\"\">Source Post</a><br><br>";
        document.getElementById("postLink").addEventListener("click", openLink.bind(null, dataArray[1]));
 	};
 }
 
 //
+
+function closeDecoder() {
+	document.getElementById("openingPage").style.display = "block";
+	document.getElementById("decoderPanel").style.display = "none";
+}
 
 function openDecoder() {
 	document.getElementById("openingPage").style.display = "none";
