@@ -51,8 +51,8 @@ function refreshNodes() {
 				var linkToImage = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1).src;
 				var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).href;
 
-				var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("icons/download.png") + '" width=32></a></idl_button>';
-				//Now inject the button
+				var buttonLink = '<br><idl_button align="right"><a><img src="' + chrome.runtime.getURL("res/icons/download.png") + '" width=32></a></idl_button>';
+				currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).innerHTML += buttonLink;
 
 				//Get that button you just injected as a DOM element so we can add a listener
 				//To add the listener (each item after null will be passed as an argument):
