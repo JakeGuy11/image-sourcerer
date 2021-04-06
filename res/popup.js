@@ -17,11 +17,13 @@ fileInput.onchange = function(event) {
    imageReader.readAsDataURL(interestedFile);
 
 	imageReader.onload = function() {
+		document.getElementById("dataContainer").innerHTML = "";
        var splitFile = imageReader.result.split("THISISUNIQUE");
        var splitFileSecond = splitFile[1].split("THISISUNIQUA");
        var encodedData = splitFileSecond[0];
        var dataArray = atob(encodedData).split(";&&;");
-       document.getElementById("dataContainer").innerHTML += dataArray[2] + "<br><a href=\"" + dataArray[1] + "\">Source Post</a><br><br>";
+       document.getElementById("dataContainer").innerHTML += dataArray[2] + "<br><a id=\"postLink\" href=\"\">Source Post</a><br><br>";
+       document.getElementById("postLink").addEventListener("click", openLink.bind(null, dataArray[1]));
 	};
 }
 
@@ -30,6 +32,14 @@ fileInput.onchange = function(event) {
 function openDecoder() {
 	document.getElementById("openingPage").style.display = "none";
 	document.getElementById("decoderPanel").style.display = "block";
+}
+
+function openLink(url){
+	chrome.tabs.create({
+		active: true,
+		url:  url
+		}, null);
+	window.close();
 }
 
 function openGithubPage(){
