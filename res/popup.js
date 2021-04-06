@@ -5,6 +5,12 @@ notifySignal({ "intent": "relay", "content": "=====================" });
 document.getElementById("openGithubPageButton").addEventListener("click", openGithubPage);
 document.getElementById("openGithubTemplateButton").addEventListener("click", openGithubTemplate);
 document.getElementById("downloadDecoder").addEventListener("click", downloadDecoder);
+document.getElementById("openDecoder").addEventListener("click", openDecoder);
+
+function openDecoder() {
+	document.getElementById("openingPage").style.display = "none";
+	document.getElementById("decoderPanel").style.display = "block";
+}
 
 function openGithubPage(){
 	chrome.tabs.create({
