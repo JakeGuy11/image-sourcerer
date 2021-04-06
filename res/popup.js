@@ -7,6 +7,27 @@ document.getElementById("openGithubTemplateButton").addEventListener("click", op
 document.getElementById("downloadDecoder").addEventListener("click", downloadDecoder);
 document.getElementById("openDecoder").addEventListener("click", openDecoder);
 
+//This next chunk is just a copy/paste from the decoding document
+
+var fileInput = document.getElementById("fileDrop");
+fileInput.onchange = function(event) {
+   var fileList = event.target.files;
+   var interestedFile = fileList[0];
+
+   let imageReader = new FileReader();
+   imageReader.readAsDataURL(interestedFile);
+
+	imageReader.onload = function() {
+       var splitFile = imageReader.result.split("THISISUNIQUE");
+       var splitFileSecond = splitFile[1].split("THISISUNIQUA");
+       var encodedData = splitFileSecond[0];
+       var dataArray = atob(encodedData).split(";&&;");
+       document.getElementById("dataContainer").innerHTML += dataArray[2] + "<br><a href=\"" + dataArray[1] + "\">Source Post</a><br><br>";
+	};
+}
+
+//
+
 function openDecoder() {
 	document.getElementById("openingPage").style.display = "none";
 	document.getElementById("decoderPanel").style.display = "block";

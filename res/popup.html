@@ -29,11 +29,20 @@
 					<button type="button" id="openDecoder" class="fadingButton">Open Decoder</button>
 				</div>
 			</div>
-			<script src="popup.js"></script>
 		</div>
 		<div id="decoderPanel" style="display: none;">
-			This is the decoding panel
+			<center>
+				<img src="https://github.com/JakeGuy11/image-sourcerer/blob/main/res/icons/logo-large.png?raw=true" width=70%>
+				<div style="width: 70%">
+					<p style="font-size: 14px;">Upload an image that you've downloaded using Image-Sourcerer to retrieve the stored information.</p>
+				</div>
+		  		<input id="fileDrop" type="file" name="filename" style="margin: 5px; width: 180px;" />
+		  		<div id="dataContainer">
+		  			<br>
+		  		</div>
+			</center>
 		</div>
+	<script src="popup.js"></script>
 	</body>
 </html>
 
