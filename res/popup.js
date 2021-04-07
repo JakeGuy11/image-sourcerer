@@ -4,6 +4,8 @@ notifySignal({ "intent": "relay", "content": "=====================" });
 
 document.getElementById("openGithubPageButton").addEventListener("click", openLink.bind(null, "https://github.com/JakeGuy11/image-archive"));
 document.getElementById("reportIssueButton").addEventListener("click", openLink.bind(null, "https://github.com/JakeGuy11/image-sourcerer/issues/new"));
+document.getElementById("openDecoderPageButton").addEventListener("click", openLink.bind(null, "https://jakeguy11.github.io/image-sourcerer/decode.html"));
+document.getElementById("donateButton").addEventListener("click", openLink.bind(null, "https://paypal.me/JakeGuy11"));
 document.getElementById("openDecoder").addEventListener("click", openDecoder);
 document.getElementById("goBackButton").addEventListener("click", closeDecoder);
 document.getElementById("goBackButtonColoured").addEventListener("click", closeDecoder);
