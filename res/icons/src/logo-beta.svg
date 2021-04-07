@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="1727.8441mm"
+   height="759.37439mm"
+   viewBox="0 0 1727.8441 759.37439"
+   version="1.1"
+   id="svg8"
+   inkscape:version="1.0.2 (e86c870879, 2021-01-15, custom)"
+   sodipodi:docname="logo-beta.svg"
+   inkscape:export-filename="/home/jake/github/image-sourcerer/res/icons/logo-beta-small.png"
+   inkscape:export-xdpi="14.7004"
+   inkscape:export-ydpi="14.7004">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.063865667"
+     inkscape:cx="3012.926"
+     inkscape:cy="1987.507"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     inkscape:document-rotation="0"
+     showgrid="false"
+     showborder="true"
+     inkscape:window-width="1366"
+     inkscape:window-height="722"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(98.330723,185.98567)">
+    <g
+       id="g884"
+       transform="translate(-98.330723,-185.98567)">
+      <g
+         id="layer2"
+         inkscape:label="Text"
+         transform="translate(20.221622,-38.567821)">
+        <path
+           id="text1582"
+           style="font-style:normal;font-weight:normal;font-size:529.167px;line-height:1.25;font-family:sans-serif;fill:#c30b38;fill-opacity:1;stroke:none;stroke-width:0.999999"
+           transform="scale(0.26458333)"
+           d="m 438.67383,798.38867 c -34.00002,0 -151.9999,65.99993 -316,176 l -4,56.00003 c 122.00007,-66.0001 127.99999,-68.00003 146,-68.00003 16.00001,0 24,11.99999 24,34 0,28.00003 -5.99998,56.00193 -36,170.00193 -94.00006,348.0002 -94,348 -94,400 0,48.0001 17.99998,80 48,80 34.00002,0 87.99993,-25.9999 194,-94 38.00002,-24 75.99997,-48 114,-74 18.00001,-10 31.99998,-20 56,-34 l 8,-56 -34,18 c -138.00009,76.0001 -161.99999,86 -186,86 -22.00002,0 -36,-22 -36,-56 0,-34 -4e-5,-33.9998 66,-298 74.00004,-304.00013 74,-304.00192 74,-320.00193 0,-12.00001 -9.99999,-20 -24,-20 z" />
+      </g>
+      <g
+         inkscape:label="Layer 1"
+         id="layer1-67"
+         style="display:inline"
+         transform="translate(20.221622,-38.567821)">
+        <g
+           inkscape:label="Layer 1"
+           id="layer1-6"
+           transform="translate(80.213131,91.912739)">
+          <path
+             style="fill:#542538;fill-opacity:1;stroke:#000000;stroke-width:0.237018px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+             d="m -54.14592,52.678234 -46.01663,17.354827 c 0,0 52.682937,31.330669 116.294525,31.330669 64.452226,0 126.078655,-26.56634 126.078655,-26.56634 L 91.862561,52.524289 c 0,0 -20.117959,16.139974 -73.098501,16.139974 -53.966834,0 -72.90998,-15.986029 -72.90998,-15.986029 z"
+             id="path833"
+             sodipodi:nodetypes="ccsccsc" />
+          <path
+             style="fill:#542538;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+             d="m -47.896672,42.162484 c 0,0 15.192999,15.406188 65.187436,15.406188 42.13193,0 69.886982,-13.274585 69.886982,-13.274585 0,0 -61.165938,-64.314556 -36.620076,-62.131865 24.545864,2.182688 27.253138,11.2307874 30.657573,7.096762 4.520907,-5.489763 -52.305165,-53.782844 -69.689994,-40.207922 -21.5057519,16.79274 -59.421921,93.111422 -59.421921,93.111422 z"
+             id="path835"
+             sodipodi:nodetypes="cscsssc" />
+        </g>
+      </g>
+    </g>
+    <text
+       xml:space="preserve"
+       style="font-size:529.167px;line-height:1.25;font-family:Z003;-inkscape-font-specification:Z003;fill:#542538;fill-opacity:1;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
+       x="46.640694"
+       y="202.59103"
+       id="text888"><tspan
+         sodipodi:role="line"
+         id="tspan886"
+         x="46.640694"
+         y="202.59103"
+         style="fill:#542538;fill-opacity:1;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none">mage</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:529.167px;line-height:1.25;font-family:Z003;-inkscape-font-specification:Z003;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
+       x="-99.034065"
+       y="566.50952"
+       id="text870"><tspan
+         sodipodi:role="line"
+         id="tspan868"
+         x="-99.034065"
+         y="566.50952"
+         style="fill:#542538;fill-opacity:1;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none">so<tspan
+   style="fill:#c30b38;fill-opacity:1"
+   id="tspan872">u</tspan>rcerer</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:529.167px;line-height:1.25;font-family:'AR PL UMing CN';-inkscape-font-specification:'AR PL UMing CN';stroke-width:0.264583"
+       x="1043.3346"
+       y="696.97717"
+       id="text969"><tspan
+         sodipodi:role="line"
+         id="tspan967"
+         x="1043.3346"
+         y="696.97717"
+         style="stroke-width:0.264583" /></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:237.124px;line-height:1.25;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro';fill:#0091ff;fill-opacity:1;stroke-width:0.118562"
+       x="1075.83"
+       y="323.0849"
+       id="text973"><tspan
+         sodipodi:role="line"
+         id="tspan971"
+         x="1075.83"
+         y="323.0849"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:'Source Code Pro';-inkscape-font-specification:'Source Code Pro';fill:#0091ff;fill-opacity:1;stroke-width:0.118562">Beta</tspan></text>
+  </g>
+</svg>
