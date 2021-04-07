@@ -1,4 +1,4 @@
-# Beta Testing Information
+<img src="res/icons/logo-beta-large.png" alt="Image Sourcerer Beta" width=1024>
 
 We are currently looking for beta testers!\
 If you are interested, read the [Overview](#Overview) and [Joining the Program](#Joining-the-Program) sections.
