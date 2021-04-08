@@ -30,12 +30,62 @@ function startDownload(url, pageLink, likeButton) {
 }
 
 function handleMultiPost(aList, linkToPost, likeButton){
-	var desiredSlide = prompt("Enter the number of the post you would like to download:","");
+	var desiredSlide = prompt("Enter the number of the post you would like to download (left to right, top to bottom):","");
 	if(desiredSlide === null) return;
 	var desiredSlideNum = parseInt(desiredSlide);
 	if(desiredSlideNum === parseInt(desiredSlide, 10)){
+		var imageURL = "";
 		try {
-			var imageURL = aList.item(desiredSlideNum-1).childNodes.item(0).childNodes.item(0).childNodes.item(1).src;
+			var imagesList = aList.getElementsByTagName("img");
+			switch(imagesList.length) {
+				case 2:
+					switch (desiredSlideNum) {
+						case 1:
+							imageURL = imagesList[0].src;
+							break;
+						case 2:
+							imageURL = imagesList[1].src;
+							break;
+						default:
+							throw new Error("Index out of bounds");
+					}
+					break;
+				case 3:
+					switch (desiredSlideNum) {
+						case 1:
+							imageURL = imagesList[0].src;
+							break;
+						case 2:
+							imageURL = imagesList[1].src;
+							break;
+						case 3:
+							imageURL = imagesList[2].src;
+							break;
+						default:
+							throw new Error("Index out of bounds");
+					}
+					break;
+				case 4:
+					switch (desiredSlideNum) {
+						case 1:
+							imageURL = imagesList[0].src;
+							break;
+						case 2:
+							imageURL = imagesList[2].src;
+							break;
+						case 3:
+							imageURL = imagesList[1].src;
+							break;
+						case 4:
+							imageURL = imagesList[3].src;
+							break;
+						default:
+							throw new Error("Index out of bounds");
+					}
+					break;
+				default:
+					throw new Error("Out of range");
+			}
 			startDownload(imageURL, linkToPost, likeButton);
 		} catch (err) {
 			alert("The image at that index is not available");
@@ -85,8 +135,10 @@ function refreshNodes() {
 				try {
 					//Multi-image posts
 					var currentNode = feedNodeList.item(i);
-					var imagesList = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+					var imagesList = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0);
 					var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
+
+					if(imagesList.getElementsByTagName("img".length) == 1) throw new Error("Not a multi-post");
 
 					var buttonLink = '<idl_button align="right"><br><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center><br></idl_button>';
 					currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).innerHTML += buttonLink;
