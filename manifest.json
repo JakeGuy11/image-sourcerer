@@ -2,7 +2,7 @@
 
   "manifest_version": 2,
   "name": "Image Sourcerer",
-  "version": "0.5",
+  "version": "0.2.1",
 
   "icons": {
     "512": "res/icons/icon-512.png"
@@ -10,11 +10,6 @@
 
   "permissions": [
     "<all_urls>",
-    "https://*/",
-    "http://*/",
-    "https://preview.redd.it/",
-    "https://i.redd.it/",
-    "storage",
     "activeTab",
     "downloads",
     "downloads.open"
@@ -48,8 +43,7 @@
 
   "web_accessible_resources": [
     "res/icons/download.png",
-    "res/icons/download-coloured.png",
-    "res/popup.js"
+    "res/icons/download-coloured.png"
   ]
 
 }
