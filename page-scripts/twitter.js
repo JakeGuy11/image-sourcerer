@@ -97,22 +97,50 @@ function handleMultiPost(aList, linkToPost, likeButton){
 }
 
 function refreshNodes() {
-	
-	var feedNodeList;
-	try{
-		feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
-	} catch (nodelisterr1){
-		try{
-			feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
-		} catch (nodelisterr2) {	}
-	}
 
 	var element = document.getElementsByTagName("idl_button");
 	
 	for (var index = element.length - 1; index >= 0; index--) {
 	    element[index].parentNode.removeChild(element[index]);
 	}
-	
+
+	var feedNodeList;
+	try{
+		//Home Feed
+		feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+	} catch (nodelisterr1){
+		try{
+			//Profile Feeds
+			feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+		} catch (nodelisterr2) {
+			try{
+				//Individual Posts
+				var rootNode = document.getElementById("react-root");
+				var baseNode = rootNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0);
+				
+				var linkToImage = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1).src;
+				var linkToPost = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).href;
+				
+				var buttonLink = '<idl_button align="right"><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center></idl_button>';
+				baseNode.childNodes.item(2).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
+
+				var idl_downloader = baseNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+				idl_downloader.addEventListener("click", startDownload.bind(null, linkToImage, linkToPost, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
+				return;
+			} catch (nodelisterr3) {
+				try {
+					console.log(nodelisterr3);
+					//Hashtag Posts
+					return;
+				} catch (nodelisterr4) {
+					console.log("Nothings working");
+					//Not a supported post
+					return;
+				}
+			}
+		}
+	}
+
 	for(var i = 0; i < feedNodeList.length; i++) {
 		try {
 			//Regular Posts
