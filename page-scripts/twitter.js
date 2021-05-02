@@ -234,13 +234,16 @@ function refreshNodes() {
 			idl_downloader.addEventListener("click", startDownload.bind(null, linkToImage, linkToPost, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
 		} catch (err1) {
 			try {
-				var imagesList = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).getElementsByTagName("img");
+				var imagesList = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1);
 				var linkToPost = document.URL;
 
-				if(imagesList.length == 1) throw new Error("Not a multi-post");
+				if(imagesList.getElementsByTagName("img").length == 1) throw new Error("Not a multi-post");
 			
 				var buttonLink = '<idl_button align="right"><br><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center><br></idl_button>';
-				baseNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).innerHTML += buttonLink;
+				baseNode.childNodes.item(2).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
+
+				var idl_downloader = baseNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+				idl_downloader.addEventListener("click", handleMultiPost.bind(null, imagesList, linkToPost, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
 			} catch (err2) {	}
 		}
 	}
