@@ -36,7 +36,6 @@ function messageRecieved(recMsg) {
 						injectionContent += "X";
 					}
 					injectedDataURL = firstChars + lastCharsPreEquals + injectionContent;
-					console.log(injectedDataURL);
 					notifySignal({ "intent": "download", "target_url": injectedDataURL, "save_name": recMsg.save_name, "ext": recMsg.ext });
 				});
 				break;
