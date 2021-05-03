@@ -131,8 +131,41 @@ function refreshNodes() {
 	}
 	
 	var includesSinglePost = false;
-	if (document.URL.includes("/status/") && !document.URL.includes("?s=")) includesSinglePost = true;
+	var isNotEnlargedPhoto = (document.URL.includes("/status/") && !document.URL.includes("/photo/"));
+	var isNotSingleFeed = (document.URL.includes("/status/") && !document.URL.includes("?s="));
+	if (isNotEnlargedPhoto && isNotSingleFeed) includesSinglePost = true;
 
+	console.log("Is single post: " + includesSinglePost);
+
+	if (includesSinglePost) {
+		// Get the base node
+		baseNode = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0);
+		try {
+			// Is it a basic single post with no recommended posts?
+			var linkToImage = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1).src;
+			var linkToPost = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).href;
+			
+			var buttonLink = '<idl_button align="right"><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center></idl_button>';
+			baseNode.childNodes.item(2).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
+
+			var idl_downloader = baseNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+			idl_downloader.addEventListener("click", startDownload.bind(null, linkToImage, linkToPost, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
+		} catch (err1) {
+			try {
+				var imagesList = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1);
+				var linkToPost = document.URL;
+
+				if(imagesList.getElementsByTagName("img").length == 1) throw new Error("Not a multi-post");
+			
+				var buttonLink = '<idl_button align="right"><br><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center><br></idl_button>';
+				baseNode.childNodes.item(2).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
+
+				var idl_downloader = baseNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+				idl_downloader.addEventListener("click", handleMultiPost.bind(null, imagesList, linkToPost, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
+			} catch (err2) {	}
+		}
+	}
+	
 	for(var i = 0; i < feedNodeList.length; i++) {
 		try {
 			//Regular Posts
@@ -216,35 +249,6 @@ function refreshNodes() {
 					}
 				}
 			}
-		}
-	}
-
-	if (includesSinglePost) {
-		// Get the base node
-		baseNode = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0);
-		try {
-			// Is it a basic single post with no recommended posts?
-			var linkToImage = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1).src;
-			var linkToPost = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).href;
-			
-			var buttonLink = '<idl_button align="right"><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center></idl_button>';
-			baseNode.childNodes.item(2).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
-
-			var idl_downloader = baseNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-			idl_downloader.addEventListener("click", startDownload.bind(null, linkToImage, linkToPost, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
-		} catch (err1) {
-			try {
-				var imagesList = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1);
-				var linkToPost = document.URL;
-
-				if(imagesList.getElementsByTagName("img").length == 1) throw new Error("Not a multi-post");
-			
-				var buttonLink = '<idl_button align="right"><br><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center><br></idl_button>';
-				baseNode.childNodes.item(2).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
-
-				var idl_downloader = baseNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-				idl_downloader.addEventListener("click", handleMultiPost.bind(null, imagesList, linkToPost, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
-			} catch (err2) {	}
 		}
 	}
 }
