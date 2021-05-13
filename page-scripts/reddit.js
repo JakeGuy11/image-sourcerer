@@ -44,7 +44,7 @@ function handleSwipePost(nodeNumber){
 			var postNodeList = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes;
 			var wantedImageNode = postNodeList.item(desiredSlide - 1);
 			var imageURL = wantedImageNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.src.nodeValue;
-			startDownload(imageURL, linkToPost, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0));
+			startDownload(imageURL, linkToPost, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0));
 		} catch (err) {
 			alert("The image at the selected index has not been loaded yet");
 		}
