@@ -6,7 +6,7 @@ notifySignal({ "intent": "relay", "content": "=======================" });
 function startDownload(url, pageLink, likeButton) {
 	likeButton.click();
 	var extention = "";
-	url = url.replace("name=small", "name=large");
+	url = url.split("name=")[0] + "name=large";
 	if(url.includes("format=jpg")){
 		extention = ".jpg";
 	} else if(url.includes("format=png")) {
