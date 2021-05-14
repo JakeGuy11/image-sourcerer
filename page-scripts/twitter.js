@@ -3,7 +3,7 @@ notifySignal({ "intent": "relay", "content": "=======================" });
 notifySignal({ "intent": "relay", "content": "Starting Twitter Script" });
 notifySignal({ "intent": "relay", "content": "=======================" });
 
-function startDownload(url, pageLink, likeButton) {
+function startDownload(url, pageLink, author, likeButton) {
 	likeButton.click();
 	var extention = "";
 	url = url.split("name=")[0] + "name=large";
@@ -26,7 +26,7 @@ function startDownload(url, pageLink, likeButton) {
 	if(url.includes("i.redd.it")){
 		CORSRisk = true;
 	}
-	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink , "cors_risk": CORSRisk });
+	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author, "cors_risk": CORSRisk });
 }
 
 function handleMultiPost(aList, linkToPost, likeButton){
@@ -152,8 +152,10 @@ function refreshNodes() {
 			var buttonLink = '<idl_button align="right"><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center></idl_button>';
 			baseNode.childNodes.item(2).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
 
+			var postAuthor = document.URL.split("/")[3];
+			
 			var idl_downloader = baseNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-			idl_downloader.addEventListener("click", startDownload.bind(null, linkToImage, linkToPost, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
+			idl_downloader.addEventListener("click", startDownload.bind(null, linkToImage, linkToPost, postAuthor, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
 		} catch (err1) {
 			try {
 				var imagesList = baseNode.childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1);
@@ -164,8 +166,10 @@ function refreshNodes() {
 				var buttonLink = '<idl_button align="right"><br><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center><br></idl_button>';
 				baseNode.childNodes.item(2).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
 
+				var postAuthor = document.URL.split("/")[3];
+				
 				var idl_downloader = baseNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-				idl_downloader.addEventListener("click", handleMultiPost.bind(null, imagesList, linkToPost, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
+				idl_downloader.addEventListener("click", handleMultiPost.bind(null, imagesList, linkToPost, postAuthor, baseNode.childNodes.item(2).childNodes.item(4).childNodes.item(2).childNodes.item(0)), false);
 			} catch (err2) {	}
 		}
 	}
