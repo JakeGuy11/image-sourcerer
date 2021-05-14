@@ -122,20 +122,17 @@ function refreshNodes() {
 					//Individual Posts
 					baseNode = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0);
 				} catch (nodelisterr4) {
-					console.log("Nothings working");
 					//Not a supported post
-					return;
 				}
 			}
 		}
 	}
-	
+	if (document.URL.includes("/hashtag/")) feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;	
+
 	var includesSinglePost = false;
 	var isNotEnlargedPhoto = (document.URL.includes("/status/") && !document.URL.includes("/photo/"));
 	var isNotSingleFeed = (document.URL.includes("/status/") && !document.URL.includes("?s="));
-	if (isNotEnlargedPhoto && isNotSingleFeed) includesSinglePost = true;
-
-	console.log("Is single post: " + includesSinglePost);
+	if (isNotEnlargedPhoto && isNotSingleFeed) includesSinglePost = true;	
 
 	if (includesSinglePost) {
 		// Get the base node
