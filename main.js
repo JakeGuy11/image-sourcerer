@@ -29,7 +29,7 @@ function messageRecieved(recMsg) {
 					for (var i = 0; i < equalsCount; i++){
 						lastCharsPostEquals += "=";
 					}
-					var dataToInject = "v001" + ";&&;" + recMsg.post_src + ";&&;" + recMsg.save_name + recMsg.ext;
+					var dataToInject = "v002" + ";&&;" + recMsg.post_src + ";&&;" + recMsg.save_name + recMsg.ext + ";&&;" + recMsg.op;
 					var encodedData = btoa(dataToInject).replace(/=/g, "");
 					var injectionContent = "THISISUNIQUE" + encodedData + "THISISUNIQUE";
 					while(injectionContent.length % 4 != 0){
