@@ -96,6 +96,12 @@ function handleMultiPost(aList, linkToPost, likeButton){
 	}
 }
 
+function feedIsProfile() {
+	var indicator = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1).tagName.toLowerCase();
+	if (indicator == "img") return true;
+	else return false;
+}
+
 function refreshNodes() {
 
 	var element = document.getElementsByTagName("idl_button");
@@ -127,8 +133,20 @@ function refreshNodes() {
 			}
 		}
 	}
-	if (document.URL.includes("/hashtag/")) feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;	
-
+	
+	// This is a more efficient way to assign feedNodeList
+	var currentURL = document.URL;
+	// Home feed
+	if (currentURL.includes("/home")) feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+	// Profile Feed
+	else if (feedIsProfile()) feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+	// Individual with feed
+	else if (currentURL.includes("/status/") && currentURL.includes("?s=")) feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+	else if (currentURL.includes("/status/") && !currentURL.includes("?s=")) baseNode = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0);
+	else if (currentURL.includes("/hashtag/")) feedNodeList = document.getElementById("react-root").childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;	
+	else {
+		console.log("feedNodeList not found");
+	}
 	var includesSinglePost = false;
 	var isNotEnlargedPhoto = (document.URL.includes("/status/") && !document.URL.includes("/photo/"));
 	var isNotSingleFeed = (document.URL.includes("/status/") && !document.URL.includes("?s="));
