@@ -22,16 +22,15 @@ fileInput.onchange = function(event) {
 
 	imageReader.onload = function() {
 		document.getElementById("dataContainer").innerHTML = "";
-       var splitFile = imageReader.result.split("THISISUNIQUE");
-       var splitFileSecond = splitFile[1].split("THISISUNIQUA");
-       var encodedData = splitFileSecond[0];
-       var dataArray = atob(encodedData).split(";&&;");
-       document.getElementById("dataContainer").innerHTML += "<br>~/Downloads/" + dataArray[2] + "<br><a id=\"postLink\" href=\"\">Source Post</a><br><br>";
-       document.getElementById("postLink").addEventListener("click", openLink.bind(null, dataArray[1]));
+    	var splitFile = imageReader.result.split("THISISUNIQUE");
+    	var splitFileSecond = splitFile[1].split("THISISUNIQUA");
+    	var encodedData = splitFileSecond[0];
+    	var dataArray = atob(encodedData).split(";&&;");
+    	if (dataArray[0] == "v001") document.getElementById("dataContainer").innerHTML += dataArray[2] + "<br><a id=\"postLink\" href=\"\">Source Post</a><br><br>";
+    	else if (dataArray[0] == "v002") document.getElementById("dataContainer").innerHTML += dataArray[2] + "<br>Original Poster: " + dataArray[3] + "<br><a id=\"postLink\" href=\"\">Source Post</a><br><br>";
+		document.getElementById("postLink").addEventListener("click", openLink.bind(null, dataArray[1]));
 	};
 }
-
-//
 
 function closeDecoder() {
 	document.getElementById("openingPage").style.display = "block";
