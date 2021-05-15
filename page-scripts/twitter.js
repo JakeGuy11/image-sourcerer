@@ -4,7 +4,12 @@ notifySignal({ "intent": "relay", "content": "Starting Twitter Script" });
 notifySignal({ "intent": "relay", "content": "=======================" });
 
 function startDownload(url, pageLink, author, likeButton) {
-	likeButton.click();
+	console.log(likeButton);
+	try {
+		likeButton.click();
+	} catch (e) {
+		console.log("Could not like post");
+	}
 	var extention = "";
 	url = url.split("name=")[0] + "name=large";
 	if(url.includes("format=jpg")){
@@ -29,7 +34,7 @@ function startDownload(url, pageLink, author, likeButton) {
 	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author, "cors_risk": CORSRisk });
 }
 
-function handleMultiPost(aList, linkToPost, likeButton){
+function handleMultiPost(aList, linkToPost, author, likeButton){
 	var desiredSlide = prompt("Enter the number of the post you would like to download (left to right, top to bottom):","");
 	if(desiredSlide === null) return;
 	var desiredSlideNum = parseInt(desiredSlide);
@@ -86,7 +91,7 @@ function handleMultiPost(aList, linkToPost, likeButton){
 				default:
 					throw new Error("Out of range");
 			}
-			startDownload(imageURL, linkToPost, likeButton);
+			startDownload(imageURL, linkToPost, author, likeButton);
 		} catch (err) {
 			alert("The image at that index is not available");
 			console.log(err);
