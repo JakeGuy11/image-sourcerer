@@ -1,11 +1,11 @@
-sleep(1000);
+sleep(3000);
 notifySignal({ "intent": "relay", "content": "======================" });
 notifySignal({ "intent": "relay", "content": "Starting Reddit Script" });
 notifySignal({ "intent": "relay", "content": "======================" });
 
 var oldListSize = 0;
 
-function startDownload(url, pageLink, upvoteButton) {
+function startDownload(url, pageLink, author, upvoteButton) {
 	upvoteButton.click();
 	var extention = "";
 	if(url.includes(".jpg")){
@@ -27,7 +27,7 @@ function startDownload(url, pageLink, upvoteButton) {
 	if(url.includes("i.redd.it")){
 		CORSRisk = true;
 	}
-	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink , "cors_risk": CORSRisk });
+	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author, "cors_risk": CORSRisk });
 }
 
 function handleSwipePost(nodeNumber){
@@ -147,11 +147,26 @@ function refreshNodes(){
 				}
 			}
 		}
+	}else if (type == "full") {
+		var currentButton = baseNode.getElementsByTagName("idl_button")[0];
+		if (currentButton != null) currentButton.parentNode.removeChild(currentButton);
+
+		var imageURL = baseNode.childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(4).childNodes.item(0).childNodes.item(0).childNodes.item(0).src;
+		var linkToPost = document.URL;
+		var upvoteButton = baseNode.childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0);
+		try {
+			var author = baseNode.childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).textContent;
+		} catch (error) {	}
+
+		var buttonLink = '<idl_button align=right><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=24></a></idl_button>';
+		baseNode.childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).innerHTML += buttonLink;
+
+		var idl_downloader = baseNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+		idl_downloader.addEventListener("click", startDownload.bind(null, imageURL, linkToPost, author, upvoteButton), false);
 	}
 }
 
 refreshNodes();
-
 var intervalId = setInterval(refreshNodes, 3000);
 
 function sleep(milliseconds) {
