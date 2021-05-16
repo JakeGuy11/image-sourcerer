@@ -34,6 +34,7 @@ function handleSwipePost(nodeNumber){
 	var feedNodeList = document.querySelectorAll("div.rpBJOHq2PR60pnwJlUyP0").item(0).childNodes;
 	var currentNode = feedNodeList.item(nodeNumber);
 	var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
+	var author = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).textContent;
 	var desiredSlide = prompt("Enter the number of the post you would like to download:","");
 	if(desiredSlide === null) return;
 	var desiredSlideNum = parseInt(desiredSlide);
@@ -42,7 +43,7 @@ function handleSwipePost(nodeNumber){
 			var postNodeList = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes;
 			var wantedImageNode = postNodeList.item(desiredSlide - 1);
 			var imageURL = wantedImageNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.src.nodeValue;
-			startDownload(imageURL, linkToPost, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0));
+			startDownload(imageURL, linkToPost, author, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0));
 		} catch (err) {
 			alert("The image at the selected index has not been loaded yet");
 		}
@@ -84,11 +85,13 @@ function refreshNodes(){
 					var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.item(2).nodeValue;
 					var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 					var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
+					var author = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).textContent;
+
 					var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=24></a></idl_button>';
 					currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
 					
 					var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-					idl_downloader.addEventListener("click", startDownload.bind(null, imageURL, linkToPost, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0)), false);
+					idl_downloader.addEventListener("click", startDownload.bind(null, imageURL, linkToPost, author, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0)), false);
 				}
 				catch (err){
 					try {
@@ -98,11 +101,13 @@ function refreshNodes(){
 						if(!imageURL.includes(".gif")) throw new Error("Extention not supported");
 						var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 						var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
+						var author = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).textContent;
+
 						var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=24></a></idl_button>';
 						currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
 
 						var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-						idl_downloader.addEventListener("click", startDownload.bind(null, imageURL, linkToPost, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0)), false);
+						idl_downloader.addEventListener("click", startDownload.bind(null, imageURL, linkToPost, author, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0)), false);
 					} catch (err2) {
 						try {
 							//Images with spoilers (and possibly NSFW)
@@ -110,11 +115,13 @@ function refreshNodes(){
 							var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(2).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.src.nodeValue;
 							var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 							var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
+							var author = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).textContent;
+
 							var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=24></a></idl_button>';
 							currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
 							
 							var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-							idl_downloader.addEventListener("click", startDownload.bind(null, imageURL, linkToPost, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0)), false);
+							idl_downloader.addEventListener("click", startDownload.bind(null, imageURL, linkToPost, author, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0)), false);
 						} catch (err3) {
 							try {
 								//Link Posts (that show images)
@@ -122,11 +129,13 @@ function refreshNodes(){
 								var imageURL = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(3).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).attributes.src.nodeValue;
 								var linkToPost = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).href;
 								var titleText = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0).nodeValue;
+								var author = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).textContent;
+
 								var buttonLink = '<idl_button align="right"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=24></a></idl_button>';
 								currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).innerHTML += buttonLink;
 								
 								var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-								idl_downloader.addEventListener("click", startDownload.bind(null, imageURL, linkToPost, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0)), false);
+								idl_downloader.addEventListener("click", startDownload.bind(null, imageURL, linkToPost, author, currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(0)), false);
 							} catch (err4) {
 								try {
 									//Scrollable posts
