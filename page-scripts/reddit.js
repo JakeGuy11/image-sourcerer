@@ -158,7 +158,7 @@ function refreshNodes(){
 			var author = baseNode.childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).textContent;
 		} catch (error) {	}
 
-		var buttonLink = '<idl_button align=right><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=24></a></idl_button>';
+		var buttonLink = '<idl_button align=right><a><img align=right src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=48></a></idl_button>';
 		baseNode.childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).innerHTML += buttonLink;
 
 		var idl_downloader = baseNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
