@@ -12,12 +12,7 @@ notifySignal({ "intent": "relay", "content": "==========================" });
 notifySignal({ "intent": "relay", "content": "Starting [PageName] Script" });
 notifySignal({ "intent": "relay", "content": "==========================" });
 
-//Load the feed here. If there are multiple types of feeds to check (ex. home feed, profile feed, single post w details, etc.), put all node parsing in a try statement
-var feedNodeList = "list/array of child nodes of the element"
-//Create a var for the last feed size so the page isn't actually updated every 3 seconds
-var oldListSize = 0;
-
-//Add a function to handle downloads. Although not required, it is **HIGHLY** recommended that you provide the user with a prompt to let them choose the download location
+//Add a function to handle downloads. Although not technically required, it is **HIGHLY** recommended that you provide the user with a prompt to let them choose the download location
 //This is the actual download command:
 notifySignal({
 	"intent": "queue_download",
@@ -25,13 +20,18 @@ notifySignal({
 	"post_src": "the link to the actual post, not the raw image",
 	"save_name": "the name and path relative to ~/Downloads/Image-Sourcerer/ to save the file under",
 	"ext": "a simple '.jpg', '.png', etc. depending on the image",
-	"cors_risk": "[OPTIONAL] whether or not this image could be at risk for being blocked by the CORS. This doesn't do anything yet"
-	//Eventually, more things like author will be implemented, but this is it for now
+	"op": "the original poster as a string. Do not omit site specific tags such as '@' or 'u/'",
+	"cors_risk": "[OPTIONAL] whether or not this image could be at risk for being blocked by the CORS. This doesn't do anything yet",
+	"custom_header": false, // if you need a custom https header
+	"header_name": "the name of the header",
+	"header_content": "the value of the header"
 });
 
 function refreshNodes() {
-	//Updated the feed again
-	feedNodeList = "update it";
+	//Updated the feed
+	var feedNodeList = "get a list of nodes of things to parse";
+
+	// The following is what's most common, but note that a lot of sites will need something totally different, and that's fine.
 
 	//If there are new posts in the feed, do what needs to be done
 	if(oldListSize < feedNodeList.length) {
@@ -74,7 +74,7 @@ refreshNodes();
 
 var intervalId = setInterval(refreshNodes, 3000);
 
-//Touch NOTHING below here
+//Touch NOTHING below here except for msg.sender
 //A simple sleep function. Don't use this, it's only for a small delay at the start
 function sleep(milliseconds) {
   const date = Date.now();
@@ -86,7 +86,7 @@ function sleep(milliseconds) {
 
 //Send a message to everything. It will be picked up by relay.js and sent to main.js
 function notifySignal(msg) {
-	msg.sender = "reddit.js";
+	msg.sender = "your base website";
 	if(!("intent" in msg)) msg.intent = "undefined_intent";
 	chrome.runtime.sendMessage(msg);
 }
