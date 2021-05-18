@@ -27,11 +27,7 @@ function startDownload(url, pageLink, author, likeButton) {
 		alert("Your saveName cannot include '..'");
 		return;
 	}
-	var CORSRisk = false;
-	if(url.includes("i.redd.it")){
-		CORSRisk = true;
-	}
-	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author, "cors_risk": CORSRisk });
+	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author });
 }
 
 function handleMultiPost(aList, linkToPost, author, likeButton){
