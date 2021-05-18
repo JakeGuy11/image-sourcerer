@@ -27,7 +27,7 @@ function startDownload(url, pageLink, author, likeButton) {
 		alert("Your saveName cannot include '..'");
 		return;
 	}
-	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author });
+	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author, "page": "https://twitter.com/" });
 }
 
 function handleMultiPost(aList, linkToPost, author, likeButton){

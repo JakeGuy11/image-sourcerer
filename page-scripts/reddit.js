@@ -27,7 +27,7 @@ function startDownload(url, pageLink, author, upvoteButton) {
 	if(url.includes("i.redd.it")){
 		CORSRisk = true;
 	}
-	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author, "cors_risk": CORSRisk });
+	notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author, "cors_risk": CORSRisk, "page": "https://www.reddit.com/" });
 }
 
 function handleSwipePost(nodeNumber){
