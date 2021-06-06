@@ -36,7 +36,7 @@
       "js": ["page-scripts/twitter.js"]
     },
 	{
-	  "matches": ["*://danbooru.donmai.us/*"],
+	  "matches": ["*://danbooru.donmai.us/posts/*"],
 	  "js": ["page-scripts/danbooru.js"]
 	}
   ],

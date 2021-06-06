@@ -14,21 +14,27 @@ function download_post(src, post_link, op) {
 
 	notifySignal({
 		"intent": "queue_download",
-		"target_url": "this is the url of the actual image",
-		"post_src": "the link to the actual post, not the raw image",
-		"save_name": "the name and path relative to ~/Downloads/Image-Sourcerer/ to save the file under",
-		"ext": "a simple '.jpg', '.png', etc. depending on the image",
-		"op": "the original poster as a string. Do not omit site specific tags such as '@' or 'u/'",
+		"target_url": src,
+		"post_src": post_link,
+		"save_name": "testimg",
+		"ext": ".jpg",
+		"op": op
 	});
 }
 
 // First, find the link to the image
+var link_to_image = document.getElementById("content").getElementsByTagName("img")[0].src;
 
 // Get the url to save it with
+var post_link = document.getElementById("post-info-source").childNodes.item(1).href;
 
 // Get the OP
+var original_poster = document.getElementsByClassName("artist-tag-list")[1].childNodes.item(1).getAttribute("data-tag-name");
 
 // Inject the button, add the listener
+var button_element = '<idl_button id="idl_button"><br><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" width=64></a><br></idl_button>';
+document.getElementById("post-information").innerHTML += button_element;
+document.getElementById("idl_button").addEventListener("click", download_post.bind(null, link_to_image, post_link, original_poster), false);
 
 function sleep(milliseconds) {
   const date = Date.now();
@@ -39,7 +45,7 @@ function sleep(milliseconds) {
 }
 
 function notifySignal(msg) {
-	msg.sender = "your base website";
+	msg.sender = "danbooru.js";
 	if(!("intent" in msg)) msg.intent = "undefined_intent";
 	chrome.runtime.sendMessage(msg);
 }
