@@ -20,12 +20,12 @@ function download_post(src, post_link, op) {
 	}
 
 	var save_name = prompt("Enter the path (relative to ~/Downloads/Image-Sourcerer/) and filename you would like to save the image under","");
+	
+	if (save_name == null || save_name == "") return;
 	if(save_name.includes("..")){
 		alert("Your save location cannot include '..'");
 		return;
 	}
-
-	if (save_name == null || save_name == "") return;
 
 	notifySignal({
 		"intent": "queue_download",
@@ -38,7 +38,7 @@ function download_post(src, post_link, op) {
 }
 
 // First, find the link to the image
-var link_to_image = document.getElementById("content").getElementsByTagName("img")[0].src;
+var link_to_image = document.getElementById("post-info-size").childNodes.item(1).href;
 
 // Get the url to save it with
 var post_link = document.getElementById("post-info-source").childNodes.item(1).href;
