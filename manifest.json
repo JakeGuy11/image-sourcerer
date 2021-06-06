@@ -34,7 +34,11 @@
     {
       "matches": ["*://twitter.com/*"],
       "js": ["page-scripts/twitter.js"]
-    }
+    },
+	{
+	  "matches": ["*://danbooru.donmai.us/*"],
+	  "js": ["page-scripts/danbooru.js"]
+	}
   ],
 
   "background": {
