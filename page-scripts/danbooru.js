@@ -6,18 +6,33 @@ notifySignal({ "intent": "relay", "content": "========================" });
 // Handle the download
 function download_post(src, post_link, op) {
 	
-	// Get what the user wants to save it as
-
-	// Parse for the file ext
+	var extention = "";
 	
-	// Send it to download
+	if(src.includes(".jpg")){
+		extention = ".jpg";
+	} else if(src.includes(".png")) {
+		extention = ".png";
+	} else if(src.includes(".gif")) {
+		extention = ".gif";
+	} else {
+		notifySignal({ "intent": "relay", "content": "Extention could not be found." });
+		return;
+	}
+
+	var save_name = prompt("Enter the path (relative to ~/Downloads/Image-Sourcerer/) and filename you would like to save the image under","");
+	if(save_name.includes("..")){
+		alert("Your save location cannot include '..'");
+		return;
+	}
+
+	if (save_name == null || save_name == "") return;
 
 	notifySignal({
 		"intent": "queue_download",
 		"target_url": src,
 		"post_src": post_link,
-		"save_name": "testimg",
-		"ext": ".jpg",
+		"save_name": "Image-Sourcerer/" + save_name,
+		"ext": extention,
 		"op": op
 	});
 }
