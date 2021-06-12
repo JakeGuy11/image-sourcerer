@@ -44,7 +44,7 @@ var link_to_image = document.getElementById("post-info-size").childNodes.item(1)
 var post_link = document.getElementById("post-info-source").childNodes.item(1).href;
 
 // Get the OP
-var original_poster = document.getElementsByClassName("artist-tag-list")[1].childNodes.item(1).getAttribute("data-tag-name");
+var original_poster = document.getElementsByClassName("artist-tag-list")[1].getElementsByClassName("search-tag")[0].innerText;
 
 // Inject the button, add the listener
 var button_element = '<idl_button id="idl_button"><br><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" width=64></a><br></idl_button>';
