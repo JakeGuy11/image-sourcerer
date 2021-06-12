@@ -29,13 +29,17 @@ function messageRecieved(recMsg) {
 					for (var i = 0; i < equalsCount; i++){
 						lastCharsPostEquals += "=";
 					}
-					var dataToInject = "v002" + ";&&;" + recMsg.post_src + ";&&;" + recMsg.save_name + recMsg.ext + ";&&;" + recMsg.op;
-					var encodedData = btoa(dataToInject).replace(/=/g, "");
+					var dataToInject = "v003" + ";&&;" + recMsg.post_src + ";&&;" + recMsg.save_name + recMsg.ext + ";&&;" + recMsg.op;
+					console.log ("injection content: " + dataToInject);
+					var encodedData = btoa(escape(dataToInject)).replaceAll("=","");
+					// while (((encodedData.length-3) % 4) != 0) encodedData += "=";
 					var injectionContent = "THISISUNIQUE" + encodedData + "THISISUNIQUE";
-					while(injectionContent.length % 4 != 0){
+					while(injectionContent.length % 4 != 0) {
 						injectionContent += "X";
 					}
 					injectedDataURL = firstChars + lastCharsPreEquals + injectionContent;
+					console.log("injecting " + injectionContent);
+					console.log(injectedDataURL);
 					notifySignal({ "intent": "download", "target_url": injectedDataURL, "save_name": recMsg.save_name, "ext": recMsg.ext });
 				});
 				break;
