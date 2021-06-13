@@ -6,41 +6,7 @@ document.getElementById("openGithubPageButton").addEventListener("click", openLi
 document.getElementById("reportIssueButton").addEventListener("click", openLink.bind(null, "https://github.com/JakeGuy11/image-sourcerer/issues/new"));
 document.getElementById("openDecoderPageButton").addEventListener("click", openLink.bind(null, "https://jakeguy11.github.io/image-sourcerer/decode.html"));
 document.getElementById("donateButton").addEventListener("click", openLink.bind(null, "https://paypal.me/JakeGuy11"));
-document.getElementById("openDecoder").addEventListener("click", openDecoder);
-document.getElementById("goBackButton").addEventListener("click", closeDecoder);
-document.getElementById("goBackButtonColoured").addEventListener("click", closeDecoder);
-
-//This next chunk is just a copy/paste from the decoding document
-
-var fileInput = document.getElementById("fileDrop");
-fileInput.onchange = function(event) {
-   var fileList = event.target.files;
-   var interestedFile = fileList[0];
-
-   let imageReader = new FileReader();
-   imageReader.readAsDataURL(interestedFile);
-
-	imageReader.onload = function() {
-		document.getElementById("dataContainer").innerHTML = "";
-    	var splitFile = imageReader.result.split("THISISUNIQUE");
-    	var splitFileSecond = splitFile[1].split("THISISUNIQUA");
-    	var encodedData = splitFileSecond[0];
-    	var dataArray = atob(encodedData).split(";&&;");
-    	if (dataArray[0] == "v001") document.getElementById("dataContainer").innerHTML += dataArray[2] + "<br><a id=\"postLink\" href=\"\">Source Post</a><br><br>";
-    	else if (dataArray[0] == "v002") document.getElementById("dataContainer").innerHTML += dataArray[2] + "<br>Original Poster: " + dataArray[3] + "<br><a id=\"postLink\" href=\"\">Source Post</a><br><br>";
-		document.getElementById("postLink").addEventListener("click", openLink.bind(null, dataArray[1]));
-	};
-}
-
-function closeDecoder() {
-	document.getElementById("openingPage").style.display = "block";
-	document.getElementById("decoderPanel").style.display = "none";
-}
-
-function openDecoder() {
-	document.getElementById("openingPage").style.display = "none";
-	document.getElementById("decoderPanel").style.display = "block";
-}
+document.getElementById("betaTestButton").addEventListener("click", openLink.bind(null, "https://github.com/JakeGuy11/image-sourcerer/blob/main/beta-testing.md"));
 
 function openLink(url){
 	chrome.tabs.create({

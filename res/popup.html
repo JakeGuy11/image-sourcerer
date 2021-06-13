@@ -14,32 +14,15 @@
 			<p class="t">
 				Whenever you see a <img src="icons/download.png" height=12>, you can click it to download the image. You will be prompted for a name and/or a path. Specify the path using forward slashes (starting without a slash). Do not include the file extension.
 			</p>
-			<center><button type="button" id="openDecoder" class="fadingButton">Open Decoder</button></center>
+			<center><button type="button" id="openDecoderPageButton" class="fadingButton">Open Decoder Page</button></center>
 			<div style="width: 100%;">
 				<center>
 					<button type="button" id="openGithubPageButton" class="fadingButton" style="width: 46.3%;">Open GitHub Page</button>
+					<button type="button" id="betaTestButton" class="fadingButton" style="width: 46.3%">Beta Testing Info</button>
 					<button type="button" id="reportIssueButton" class="fadingButton" style="width: 46.3%">Report an Issue</button>
-					<button type="button" id="openDecoderPageButton" class="fadingButton" style="width: 46.3%;">Open Decoder Page</button>
 					<button type="button" id="donateButton" class="fadingButton" style="width: 46.3%">Donate</button>
 				</center>
 			</div>
-		</div>
-		<div id="decoderPanel" style="display: none;">
-			<img id="goBackButton" src="icons/back.png" style="margin: 5px; position: absolute; top: 0px; left: 0px;" width=24px>
-			<img id="goBackButtonColoured" src="icons/back-coloured.png" style="margin: 5px; position: absolute; top: 0px; left: 0px;" width=24px>
-			<center>
-				<div style="position: relative; display: inline;">
-
-					<img src="icons/logo-large.png" width=66%>
-				</div>
-				<div style="width: 95%">
-					<p class="t" style="font-size: 14px;">Upload an image that you've downloaded using Image-Sourcerer to retrieve the stored information.</p>
-				</div>
-		  		<input id="fileDrop" type="file" name="filename" style="margin: 5px; width: 180px;" />
-		  		<div id="dataContainer">
-		  			<br>
-		  		</div>
-			</center>
 		</div>
 	<script src="popup.js"></script>
 	</body>
