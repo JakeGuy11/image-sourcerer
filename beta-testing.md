@@ -11,8 +11,8 @@ If you are interested, read the [Overview](#Overview) and [Joining the Program](
 - [Joining the Program](#Joining-the-Program)
 
 # Overview
-Welcome to the beta testing program for *Image Sourcerer*! The goal of this program is to find any bugs in the program as well as find ways to optimize the user experience. This page will be broken up into 4 sections (plus the overview). Please read all of them either before or after you join the program.\
-Note that this is not just *load the extension and say "yeah, it's neat!"*. You will need to be providing feedback, suggestions, and any errors you encounter. Additionally, you should by *trying* to break it. Not messing with the code, but doing things that you might not normally do, just to see how the extension handles it.
+Welcome to the beta testing program for Image Sourcerer! The goal of this program is to find any bugs in the program as well as find ways to optimize the user experience. This page will be broken up into 4 sections (plus the overview). Please read all of them either before or after you join the program.\
+If you decide to join, you will need to be providing feedback, suggestions, and any errors you encounter. Additionally, you should by *trying* to break it. Not messing with the code, but doing things that you might not normally do, just to see how the extension handles it.
 
 # Installation and Extension Page
 This section is pretty much the same as in `README.md`, except I'll talk a little more about the parts of the debugger so I can refer to them by their technical names in the future. For now, though, just follow these install instructions.
@@ -47,5 +47,5 @@ In order to address and fix issues, I need to know what's happening in detail. A
   - Describe your idea
 
 # Joining the Program
-To join the program, just contact me! Preferable on discord at JakeGuy11#1541, but email works fine as well, at Jake_Guy_11@protonmail.ch.\
+To join the program, just contact me! I prefer discord at JakeGuy11#1541, but email works fine as well, at Jake_Guy_11@protonmail.ch.\
 If you have any questions, also contact me at one of the above socials.
