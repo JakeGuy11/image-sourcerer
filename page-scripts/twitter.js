@@ -155,7 +155,26 @@ function refreshNodes() {
     var feed_node_list = get_feed_list(feed_root);
     if (feed_node_list == null) return;
 
-    console.log("Currently detecting " + feed_node_list.length + " posts");
+    // Iterate through all the posts
+    for (var current_node of feed_node_list)
+    {
+        // Create a blank array that will hold any images we want to download
+        let interested_images = [];
+        // Scan the post, adding any images we might want to download to the array
+        for (var current_image of current_node.getElementsByTagName("img"))
+        {
+            if (current_image.width >= 100 && current_image.height >= 100) interested_images.push(current_image.src);
+        }
+        
+        // If the list is empty, it's not a post we want to do anything else to
+        if (interested_images.length == 0) continue;
+
+        console.log(interested_images);
+
+        // Find other elements - OP, link to the post, like button(?)
+
+        // Bind everything we've collected to a download function
+    }
 
 }
 
