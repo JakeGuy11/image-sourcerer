@@ -169,9 +169,14 @@ function refreshNodes() {
         // If the list is empty, it's not a post we want to do anything else to
         if (interested_images.length == 0) continue;
 
-        console.log(interested_images);
-
         // Find other elements - OP, link to the post, like button(?)
+        // Get the OP
+        let all_op_tags = current_node.getElementsByClassName("css-901oao css-bfa6kz r-9ilb82 r-18u37iz r-1qd0xha r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0");
+        let op = "";
+        if (all_op_tags.length < 1) op = "UNKNOWN";
+        else op = all_op_tags[all_op_tags.length - 1].innerText;
+
+        console.log(op + " posted " + interested_images.join(", "));
 
         // Bind everything we've collected to a download function
     }
