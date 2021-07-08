@@ -106,6 +106,42 @@ function feedIsProfile() {
     }
 }
 
+function get_feed_list(feed_root)
+{ 
+
+    var return_list;
+
+    // We need to parse for the list of all the posts
+    if (feed_root.childNodes.item(0).childNodes.item(3) != null)
+    {
+        // If this evaluates to true, it's the home feed.
+        return_list = feed_root.childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+    }
+    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2) != null)
+    {
+        // If this is true, it's a profile feed
+        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+    }
+    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1) != null)
+    {
+        // It's a single enlarged post
+        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+    }
+    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0) != null)
+    {
+        // It's a hashtag feed
+        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+    }
+    else
+    {
+        // We don't recognize it - do no parsing
+        return_list = null;
+    }
+    
+    return return_list;
+
+}
+
 function refreshNodes() {
 
     var element = document.getElementsByTagName("idl_button");
@@ -114,34 +150,10 @@ function refreshNodes() {
         element[index].parentNode.removeChild(element[index]);
     }
 
+    // Define the feed root and send it to a method to get a list of all the posts. If it's null, exit the function.
     var feed_root = document.getElementsByClassName("css-1dbjc4n r-kemksi r-1kqtdi0 r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-11wrixw r-61z16t r-1ye8kvj r-13qz1uu r-184en5c")[0];
-    var feed_node_list;
-
-    // We need to parse for the list of all the posts
-    if (feed_root.childNodes.item(0).childNodes.item(3) != null)
-    {
-        // If this evaluates to true, it's the home feed.
-        console.log("I think this is a home feed");
-        feed_node_list = feed_root.childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
-    }
-    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2) != null)
-    {
-        // If this is true, it's a profile feed
-        console.log("I think this is a profile feed");
-        feed_node_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
-    }
-    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1) != null)
-    {
-        // It's a single enlarged post
-        console.log("I think this is a single post feed");
-        feed_node_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
-    }
-    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0) != null)
-    {
-        // It's a hashtag feed
-        console.log("I think this is a hashtag feed");
-        feed_node_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
-    }
+    var feed_node_list = get_feed_list(feed_root);
+    if (feed_node_list == null) return;
 
     console.log("Currently detecting " + feed_node_list.length + " posts");
 
