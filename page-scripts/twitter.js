@@ -10,22 +10,26 @@ function startDownload(images, pageLink, author)
     
     // Make sure the images are in order
     let ordered_images = [];
-    switch (images.length)
+    if (images.length == 4)
     {
-        case 1: ordered_images = images;
-        case 2: ordered_images = images;
-        case 3: ordered_images = images;
-        case 4: ordered_images[0] = images[0]; ordered_images[1] = posts[2]; ordered_images[2] = posts[1]; ordered_images[3] = posts[3];
-        default: alert("Failed to parse image list! Please report this to the Image Sourcerer github page."); return;
+        ordered_images[0] = images[0];
+        ordered_images[1] = images[2];
+        ordered_images[2] = images[1];
+        ordered_images[3] = images[3];
     }
+    else ordered_images = images;
 
     // If there are >1 images, prompt the user for which to download
     if (ordered_images.length == 1) url = ordered_images[0];
     else
     {
         let req_image = prompt("Enter the number of the post you would like to download (left to right, top to bottom):","");
-        let req_index = parseInt(req_image, 10);
-        if (isNaN(req_index)) alert("That is not a valid image index!"); return;
+        let req_index = parseInt(req_image);
+        if (isNaN(req_index))
+        {
+            alert("That is not a valid image index!");
+            return;
+        }
         url = ordered_images[req_index - 1];
     }
 
@@ -45,6 +49,7 @@ function startDownload(images, pageLink, author)
 
     // Find where to save the image
     var saveName = prompt("Enter the path (relative to ~/<Download path>/Image-Sourcerer/) and filename you would like to save the image under","");
+    if (saveName == null || saveName == "") return;
     if(saveName.includes("..")){
         alert("Your saveName cannot include '..'");
         return;
@@ -130,9 +135,13 @@ function refreshNodes() {
         if (all_link_tags.length < 1) link = "UNKNOWN";
         else link = all_link_tags[all_link_tags.length - 1].href;
 
-        console.log(op + " posted " + interested_images.join(", ") + " at " + link);
+        // Add an IDL button to the post
+        let button_code = buttonLink = '<idl_button align="right"><br><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center><br></idl_button>';
+        current_node.getElementsByClassName("css-1dbjc4n r-18kxxzh r-1wbh5a2 r-13qz1uu")[0].innerHTML += button_code;
 
         // Bind everything we've collected to a download function
+        let idl_downloader = current_node.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+        idl_downloader.addEventListener("click", startDownload.bind(null, interested_images, link, op), false);
     }
 
 }
