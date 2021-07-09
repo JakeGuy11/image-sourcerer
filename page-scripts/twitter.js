@@ -59,6 +59,12 @@ function startDownload(images, pageLink, author)
     notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author, "page": "https://twitter.com/" });
 }
 
+function is_enlarged_post(node)
+{
+    if (node.getElementsByClassName("css-1dbjc4n r-1iusvr4 r-16y2uox r-1777fci r-1h8ys4a r-1bylmt5 r-13tjlyg r-7qyjyx r-1ftll1t").length == 0) return false;
+    else return true;
+}
+
 function get_feed_list(feed_root)
 { 
 
@@ -135,9 +141,17 @@ function refreshNodes() {
         if (all_link_tags.length < 1) link = "UNKNOWN";
         else link = all_link_tags[all_link_tags.length - 1].href;
 
-        // Add an IDL button to the post
-        let button_code = buttonLink = '<idl_button align="right"><br><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center><br></idl_button>';
-        current_node.getElementsByClassName("css-1dbjc4n r-18kxxzh r-1wbh5a2 r-13qz1uu")[0].innerHTML += button_code;
+        // Add an IDL button to the post. If it's an enlarged post, use a modified button in a different position
+        if (!is_enlarged_post(current_node))
+        {
+            let button_code = buttonLink = '<idl_button align="right"><br><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center><br></idl_button>';
+            current_node.getElementsByClassName("css-1dbjc4n r-18kxxzh r-1wbh5a2 r-13qz1uu")[0].innerHTML += button_code;
+        }
+        else
+        {
+            let button_code = buttonLink = '<idl_button align="right"><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center></idl_button>';
+            current_node.getElementsByClassName("css-1dbjc4n r-1r5su4o")[0].childNodes[0].innerHTML += button_code;
+        }
 
         // Bind everything we've collected to a download function
         let idl_downloader = current_node.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
