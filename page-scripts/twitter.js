@@ -1,4 +1,3 @@
-sleep(1000);
 notifySignal({ "intent": "relay", "content": "=======================" });
 notifySignal({ "intent": "relay", "content": "Starting Twitter Script" });
 notifySignal({ "intent": "relay", "content": "=======================" });
@@ -162,14 +161,6 @@ function refreshNodes() {
 
 
 setTimeout(function() { try {  var intervalId = setInterval(refreshNodes, 2000);  } catch (e) {  notifySignal({"intent": "relay", "content": "Error occurred: " + e});  }}, 5000);
-
-function sleep(milliseconds) {
-    const date = Date.now();
-    let currentDate = null;
-    do {
-        currentDate = Date.now();
-    } while (currentDate - date < milliseconds);
-}
 
 function notifySignal(msg) {
     msg.sender = "twitter.js";
