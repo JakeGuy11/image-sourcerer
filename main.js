@@ -13,7 +13,7 @@ function messageRecieved(recMsg) {
 				console.log("[" + recMsg.sender + "]: " + recMsg.content);
 				break;
 			case "queue_download":
-				toDataURL(recMsg.target_url, function(dataUrl) {
+				toDataURL(recMsg, function(dataUrl) {
 					var lastChars = dataUrl.substr(-10);
 					var firstChars = dataUrl.substr(0, dataUrl.length - 10);
 					var equalsCount = 0;
@@ -53,19 +53,29 @@ function messageRecieved(recMsg) {
 	}
 }
 
-function toDataURL(url, callback) {
+function toDataURL(obj, callback) {
 	var xhr = new XMLHttpRequest();
 	xhr.onload = function() {
 		var reader = new FileReader();
 		reader.onloadend = function() {
-			callback(reader.result);
+            callback(reader.result);
 		}
 		reader.readAsDataURL(xhr.response);
 	};
-	xhr.onerror = (e) => alert("Due to the CORS policy of the server,\nthe image could not be downloaded. It is\nrecommended that you download the chrome\nextension \"Allow CORS\" and try again.");
-	xhr.open('GET', url);
-	xhr.responseType = 'blob';
-	xhr.send();
+    xhr.onerror = function() { // only triggers if the request couldn't be made at all
+        console.log(`Error ${xhr.status}: ${xhr.statusText}`);
+    };
+    if (("custom_header" in obj) && (obj.custom_header)) proxy_needed = true;
+    else proxy_needed = false;
+    if (!proxy_needed){
+        xhr.open('GET', obj.target_url);
+        xhr.responseType = "blob";
+    }
+    else {
+        xhr.open('GET', "https://image-sourcerer-proxy.herokuapp.com/unsafe_header?header=" + obj.header_name + ":" + obj.header_content + "&src_img=" + obj.target_url);
+        xhr.responseType = "blob";
+	}
+    xhr.send();
 }
 
 function notifySignal(msg) {
