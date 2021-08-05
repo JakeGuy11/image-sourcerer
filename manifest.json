@@ -36,6 +36,7 @@
       "js": ["page-scripts/twitter.js"]
     },
     {
+      "run_at": "document_end",
       "matches": ["*://www.pixiv.net/*"],
       "js": ["page-scripts/pixiv.js"]
     },
