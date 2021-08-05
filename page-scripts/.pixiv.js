@@ -3,51 +3,79 @@ notifySignal({ "intent": "relay", "content": "=====================" });
 notifySignal({ "intent": "relay", "content": "Starting Pixiv Script" });
 notifySignal({ "intent": "relay", "content": "=====================" });
 
-// This is just some code I don't want to lose - it'll allow parsing of japanese/chinese/non-ascii characters
-/*
-btoa(unescape(encodeURIComponent("私のString")));
-decodeURIComponent(escape(window.atob("56eB44GuU3RyaW5n")));
-*/
+// Handle the download
+function startDownload(src, post_link, op) {
 
-/*
-notifySignal({
-	"intent": "queue_download",
-	"target_url": "this is the url of the actual image",
-	"post_src": "the link to the actual post, not the raw image",
-	"save_name": "the name and path relative to ~/Downloads/Image-Sourcerer/ to save the file under",
-	"ext": "a simple '.jpg', '.png', etc. depending on the image",
-	"op": "the original poster as a string. Do not omit site specific tags such as '@' or 'u/'",
-	"custom_header": false,
-	"header_name": "the name of the header",
-	"header_content": "the value of the header"
-});
-*/
+    var extention = "";
 
-function refreshNodes() {
+     if(src.includes(".jpg")){
+        extention = ".jpg";
+    } else if(src.includes(".png")) {
+        extention = ".png";
+    } else if(src.includes(".gif")) {
+        extention = ".gif";
+    } else {
+        notifySignal({ "intent": "relay", "content": "Extention could not be found." });
+        return;
+    }
 
-	var feedNodeList = document.body.getElementsByClassName("iasfms-3 hvlsSe");
+   var save_name = prompt("Enter the path (relative to ~/Downloads/Image-Sourcerer/) and filename you would like to save the image under","");
 
-	for (var i = 0; i < feedNodeList.length; i++) {
-		var currentNode = feedNodeList[i];
+    if (save_name == null || save_name == "") return;
+    if(save_name.includes("..")){
+        alert("Your save location cannot include '..'");
+        return;
+    }
 
-		// If we haven't parsed this element yet
-		if(currentNode.getElementsByTagName("idl_button").length == 0) {
-			var image_url = currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).src;
-			var author = currentNode.childNodes.item(2).childNodes.item(0).childNodes.item(1).innerText;
-			var link_to_post = currentNode.childNodes.item(1).childNodes.item(0).href;
-				
-			var buttonLink = '<idl_button align="right"><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center></idl_button>';
-			if (image_url != null){
-				currentNode.childNodes.item(0).childNodes.item(0).childNodes.item(1).innerHTML += buttonLink;
-				
-				var idl_downloader = currentNode.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-			}
-		}
-	}
+    notifySignal({
+        "intent": "queue_download",
+        "target_url": src,
+        "post_src": post_link,
+        "save_name": "Image-Sourcerer/" + save_name,
+        "ext": extention,
+        "op": op,
+        "custom_header": true,
+        "header_name": "referer",
+        "header_content": "https://www.pixiv.net/"
+    });
 }
 
-refreshNodes();
-var intervalId = setInterval(refreshNodes, 3000);
+function startParse()
+{
+    // Find the link to the actual image
+    var image_divs = Array.from(document.querySelectorAll("[role=\"presentation\"]"));
+    // Remove the two elements we know we don't want
+    image_divs.splice(0, 1);
+    image_divs.splice(-1, 1);
+
+    console.log(image_divs);
+
+    // Iterate through the images
+    for(current_item of image_divs)
+    {
+        // Get all the info we'll need
+        var source = document.URL;
+        var img_src = current_item.getElementsByTagName("img")[0].src;
+        var op = document.getElementsByClassName("sc-10gpz4q-6 gOiTBS")[0].innerText;
+
+        var button_element = '<idl_button style="position:absolute;float:left;top:10px;left:10px;z-index:99"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" width=32></a></idl_button>';
+        current_item.style.position = "relative";
+        current_item.innerHTML += button_element;
+
+        let idl_downloader = current_item.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+        idl_downloader.addEventListener("click", startDownload.bind(null, img_src, source, op), false);
+    }
+}
+
+setTimeout(() => { startParse(); }, 5000);
+setTimeout(() => {
+    let seeAllButton = document.getElementsByClassName("emr523-0 cwSjFV");
+    console.log(seeAllButton);
+    if (seeAllButton.length > 0)
+    {
+        seeAllButton[0].addEventListener("click", () => { setTimeout(() => { startParse(); }, 2000); });
+    }
+}, 2000);
 
 function sleep(milliseconds) {
   const date = Date.now();
