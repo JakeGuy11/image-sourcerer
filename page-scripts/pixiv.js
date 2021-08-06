@@ -55,7 +55,7 @@ function startParse()
     {
         // Get all the info we'll need
         var source = document.URL;
-        var img_src = current_item.getElementsByTagName("img")[0].src;
+        var img_src = current_item.childNodes[0].href;
         var op = document.getElementsByClassName("sc-10gpz4q-6 gOiTBS")[0].innerText;
 
         var button_element = '<idl_button style="position:absolute;float:left;top:10px;left:10px;z-index:99"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" width=32></a></idl_button>';
