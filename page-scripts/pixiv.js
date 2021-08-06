@@ -67,15 +67,18 @@ function startParse()
     }
 }
 
-setTimeout(() => { startParse(); }, 5000);
-setTimeout(() => {
-    let seeAllButton = document.getElementsByClassName("emr523-0 cwSjFV");
-    console.log(seeAllButton);
-    if (seeAllButton.length > 0)
-    {
-        seeAllButton[0].addEventListener("click", () => { setTimeout(() => { startParse(); }, 2000); });
-    }
-}, 2000);
+window.addEventListener('load', function () {
+    console.log("window loaded");
+    startParse();
+    setTimeout(() => {
+        let seeAllButton = document.getElementsByClassName("emr523-0 cwSjFV");
+        console.log(seeAllButton);
+        if (seeAllButton.length > 0)
+        {
+            seeAllButton[0].addEventListener("click", () => { setTimeout(() => { startParse(); }, 2000); });
+        }
+    }, 2000);
+});
 
 function sleep(milliseconds) {
   const date = Date.now();
