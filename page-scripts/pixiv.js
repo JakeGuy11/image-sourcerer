@@ -67,13 +67,14 @@ function startParse()
 }
 
 window.addEventListener('load', function () {
-    console.log("window loaded");
-    startParse();
-    let seeAllButton = document.getElementsByClassName("emr523-0 cwSjFV");
-    if (seeAllButton.length > 0)
-    {
-        seeAllButton[0].addEventListener("click", () => { setTimeout(() => { startParse(); }, 2000); });
-    }
+    setTimeout(function() {
+        startParse();
+        let seeAllButton = document.getElementsByClassName("emr523-0 cwSjFV");
+        if (seeAllButton.length > 0)
+        {
+            seeAllButton[0].addEventListener("click", () => { setTimeout(() => { startParse(); }, 2000); });
+        }
+    }, 500);
 });
 
 function sleep(milliseconds) {
