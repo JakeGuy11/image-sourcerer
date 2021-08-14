@@ -148,6 +148,7 @@ function refreshNodes() {
         }
         else
         {
+            link = document.URL;
             let button_code = buttonLink = '<idl_button align="right"><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center></idl_button>';
             current_node.getElementsByClassName("css-1dbjc4n r-1r5su4o")[0].childNodes[0].innerHTML += button_code;
         }
