@@ -129,13 +129,13 @@ function refreshNodes() {
 
         // Find other elements - OP, link to the post, like button(?)
         // Get the OP
-        let all_op_tags = current_node.getElementsByClassName("css-901oao css-bfa6kz r-9ilb82 r-18u37iz r-1qd0xha r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0");
+        let all_op_tags = current_node.getElementsByClassName("css-901oao css-bfa6kz r-9ilb82 r-18u37iz r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0");
         let op = "";
         if (all_op_tags.length < 1) op = "UNKNOWN";
         else op = all_op_tags[all_op_tags.length - 1].innerText;
 
         // Get the link
-        let all_link_tags = current_node.getElementsByClassName("css-4rbku5 css-18t94o4 css-901oao r-9ilb82 r-1loqt21 r-1q142lx r-1qd0xha r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-3s2u2q r-qvutc0");
+        let all_link_tags = current_node.getElementsByClassName("css-4rbku5 css-18t94o4 css-901oao r-9ilb82 r-1loqt21 r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-3s2u2q r-qvutc0");
         let link = "";
         if (all_link_tags.length < 1) link = "UNKNOWN";
         else link = all_link_tags[all_link_tags.length - 1].href;
