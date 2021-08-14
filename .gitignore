@@ -1,2 +1,2 @@
 #Exclude some scripts I use to make taring easier
-*.command
+*.sh
