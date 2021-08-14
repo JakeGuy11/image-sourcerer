@@ -72,7 +72,7 @@ function toDataURL(obj, callback) {
         xhr.responseType = "blob";
     }
     else {
-        xhr.open('GET', "https://image-sourcerer-proxy.herokuapp.com/unsafe_header?header=" + obj.header_name + ":" + obj.header_content + "&src_img=" + obj.target_url);
+        xhr.open('GET', "https://img-sourcerer-proxy.herokuapp.com/custom_header.php?name=" + obj.header_name + "&content=" + obj.header_content + "&src=" + obj.target_url);
         xhr.responseType = "blob";
 	}
     xhr.send();
