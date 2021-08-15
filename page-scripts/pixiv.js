@@ -50,20 +50,46 @@ function startParse()
 
     console.log(image_divs);
 
-    for(current_item of image_divs)
-    {
-        // Get all the info we'll need
+    //if(image_divs.length < 5)
+    //{
+        for(current_item of image_divs)
+        {
+            // Get all the info we'll need
+            var source = document.URL;
+            var img_src = current_item.childNodes[0].href;
+            var op = document.getElementsByClassName("sc-10gpz4q-6 gOiTBS")[0].innerText;
+
+            var button_element = '<idl_button style="position:absolute;float:left;top:10px;left:10px;z-index:99"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" width=32></a></idl_button>';
+            current_item.style.position = "relative";
+            current_item.innerHTML += button_element;
+
+            let idl_downloader = current_item.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
+            idl_downloader.addEventListener("click", startDownload.bind(null, img_src, source, op), false);
+        }
+    //}
+    //else
+    /*{
         var source = document.URL;
-        var img_src = current_item.childNodes[0].href;
         var op = document.getElementsByClassName("sc-10gpz4q-6 gOiTBS")[0].innerText;
 
-        var button_element = '<idl_button style="position:absolute;float:left;top:10px;left:10px;z-index:99"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" width=32></a></idl_button>';
-        current_item.style.position = "relative";
-        current_item.innerHTML += button_element;
+        var button_element = '<idl_button style="top:36px;margin:24px;position:fixed"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" width=32></a></idl_button>';
+        document.getElementsByClassName("sc-4nj1pr-0 gRbSeX")[0].innerHTML = button_element + document.getElementsByClassName("sc-4nj1pr-0 gRbSeX")[0].innerHTML;
 
-        let idl_downloader = current_item.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
-        idl_downloader.addEventListener("click", startDownload.bind(null, img_src, source, op), false);
-    }
+        document.getElementsByTagName("idl_button")[0].addEventListener("click", function() {
+            console.log("clicked");
+            let req_image = prompt("Enter the index of the image you would like to download:","");
+            let req_index = parseInt(req_image);
+            
+            if (isNaN(req_index))
+            {
+                alert("That is not a valid image index!");
+                return;
+            }
+
+            url = image_divs[req_index - 1].getElementsByTagName("img")[0].src;
+            startDownload(url, source, op);
+        }, false);
+    }*/
 }
 
 window.addEventListener('load', function () {
