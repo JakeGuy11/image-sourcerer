@@ -50,7 +50,11 @@ function startParse()
 
     console.log(image_divs);
 
-    //if(image_divs.length < 5)
+    if(image_divs.length > 5)
+    {
+        alert("There are too many images on this page so it could not be supported by Image Sourcerer.\nConsider donating if you would like to see quicker development!");
+        return;
+    }
     //{
         for(current_item of image_divs)
         {
