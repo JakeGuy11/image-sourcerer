@@ -107,6 +107,7 @@ function handle_post() {
         img.style.position = 'relative';
         let parent_element = img.parentElement;
         parent_element.removeAttribute('href');
+        parent_element.parentElement.removeAttribute('href');
         parent_element.innerHTML = '<a href="' + src + '" target="_blank">' + img.outerHTML + '</a>' + injection_button;
         parent_element.getElementsByTagName('img')[0].style.height = old_height + "px";
         console.log("set to " + old_height + "px");
