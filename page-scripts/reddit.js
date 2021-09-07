@@ -11,7 +11,7 @@ const FeedType = {
     Unknown: 'unknown'
 };
 
-function startDownload(url, pageLink, author) {
+function start_download(url, pageLink, author) {
 	var extention = "";
 	if(url.includes(".jpg")){
 		extention = ".jpg";
@@ -112,7 +112,7 @@ function handle_post() {
         console.log("set to " + old_height + "px");
         
         // Add the listener
-        console.log('detected data:\nLink: ' + link + '\nOP: ' + op + '\nSRC: ' + src);
+        parent_element.getElementsByTagName('idl_button')[0].addEventListener('click', start_download.bind(null, src, link, op), false);
     }
 }
 
