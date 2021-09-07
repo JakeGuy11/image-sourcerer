@@ -28,6 +28,10 @@
       "js": ["main.js"]
     },
     {
+      "matches": ["*://www.reddit.com/*"],
+      "js": ["page-scripts/reddit.js"]
+    },
+    {
       "matches": ["*://twitter.com/*"],
       "js": ["page-scripts/twitter.js"]
     },
