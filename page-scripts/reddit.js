@@ -12,6 +12,7 @@ const FeedType = {
 };
 
 function start_download(url, pageLink, author) {
+    console.log('asked to download ' + url);
 	var extention = "";
 	if(url.includes(".jpg")){
 		extention = ".jpg";
@@ -30,7 +31,7 @@ function start_download(url, pageLink, author) {
 	}
 
 	var cors_risk = false;
-	if(url.includes("i.redd.it")){
+	if(url.includes("i.redd.it") || url.includes("external-preview.redd.it")){
 		cors_risk = true;
 	}
 
@@ -44,8 +45,8 @@ function start_download(url, pageLink, author) {
             "op": author,
             "page": "https://www.reddit.com/",
             "custom_header": true,
-            "header_name": "Access-Control-Allow-Origin",
-            "header_content": "*"
+            "header_name": "important",
+            "header_content": "false"
         });
     } else {
 	    notifySignal({
@@ -66,8 +67,52 @@ function delete_tags(node, tag) {
     }
 }
 
+var last_count = 0;
 function handle_feed() {
+    let node_list = document.getElementsByClassName('rpBJOHq2PR60pnwJlUyP0')[0].childNodes;
+    for (var base_node of node_list) {
+        // Define the things we're checking for
+        let op = 'UNKNOWN';
+        let link = 'UNKNOWN';
+        let src = 'UNKNOWN';
+        let injection_button = '<idl_button style="position:absolute;margin-left:10px;top:10px;z-index:999"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" width=32></a></idl_button>';
 
+        // Get the OP
+        op = base_node.getElementsByClassName('_2tbHP6ZydRpjI44J3syuqC  _23wugcdiaj44hdfugIAlnX oQctV4n0yUb0uiHDdGnmE')[0].innerText;
+
+        // Get the link
+        link = base_node.getElementsByClassName('SQnoC3ObvgnGjWt90zD9Z _2INHSNB8V5eaWp4P0rY_mE')[0].href;
+
+        // Get the source(s) and inject the download button
+        let all_images = Array.from(base_node.getElementsByTagName('img'));
+        let images = all_images.filter(function (current_img) {
+            return (current_img.height > 200) && (current_img.width > 200);
+        });
+        // If there are no images
+        if (images.length == 0) return;
+        // If there are images
+        for (var img of images) {
+            // Skip if already injected
+            if (img.parentElement.parentElement.getElementsByTagName('idl_button').length > 0) continue;
+            
+            // Get the src and some other info
+            src = img.parentElement.href;
+            if (src == undefined) src = img.parentElement.parentElement.href;
+            let old_height = img.height;
+            
+            // Inject the button
+            img.style.position = 'relative';
+            let parent_element = img.parentElement;
+            parent_element.removeAttribute('href');
+            parent_element.parentElement.removeAttribute('href');
+            parent_element.innerHTML = '<a href="' + src + '" target="_blank">' + img.outerHTML + '</a>' + injection_button;
+            parent_element.getElementsByTagName('img')[0].style.height = old_height + "px";
+            console.log("set to " + old_height + "px");
+            
+            // Add the listener
+            parent_element.getElementsByTagName('idl_button')[0].addEventListener('click', start_download.bind(null, src, link, op), false);
+        }
+    }
 }
 
 function handle_post() {
