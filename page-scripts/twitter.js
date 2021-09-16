@@ -85,9 +85,9 @@ const LightMode = {
     FullInjectionSite: 'css-1dbjc4n r-1r5su4o'
 }
 
-function is_enlarged_post(node)
+function is_enlarged_post(node, mode)
 {
-    if (node.getElementsByClassName("css-1dbjc4n r-1iusvr4 r-16y2uox r-1777fci r-1h8ys4a r-1bylmt5 r-13tjlyg r-7qyjyx r-1ftll1t").length == 0) return false;
+    if (node.getElementsByClassName(mode.FullPostIndicator).length == 0) return false;
     else return true;
 }
 
@@ -140,7 +140,7 @@ function refreshNodes() {
     console.log(current_mode.BaseNode);
 
     // Define the feed root and send it to a method to get a list of all the posts. If it's null, exit the function.
-    var feed_root = document.getElementsByClassName("css-1dbjc4n r-kemksi r-1kqtdi0 r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-11wrixw r-61z16t r-1ye8kvj r-13qz1uu r-184en5c")[0];
+    var feed_root = document.getElementsByClassName(current_mode.BaseNode)[0];
     var feed_node_list = get_feed_list(feed_root);
     if (feed_node_list == null) return;
 
@@ -160,28 +160,28 @@ function refreshNodes() {
 
         // Find other elements - OP, link to the post, like button(?)
         // Get the OP
-        let all_op_tags = current_node.getElementsByClassName("css-901oao css-bfa6kz r-9ilb82 r-18u37iz r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0");
+        let all_op_tags = current_node.getElementsByClassName(current_mode.OPTags);
         let op = "";
         if (all_op_tags.length < 1) op = "UNKNOWN";
         else op = all_op_tags[all_op_tags.length - 1].innerText;
 
         // Get the link
-        let all_link_tags = current_node.getElementsByClassName("css-4rbku5 css-18t94o4 css-901oao r-9ilb82 r-1loqt21 r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-3s2u2q r-qvutc0");
+        let all_link_tags = current_node.getElementsByClassName(current_mode.LinkTags);
         let link = "";
         if (all_link_tags.length < 1) link = "UNKNOWN";
         else link = all_link_tags[all_link_tags.length - 1].href;
 
         // Add an IDL button to the post. If it's an enlarged post, use a modified button in a different position
-        if (!is_enlarged_post(current_node))
+        if (!is_enlarged_post(current_node, current_mode))
         {
             let button_code = buttonLink = '<idl_button align="right"><br><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center><br></idl_button>';
-            current_node.getElementsByClassName("css-1dbjc4n r-18kxxzh r-1wbh5a2 r-13qz1uu")[0].innerHTML += button_code;
+            current_node.getElementsByClassName(current_mode.FeedInjectionSite)[0].innerHTML += button_code;
         }
         else
         {
             link = document.URL;
             let button_code = buttonLink = '<idl_button align="right"><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center></idl_button>';
-            current_node.getElementsByClassName("css-1dbjc4n r-1r5su4o")[0].childNodes[0].innerHTML += button_code;
+            current_node.getElementsByClassName(current_mode.FullInjectionSite)[0].childNodes[0].innerHTML += button_code;
         }
 
         // Bind everything we've collected to a download function
