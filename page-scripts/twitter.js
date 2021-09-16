@@ -58,6 +58,33 @@ function startDownload(images, pageLink, author)
     notifySignal({ "intent": "queue_download", "target_url": url, "save_name": "Image-Sourcerer/" + saveName, "ext": extention, "post_src": pageLink, "op": author, "page": "https://twitter.com/" });
 }
 
+const DarkMode = {
+    BaseNode: 'css-1dbjc4n r-kemksi r-1kqtdi0 r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-11wrixw r-61z16t r-1ye8kvj r-13qz1uu r-184en5c',
+    FullPostIndicator: 'css-1dbjc4n r-1iusvr4 r-16y2uox r-1777fci r-1h8ys4a r-1bylmt5 r-13tjlyg r-7qyjyx r-1ftll1t',
+    OPTags: 'css-901oao css-bfa6kz r-9ilb82 r-18u37iz r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0',
+    LinkTags: 'css-4rbku5 css-18t94o4 css-901oao r-9ilb82 r-1loqt21 r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-3s2u2q r-qvutc0',
+    FeedInjectionSite: 'css-1dbjc4n r-18kxxzh r-1wbh5a2 r-13qz1uu',
+    FullInjectionSite: 'css-1dbjc4n r-1r5su4o'
+}
+
+const DimMode = {
+    BaseNode: 'css-1dbjc4n r-yfoy6g r-18bvks7 r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-11wrixw r-61z16t r-1ye8kvj r-13qz1uu r-184en5c',
+    FullPostIndicator: 'css-1dbjc4n r-1iusvr4 r-16y2uox r-1777fci r-1h8ys4a r-1bylmt5 r-13tjlyg r-7qyjyx r-1ftll1t',
+    OPTags: 'css-901oao css-bfa6kz r-111h2gw r-18u37iz r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0',
+    LinkTags: 'css-901oao r-111h2gw r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-s1qlax r-qvutc0',
+    FeedInjectionSite: 'css-1dbjc4n r-18kxxzh r-1wbh5a2 r-13qz1uu',
+    FullInjectionSite: 'css-1dbjc4n r-1r5su4o'
+}
+
+const LightMode = {
+    BaseNode: 'css-1dbjc4n r-14lw9ot r-jxzhtn r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-11wrixw r-61z16t r-1ye8kvj r-13qz1uu r-184en5c',
+    FullPostIndicator: 'css-1dbjc4n r-1iusvr4 r-16y2uox r-1777fci r-1h8ys4a r-1bylmt5 r-13tjlyg r-7qyjyx r-1ftll1t',
+    OPTags: 'css-901oao css-bfa6kz r-14j79pv r-18u37iz r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0',
+    LinkTags: 'css-901oao r-14j79pv r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-s1qlax r-qvutc0',
+    FeedInjectionSite: 'css-1dbjc4n r-18kxxzh r-1wbh5a2 r-13qz1uu',
+    FullInjectionSite: 'css-1dbjc4n r-1r5su4o'
+}
+
 function is_enlarged_post(node)
 {
     if (node.getElementsByClassName("css-1dbjc4n r-1iusvr4 r-16y2uox r-1777fci r-1h8ys4a r-1bylmt5 r-13tjlyg r-7qyjyx r-1ftll1t").length == 0) return false;
@@ -107,6 +134,10 @@ function refreshNodes() {
     for (var index = element.length - 1; index >= 0; index--) {
         element[index].parentNode.removeChild(element[index]);
     }
+
+    // Eventually add mode detection here
+    let current_mode = DarkMode;
+    console.log(current_mode.BaseNode);
 
     // Define the feed root and send it to a method to get a list of all the posts. If it's null, exit the function.
     var feed_root = document.getElementsByClassName("css-1dbjc4n r-kemksi r-1kqtdi0 r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-11wrixw r-61z16t r-1ye8kvj r-13qz1uu r-184en5c")[0];
