@@ -85,6 +85,23 @@ const LightMode = {
     FullInjectionSite: 'css-1dbjc4n r-1r5su4o'
 }
 
+function detect_mode() {
+    switch (document.body.style.backgroundColor) {
+        case 'rgb(0, 0, 0)':
+            return DarkMode;
+            break;
+        case 'rgb(21, 32, 43)':
+            return DimMode;
+            break;
+        case 'rgb(255, 255, 255)':
+            return LightMode;
+            break;
+        default:
+            return null;
+            break;
+    }
+}
+
 function is_enlarged_post(node, mode)
 {
     if (node.getElementsByClassName(mode.FullPostIndicator).length == 0) return false;
@@ -136,8 +153,13 @@ function refreshNodes() {
     }
 
     // Eventually add mode detection here
-    let current_mode = DarkMode;
-    console.log(current_mode.BaseNode);
+    let current_mode = detect_mode();
+    if (current_mode == null) {
+        console.log("Could not detect mode!");
+        return;
+    }
+
+    console.log(current_mode);
 
     // Define the feed root and send it to a method to get a list of all the posts. If it's null, exit the function.
     var feed_root = document.getElementsByClassName(current_mode.BaseNode)[0];
