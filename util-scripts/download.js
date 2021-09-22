@@ -8,7 +8,8 @@ function saveImage(message){
 	if(message.intent == "download") {
 	chrome.downloads.download({
 			url: message.target_url,
-			filename: message.save_name + message.ext
+			filename: message.save_name + message.ext,
+            saveAs: false
 		});
 	}
 }
