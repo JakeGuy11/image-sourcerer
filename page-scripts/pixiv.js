@@ -82,6 +82,10 @@ window.addEventListener('load', function () {
 
 window.onscroll = function() { startParse(); };
 
+setInterval(function() {
+    startParse();
+}, 250);
+
 function sleep(milliseconds) {
   const date = Date.now();
   let currentDate = null;
