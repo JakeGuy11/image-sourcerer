@@ -152,7 +152,6 @@ function refreshNodes() {
         element[index].parentNode.removeChild(element[index]);
     }
 
-    // Eventually add mode detection here
     let current_mode = detect_mode();
     if (current_mode == null) {
         console.log("Could not detect mode!");
