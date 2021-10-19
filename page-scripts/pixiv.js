@@ -69,6 +69,22 @@ function startParse()
         let idl_downloader = current_item.getElementsByTagName("idl_button")[0].getElementsByTagName("img")[0];
         idl_downloader.addEventListener("click", startDownload.bind(null, img_src, source, op), false);
     }
+
+    // Add listeners to every suggested post to reload the page after clicked
+    let bottom_posts = Array.from(document.getElementsByClassName("sc-iasfms-3 jDiPOg"));
+    let side_posts = Array.from(document.getElementsByClassName("sc-iasfms-3 hQJkLh"));
+    let far_bottom_posts = Array.from(document.getElementsByClassName("sc-iasfms-3 jDiQFZ"));
+    var posts_to_listen = bottom_posts.concat(side_posts, far_bottom_posts);
+
+    for(current_preview of posts_to_listen)
+    {
+        current_preview.addEventListener("click", function()
+        {
+            setTimeout(function() {
+                window.location.reload(false);
+            }, 5);
+        });
+    }
 }
 
 window.addEventListener('load', function () {
