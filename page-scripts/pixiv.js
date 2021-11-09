@@ -80,6 +80,7 @@ function startParse()
     {
         current_preview.addEventListener("click", function()
         {
+            if(document.location.href.includes("/users/")) return;
             setTimeout(function() {
                 window.location.reload(false);
             }, 5);
