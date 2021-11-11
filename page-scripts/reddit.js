@@ -100,15 +100,15 @@ function handle_feed() {
                 // Get the src and some other info
                 src = img.parentElement.href;
                 if (src == undefined) src = img.parentElement.parentElement.href;
-                let old_height = img.height;
+                let old_width = img.width;
                 
                 // Inject the button
                 img.style.position = 'relative';
                 let parent_element = img.parentElement;
                 parent_element.parentElement.parentElement.removeAttribute('href');
                 parent_element.innerHTML = '<a href="' + src + '" target="_blank">' + img.outerHTML + '</a>' + injection_button;
-                parent_element.getElementsByTagName('img')[0].style.height = old_height + "px";
-                console.log("set to " + old_height + "px");
+                parent_element.getElementsByTagName('img')[0].style.maxWidth = old_width + "px";
+                console.log("set to " + old_width + "px");
                 
                 // Add the listener
                 parent_element.getElementsByTagName('idl_button')[0].addEventListener('click', start_download.bind(null, src, link, op), false);
@@ -148,7 +148,7 @@ function handle_post() {
         // Get the src and some other info
         src = img.parentElement.href;
         if (src == undefined) src = img.parentElement.parentElement.href;
-        let old_height = img.height;
+        let old_width = img.width;
         
         // Inject the button
         img.style.position = 'relative';
@@ -156,8 +156,7 @@ function handle_post() {
         parent_element.removeAttribute('href');
         parent_element.parentElement.removeAttribute('href');
         parent_element.innerHTML = '<a href="' + src + '" target="_blank">' + img.outerHTML + '</a>' + injection_button;
-        parent_element.getElementsByTagName('img')[0].style.height = old_height + "px";
-        console.log("set to " + old_height + "px");
+        parent_element.getElementsByTagName('img')[0].style.maxWidth = old_width + "px";
         
         // Add the listener
         parent_element.getElementsByTagName('idl_button')[0].addEventListener('click', start_download.bind(null, src, link, op), false);
