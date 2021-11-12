@@ -106,7 +106,7 @@ function handle_feed() {
                 if (tiny_div) continue;
                 
                 // Get the src and some other info
-                src = img.parentElement.href;
+                src = img.src;
                 if (src == undefined) src = img.parentElement.parentElement.href;
 
                 // Inject the button
