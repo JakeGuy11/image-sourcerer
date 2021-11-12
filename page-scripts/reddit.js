@@ -97,21 +97,23 @@ function handle_feed() {
             if (images.length == 0) continue;
             // If there are images
             for (var img of images) {
-                // Skip if already injected
-                if (img.parentElement.parentElement.getElementsByTagName('idl_button').length > 0) continue;
+                // Skip if already injected, but not if div is tiny
+                // Is a tiny div
+                let tiny_div = ((img.parentElement.clientHeight == 0) || (img.parentElement.clientWidth == 0));
+                // Has idl button
+                let is_parsed = (img.parentElement.parentElement.getElementsByTagName('idl_button').length > 0);
+                if ((!tiny_div) && is_parsed) continue;
+                if (tiny_div) continue;
                 
                 // Get the src and some other info
                 src = img.parentElement.href;
                 if (src == undefined) src = img.parentElement.parentElement.href;
 
-                // Skip the image if it hasn't loaded yet
-                if ((img.parentElement.clientHeight == 0) || (img.parentElement.clientWidth == 0)) continue;
-                
                 // Inject the button
                 img.style.position = 'relative';
                 let parent_element = img.parentElement;
                 parent_element.parentElement.parentElement.removeAttribute('href');
-                parent_element.innerHTML = '<a href="' + src + '" target="_blank">' + img.outerHTML + '</a>' + injection_button;
+                parent_element.innerHTML = '<a href="' + link + '" target="_blank">' + img.outerHTML + '</a>' + injection_button;
                 // Reset the width and height so we don't get overlap
                 parent_element.getElementsByTagName('img')[0].style.maxWidth = parent_element.clientWidth + "px";
                 parent_element.getElementsByTagName('img')[0].style.maxHeight = parent_element.clientHeight + "px";
