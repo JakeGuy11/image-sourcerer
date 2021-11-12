@@ -67,6 +67,9 @@ function delete_tags(node, tag) {
     }
 }
 
+// ============
+// ENTIRE FEEDS
+// ============
 var last_count = 0;
 function handle_feed() {
     var mycount = 0;
@@ -100,15 +103,18 @@ function handle_feed() {
                 // Get the src and some other info
                 src = img.parentElement.href;
                 if (src == undefined) src = img.parentElement.parentElement.href;
-                let old_width = img.width;
+
+                // Skip the image if it hasn't loaded yet
+                if ((img.parentElement.clientHeight == 0) || (img.parentElement.clientWidth == 0)) continue;
                 
                 // Inject the button
                 img.style.position = 'relative';
                 let parent_element = img.parentElement;
                 parent_element.parentElement.parentElement.removeAttribute('href');
                 parent_element.innerHTML = '<a href="' + src + '" target="_blank">' + img.outerHTML + '</a>' + injection_button;
-                parent_element.getElementsByTagName('img')[0].style.maxWidth = old_width + "px";
-                console.log("set to " + old_width + "px");
+                // Reset the width and height so we don't get overlap
+                parent_element.getElementsByTagName('img')[0].style.maxWidth = parent_element.clientWidth + "px";
+                parent_element.getElementsByTagName('img')[0].style.maxHeight = parent_element.clientHeight + "px";
                 
                 // Add the listener
                 parent_element.getElementsByTagName('idl_button')[0].addEventListener('click', start_download.bind(null, src, link, op), false);
@@ -117,6 +123,9 @@ function handle_feed() {
     }
 }
 
+// ===========
+// SINGLE POST
+// ===========
 function handle_post() {
     // Define the things we're checking for
     let op = 'UNKNOWN';
@@ -148,7 +157,10 @@ function handle_post() {
         // Get the src and some other info
         src = img.parentElement.href;
         if (src == undefined) src = img.parentElement.parentElement.href;
+
+        // Get the old height and width
         let old_width = img.width;
+        let old_height = img.height;
         
         // Inject the button
         img.style.position = 'relative';
@@ -156,7 +168,9 @@ function handle_post() {
         parent_element.removeAttribute('href');
         parent_element.parentElement.removeAttribute('href');
         parent_element.innerHTML = '<a href="' + src + '" target="_blank">' + img.outerHTML + '</a>' + injection_button;
+        // Reset the height and width so we don't get overlap
         parent_element.getElementsByTagName('img')[0].style.maxWidth = old_width + "px";
+        parent_element.getElementsByTagName('img')[0].style.maxHeight = old_height + "px";
         
         // Add the listener
         parent_element.getElementsByTagName('idl_button')[0].addEventListener('click', start_download.bind(null, src, link, op), false);
