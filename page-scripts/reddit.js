@@ -213,7 +213,7 @@ function periodic(){
 
 }
 
-var intervalId = setInterval(periodic, 3000);
+var intervalId = setInterval(periodic, 500);
 
 function sleep(milliseconds) {
   const date = Date.now();
