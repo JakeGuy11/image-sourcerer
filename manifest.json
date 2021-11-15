@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "Image Sourcerer",
   "description": "Download and track images from your favourite art sites!",
-  "version": "0.4.3",
+  "version": "0.4.5",
 
   "icons": {
     "512": "res/icons/icon-512.png"
