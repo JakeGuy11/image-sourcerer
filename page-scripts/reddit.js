@@ -115,11 +115,14 @@ function handle_feed() {
                 parent_element.parentElement.parentElement.removeAttribute('href');
                 parent_element.innerHTML = '<a href="' + link + '" target="_blank">' + img.outerHTML + '</a>' + injection_button;
                 // Reset the width and height so we don't get overlap
+		// FUTURE ME: maybe getting rid of maxHeight will allow it to be oversided like it is normally?
                 parent_element.getElementsByTagName('img')[0].style.maxWidth = parent_element.clientWidth + "px";
                 parent_element.getElementsByTagName('img')[0].style.maxHeight = parent_element.clientHeight + "px";
                 
-                // Add the listener
-                parent_element.getElementsByTagName('idl_button')[0].addEventListener('click', start_download.bind(null, src, link, op), false);
+                // Remove the default event (which redirects you) and add the download listener
+		let idl_button = parent_element.getElementsByTagName('idl_button')[0];
+		idl_button.addEventListener('click', function(e){ e.preventDefault(); });
+                idl_button.addEventListener('click', start_download.bind(null, src, link, op), false);
             }
         } catch (err) {  }
     }
