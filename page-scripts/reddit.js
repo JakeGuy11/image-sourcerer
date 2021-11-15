@@ -91,7 +91,8 @@ function handle_feed() {
             // Get the source(s) and inject the download button
             let all_images = Array.from(base_node.getElementsByTagName('img'));
             let images = all_images.filter(function (current_img) {
-                return (current_img.height > 100) && (current_img.width > 150) && (current_img.className != "_34CfAAowTqdbNDYXz5tBTW _1WX5Y5qFVBTdr6hCPpARDB");
+                // Just to make this easier for future me: The first image class is the subreddit icon, the second is the large cover for NSFW posts, the third is the blurred NSFW posts
+                return (current_img.height > 100) && (current_img.width > 150) && (current_img.className != "_34CfAAowTqdbNDYXz5tBTW _1WX5Y5qFVBTdr6hCPpARDB") && (current_img.className != "_2iaYXFpGyyEGq1rp02cl5w") && (current_img.className != "_2_tDEnGMLxpM6uOa2kaDB3 ImageBox-image media-element _1XWObl-3b9tPy64oaG6fax _3oBPn1sFwq76ZAxXgwRhhn");
             });
             // If there are no images
             if (images.length == 0) continue;
