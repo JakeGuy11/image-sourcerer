@@ -88,7 +88,7 @@ function handle_feed() {
             // Get the link
             link = base_node.getElementsByClassName('SQnoC3ObvgnGjWt90zD9Z _2INHSNB8V5eaWp4P0rY_mE')[0].href;
 
-            // Get the source(s) and inject the download button
+            // Collect and filter all the images we want to parse
             let all_images = Array.from(base_node.getElementsByTagName('img'));
             let images = all_images.filter(function (current_img) {
                 // Just to make this easier for future me: The first image class is the subreddit icon, the second is the large cover for NSFW posts, the third is the blurred NSFW posts
@@ -149,7 +149,8 @@ function handle_post() {
     // Get the source(s) and inject the download button
     let all_images = Array.from(base_node.getElementsByTagName('img'));
     let images = all_images.filter(function (current_img) {
-        return (current_img.height > 200) && (current_img.width > 200);
+        // Easier for future me: The one class is for single nsfw posts
+        return (current_img.height > 200) && (current_img.width > 200) && (current_img.className != "_2_tDEnGMLxpM6uOa2kaDB3 ImageBox-image media-element _1XWObl-3b9tPy64oaG6fax _3oBPn1sFwq76ZAxXgwRhhn");
     });
     // If there are no images
     if (images.length == 0) return;
