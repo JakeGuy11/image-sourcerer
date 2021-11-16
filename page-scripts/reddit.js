@@ -100,7 +100,7 @@ function handle_feed() {
             for (var img of images) {
                 // Skip if already injected, but not if div is tiny
                 // Is a tiny div
-                let tiny_div = ((img.parentElement.clientHeight == 0) || (img.parentElement.clientWidth == 0));
+                let tiny_div = ((img.parentElement.clientHeight < 50) || (img.parentElement.clientWidth < 50));
                 // Has idl button
                 let is_parsed = (img.parentElement.parentElement.getElementsByTagName('idl_button').length > 0);
                 if ((!tiny_div) && is_parsed) continue;
@@ -108,7 +108,7 @@ function handle_feed() {
                 
                 // Get the src and some other info
                 src = img.src;
-                if (src == undefined) src = img.parentElement.parentElement.href;
+                if (src == undefined) continue;
 
                 // Inject the button
                 img.style.position = 'relative';
@@ -119,8 +119,8 @@ function handle_feed() {
                 parent_element.getElementsByTagName('img')[0].style.maxWidth = parent_element.clientWidth + "px";
                 
                 // Remove the default event (which redirects you) and add the download listener
-		let idl_button = parent_element.getElementsByTagName('idl_button')[0];
-		idl_button.addEventListener('click', function(e){ e.preventDefault(); });
+                let idl_button = parent_element.getElementsByTagName('idl_button')[0];
+                idl_button.addEventListener('click', function(e){ e.preventDefault(); });
                 idl_button.addEventListener('click', start_download.bind(null, src, link, op), false);
             }
         } catch (err) {  }
@@ -139,9 +139,10 @@ function handle_post() {
 
     // Get the base node
     let base_node = document.getElementsByClassName('uI_hDmU5GSiudtABRz_37 ')[0];
+    if (base_node == undefined) return;
 
     // Get the OP
-    op = base_node.getElementsByClassName('_2tbHP6ZydRpjI44J3syuqC  _23wugcdiaj44hdfugIAlnX oQctV4n0yUb0uiHDdGnmE')[0].innerText;
+    try { op = base_node.getElementsByClassName('_2tbHP6ZydRpjI44J3syuqC  _23wugcdiaj44hdfugIAlnX oQctV4n0yUb0uiHDdGnmE')[0].innerText; } catch (e) { return; }
 
     // Get the link
     link = document.location.href;
