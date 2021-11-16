@@ -44,6 +44,10 @@
 	{
 	  "matches": ["*://danbooru.donmai.us/posts/*"],
 	  "js": ["page-scripts/danbooru.js"]
+	},
+	{
+	  "matches": ["*://www.instagram.com/*"],
+	  "js": ["page-scripts/instagram.js"]
 	}
   ],
 
