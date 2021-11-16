@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap');
+
 body {
+	font-family: "Noto Sans JP", sans;
 	border-style: none;
-	background-color: #C3809B;
+	background-color: #F5F5FF;
 	height: 100%;
 	width: 310px;
 }
@@ -9,20 +12,13 @@ p {
 	font-size: 16px;
 }
 
-h1 {
-	color: #490415;
-}
 
-.t {
-	color: #490415;
-	font-family: 'Open Sans', sans-serif;
-}
 
 .fadingButton {
-	background-color: #542538;
+	background-color: #F5F5FF;
 	border-radius: 10px;
-	border: none;
-	color: #C3809B;
+	border-color: #A5A5AA;
+	color: #000000;
 	padding: 8px 16px;
 	text-align: center;
 	font-size: 12px;
