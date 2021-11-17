@@ -2,6 +2,24 @@ notifySignal({ "intent": "relay", "content": "======================" });
 notifySignal({ "intent": "relay", "content": "Starting Reddit Script" });
 notifySignal({ "intent": "relay", "content": "======================" });
 
+// Check to see if the user has used the reddit script yet
+chrome.storage.local.get(['reddit_init'], function(result) {
+	if (result.reddit_init == undefined) {
+		// the user's never used reddit before
+		alert("Welcome!");
+		// Set init to true
+		chrome.storage.local.set({'reddit_init': 'true'}, function() {
+			console.log("Set reddit_init to true");
+		});
+	} else if (result.reddit_init == "true") {
+		// the user's used it, do nothing
+	} else {
+		// This shouldn't be possible, contact the devs plz
+		alert("Something went wrong! Please contact the devs with error code `FL_RI`");
+	}
+});
+
+
 let oldListSize = 0;
 const FeedType = {
     Home: 'home',

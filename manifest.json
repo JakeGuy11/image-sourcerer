@@ -13,7 +13,8 @@
     "<all_urls>",
     "activeTab",
     "downloads",
-    "downloads.open"
+    "downloads.open",
+    "storage"
   ],
 
   "browser_action": {
