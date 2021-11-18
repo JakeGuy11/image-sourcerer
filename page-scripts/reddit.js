@@ -14,8 +14,14 @@ chrome.storage.local.get(['reddit_init'], function(result) {
 		overall_div.style.left = overall_div.style.top = "0";
 		overall_div.style.zIndex = "99";
 		overall_div.innerHTML = `
-		<div style="position:absolute;left:35%;width:30%;height:50%;top:25%;padding:10px;background-color:#FFFFFF;border-radius:10px;">
-			hello worl
+		<div style="position:absolute;left:35%;width:30%;height:50%;top:25%;padding:10px;background-color:#F5F5FF;border-radius:10px;">
+			<div style="display:block;width:100%;height:80%;">
+			</div>
+			<div style="display:block;position:relative;width:100%;height:80%;">
+				<button type="button" style="position:absolute;height:20%;width:40%;left:30%;border-radius:3px;background-color:">
+					Ok, I understand!
+				</button>
+			</div>
 		</div>
 		`;
 		document.body.appendChild(overall_div);
