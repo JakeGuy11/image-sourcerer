@@ -4,19 +4,36 @@ notifySignal({ "intent": "relay", "content": "======================" });
 
 // Check to see if the user has used the reddit script yet
 chrome.storage.local.get(['reddit_init'], function(result) {
-	if (result.reddit_init == undefined) {
+	//if (result.reddit_init == undefined) {
 		// the user's never used reddit before
-		alert("Welcome!");
+		var overall_div = document.createElement("div");
+		overall_div.id = "welcome_modal";
+		overall_div.style.position = "fixed";
+		overall_div.style.backgroundColor = "#000000AA";
+		overall_div.style.width = overall_div.style.height = "100%";
+		overall_div.style.left = overall_div.style.top = "0";
+		overall_div.style.zIndex = "99";
+		overall_div.innerHTML = `
+		<div style="position:absolute;left:35%;width:30%;height:50%;top:25%;padding:10px;background-color:#FFFFFF;border-radius:10px;">
+			hello worl
+		</div>
+		`;
+		document.body.appendChild(overall_div);
+		//document.body.innerHTML += `
+		//<div id="welcome_modal" style="position:fixed;width:100vw;height:100vh;background-color:#00000055;z-index:999;">
+			
+		//</div>
+		//`;
 		// Set init to true
 		chrome.storage.local.set({'reddit_init': 'true'}, function() {
 			console.log("Set reddit_init to true");
 		});
-	} else if (result.reddit_init == "true") {
+	//} else if (result.reddit_init == "true") {
 		// the user's used it, do nothing
-	} else {
+	//} else {
 		// This shouldn't be possible, contact the devs plz
-		alert("Something went wrong! Please contact the devs with error code `FL_RI`");
-	}
+	//	alert("Something went wrong! Please contact the devs with error code `FL_RI`");
+	//}
 });
 
 
