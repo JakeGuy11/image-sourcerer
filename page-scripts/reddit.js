@@ -4,8 +4,9 @@ notifySignal({ "intent": "relay", "content": "======================" });
 
 // Check to see if the user has used the reddit script yet
 chrome.storage.local.get(['reddit_init'], function(result) {
-	//if (result.reddit_init == undefined) {
+	if (result.reddit_init != 'true') {
 		// the user's never used reddit before
+        // Show the modal
 		var overall_div = document.createElement("div");
 		overall_div.id = "welcome_modal";
 		overall_div.style.position = "fixed";
@@ -15,38 +16,41 @@ chrome.storage.local.get(['reddit_init'], function(result) {
 		overall_div.style.zIndex = "99";
 		overall_div.innerHTML = `
 		<div style="position:absolute;left:35%;width:30%;height:50%;top:25%;padding:10px;background-color:#F5F5FF;border-radius:10px;">
-            <div style="position:absolute;height:10%;width:10%;top:2%;right:2%">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="#888888" class="bi bi-x" viewBox="0 0 16 16">
-					<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-				</svg>
+            <div style="position:absolute;height:10%;width:10%;top:2%;right:2%;padding:0px;">
+                <svg id="modal_close" fill="#888888" viewBox="0 0 16 16">
+                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
             </div>
-			<div style="display:block;width:100%;height:80%;">
+            <div id="modal_title_text" style="display:bloxk;width:100%;height:8%;">
+            </div>
+			<div id="modal_body_text" style="display:block;width:100%;height:72%;overflow-y:auto;">
+                Here is my text Here is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my text
 			</div>
-			<div style="display:block;position:relative;width:100%;height:20%;">
-                <button style="display:block;position:absolute;height:80%;width:40%;left:30%;border-style:solid;border-radius:10px;border-color:#A5A5AA">
-                    Ok, I understand!
+			<div id="modal_button_holder" style="display:block;position:relative;width:100%;height:20%;">
+                <button id="modal_okay" style="display:block;position:absolute;height:80%;width:40%;left:30%;border-style:solid;border-radius:10px;border-color:#A5A5AA">
+                    Okay
                 </button>
 			</div>
 		</div>
 		`;
 		document.body.appendChild(overall_div);
-		//document.body.innerHTML += `
-		//<div id="welcome_modal" style="position:fixed;width:100vw;height:100vh;background-color:#00000055;z-index:999;">
-			
-		//</div>
-		//`;
-		// Set init to true
-		chrome.storage.local.set({'reddit_init': 'true'}, function() {
-			console.log("Set reddit_init to true");
-		});
-	//} else if (result.reddit_init == "true") {
-		// the user's used it, do nothing
-	//} else {
-		// This shouldn't be possible, contact the devs plz
-	//	alert("Something went wrong! Please contact the devs with error code `FL_RI`");
-	//}
+        // Set the listeners on the close buttons
+        let close_modal = function(div, ack) { 
+            div.parentNode.removeChild(div);
+            if (ack) {
+                chrome.storage.local.set({'reddit_init': 'true'}, function() {
+                    notifySignal({"intent": "relay", "content": "Set reddit_init to true"});
+                });
+            } else {
+                chrome.storage.local.set({'reddit_init': 'false'}, function() {
+                    notifySignal({"intent": "relay", "content": "Set reddit_init to false"});
+                });
+            }
+        };
+        document.getElementById("modal_close").addEventListener("click", close_modal.bind(null, overall_div, false));
+        document.getElementById("modal_okay").addEventListener("click", close_modal.bind(null, overall_div, true));
+	}
 });
-
 
 let oldListSize = 0;
 const FeedType = {
