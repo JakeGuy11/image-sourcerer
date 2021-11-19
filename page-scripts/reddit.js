@@ -15,12 +15,17 @@ chrome.storage.local.get(['reddit_init'], function(result) {
 		overall_div.style.zIndex = "99";
 		overall_div.innerHTML = `
 		<div style="position:absolute;left:35%;width:30%;height:50%;top:25%;padding:10px;background-color:#F5F5FF;border-radius:10px;">
+            <div style="position:absolute;height:10%;width:10%;top:2%;right:2%">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="#888888" class="bi bi-x" viewBox="0 0 16 16">
+					<path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+				</svg>
+            </div>
 			<div style="display:block;width:100%;height:80%;">
 			</div>
-			<div style="display:block;position:relative;width:100%;height:80%;">
-				<button type="button" style="position:absolute;height:20%;width:40%;left:30%;border-radius:3px;background-color:">
-					Ok, I understand!
-				</button>
+			<div style="display:block;position:relative;width:100%;height:20%;">
+                <button style="display:block;position:absolute;height:80%;width:40%;left:30%;border-style:solid;border-radius:10px;border-color:#A5A5AA">
+                    Ok, I understand!
+                </button>
 			</div>
 		</div>
 		`;
