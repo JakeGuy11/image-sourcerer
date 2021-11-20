@@ -21,10 +21,20 @@ chrome.storage.local.get(['reddit_init'], function(result) {
                     <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
                 </svg>
             </div>
-            <div id="modal_title_text" style="display:bloxk;width:100%;height:8%;">
+            <div id="modal_title_text" style="display:block;width:100%;height:12%;font-size:18px;">
+                <center style="padding-top:3%;">&#127881; Reddit is Image Sourcerer Compatible &#127881;</center>
             </div>
-			<div id="modal_body_text" style="display:block;width:100%;height:72%;overflow-y:auto;">
-                Here is my text Here is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my textHere is my text
+			<div id="modal_body_text" style="display:block;width:84%;height:68%;padding-left:8%;padding-right:8%;overflow-y:auto;">
+                <p>
+                    &emsp;&emsp;&emsp;You will find the download button in the upper left hand corner of each image. If there are multiple images in a post, there will be a download button on each image.
+                </p>
+                <center style="margin-top:4%;margin-bottom:5px;">Important:</center>
+                <p>
+                    &emsp;&emsp;&emsp;Note that some images may take longer than others to download; this is because they're stored in a different location, so they need to go through our Image Sourcerer servers before being downloaded. You need to keep the tab open until the download is complete, otherwise it will be cancelled. If you would like to see these download times decreased, please consider <a style="color:revert;text-decoration:revert;" href="https://jakeguy11.github.io/image-sourcerer-site/contribute.html" target="_blank">contributing to the project!</a>
+                </p>
+                <p style="margin-top:4%;">
+                    &emsp;&emsp;&emsp;To see this message again, you can click the "Site Help" button in the Image Sourcerer pop-up panel. To disable Image Sourcerer on this site, click the "Disable on this site" button in the pop-up.
+                </p>
 			</div>
 			<div id="modal_button_holder" style="display:block;position:relative;width:100%;height:20%;">
                 <button id="modal_okay" style="display:block;position:absolute;height:80%;width:40%;left:30%;border-style:solid;border-radius:10px;border-color:#A5A5AA">
