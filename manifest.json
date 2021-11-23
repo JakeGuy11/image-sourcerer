@@ -39,7 +39,7 @@
     {
       "run_at": "document_end",
       "matches": ["*://www.pixiv.net/*"],
-      "js": ["page-scripts/pixiv.js"]
+      "js": ["page-scripts/pixiv.js", "startup-scripts/pixiv-startup.js"]
     },
 	{
 	  "matches": ["*://danbooru.donmai.us/posts/*"],
@@ -58,7 +58,8 @@
 
   "web_accessible_resources": [
     "res/icons/download.png",
-    "res/icons/download-coloured.png"
+    "res/icons/download-coloured.png",
+    "startup-scripts/messages/pixiv.html"
   ]
 
 }

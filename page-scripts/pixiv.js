@@ -3,6 +3,9 @@ notifySignal({ "intent": "relay", "content": "=====================" });
 notifySignal({ "intent": "relay", "content": "Starting Pixiv Script" });
 notifySignal({ "intent": "relay", "content": "=====================" });
 
+// Do the startup stuff
+notifySignal({ "intent": "update_init", "site_meta": true });
+
 const DarkMode = {
 	OPNode: 'sc-10gpz4q-6 iJAMDQ',
 	BottomPosts: 'sc-iasfms-3 jDiPOg',
