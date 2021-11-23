@@ -2,65 +2,13 @@ notifySignal({ "intent": "relay", "content": "======================" });
 notifySignal({ "intent": "relay", "content": "Starting Reddit Script" });
 notifySignal({ "intent": "relay", "content": "======================" });
 
-// Check to see if the user has used the reddit script yet
-chrome.storage.local.get(['reddit_init'], function(result) {
-	if (result.reddit_init != 'true') {
-		// the user's never used reddit before
-        // Show the modal
-		var overall_div = document.createElement("div");
-		overall_div.id = "welcome_modal";
-		overall_div.style.position = "fixed";
-		overall_div.style.backgroundColor = "#000000AA";
-		overall_div.style.width = overall_div.style.height = "100%";
-		overall_div.style.left = overall_div.style.top = "0";
-		overall_div.style.zIndex = "99";
-		overall_div.innerHTML = `
-		<div style="position:absolute;left:35%;width:30%;height:50%;top:25%;padding:10px;background-color:#F5F5FF;border-radius:10px;">
-            <div style="position:absolute;height:10%;width:10%;top:2%;right:2%;padding:0px;">
-                <svg id="modal_close" fill="#888888" viewBox="0 0 16 16">
-                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                </svg>
-            </div>
-            <div id="modal_title_text" style="display:block;width:100%;height:12%;font-size:18px;">
-                <center style="padding-top:3%;">&#127881; Reddit is Image Sourcerer Compatible &#127881;</center>
-            </div>
-			<div id="modal_body_text" style="display:block;width:84%;height:68%;padding-left:8%;padding-right:8%;overflow-y:auto;">
-                <p>
-                    &emsp;&emsp;&emsp;You will find the download button in the upper left hand corner of each image. If there are multiple images in a post, there will be a download button on each image.
-                </p>
-                <center style="margin-top:4%;margin-bottom:5px;">Important:</center>
-                <p>
-                    &emsp;&emsp;&emsp;Note that some images may take longer than others to download; this is because they're stored in a different location, so they need to go through our Image Sourcerer servers before being downloaded. You need to keep the tab open until the download is complete, otherwise it will be cancelled. If you would like to see these download times decreased, please consider <a style="color:revert;text-decoration:revert;" href="https://jakeguy11.github.io/image-sourcerer-site/contribute.html" target="_blank">contributing to the project!</a>
-                </p>
-                <p style="margin-top:4%;">
-                    &emsp;&emsp;&emsp;To see this message again, you can click the "Site Help" button in the Image Sourcerer pop-up panel. To disable Image Sourcerer on this site, click the "Disable on this site" button in the pop-up.
-                </p>
-			</div>
-			<div id="modal_button_holder" style="display:block;position:relative;width:100%;height:20%;">
-                <button id="modal_okay" style="display:block;position:absolute;height:80%;width:40%;left:30%;border-style:solid;border-radius:10px;border-color:#A5A5AA">
-                    Okay
-                </button>
-			</div>
-		</div>
-		`;
-		document.body.appendChild(overall_div);
-        // Set the listeners on the close buttons
-        let close_modal = function(div, ack) { 
-            div.parentNode.removeChild(div);
-            if (ack) {
-                chrome.storage.local.set({'reddit_init': 'true'}, function() {
-                    notifySignal({"intent": "relay", "content": "Set reddit_init to true"});
-                });
-            } else {
-                chrome.storage.local.set({'reddit_init': 'false'}, function() {
-                    notifySignal({"intent": "relay", "content": "Set reddit_init to false"});
-                });
-            }
-        };
-        document.getElementById("modal_close").addEventListener("click", close_modal.bind(null, overall_div, false));
-        document.getElementById("modal_okay").addEventListener("click", close_modal.bind(null, overall_div, true));
-	}
-});
+// Make sure the script is enabled - exit if it's not
+let reddit_js_enabled = true;
+chrome.storage.local.get(function(result) { reddit_js_enabled = result.reddit_enabled; });
+if (!(reddit_js_enabled || (reddit_js_enabled == undefined))) { throw new Error(); }
+
+// Update the modal
+notifySignal({ "intent": "update_init", "site_meta": true });
 
 let oldListSize = 0;
 const FeedType = {

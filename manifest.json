@@ -30,7 +30,7 @@
     },
     {
       "matches": ["*://www.reddit.com/*"],
-      "js": ["page-scripts/reddit.js, startup-scripts/reddit-startup.js"]
+      "js": ["page-scripts/reddit.js", "startup-scripts/reddit-startup.js"]
     },
     {
       "matches": ["*://twitter.com/*"],
