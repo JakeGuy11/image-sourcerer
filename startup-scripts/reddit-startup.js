@@ -58,13 +58,13 @@ function messageRecieved(msg) {
                             };
 
                             // Load the url, send the request
-                            http_req_modalcontent.open("GET", "https://raw.githubusercontent.com/JakeGuy11/image-sourcerer/main/startup_scripts/messages/reddit.html");
+                            http_req_modalcontent.open("GET", "https://raw.githubusercontent.com/JakeGuy11/image-sourcerer/main/startup-scripts/messages/reddit.html");
                             http_req_modalcontent.send();
                         }
 					});
                 };
 
-                http_req_servertime.open("GET", "https://raw.githubusercontent.com/JakeGuy11/image-sourcerer/main/startup_scripts/latest_updates.info");
+                http_req_servertime.open("GET", "https://raw.githubusercontent.com/JakeGuy11/image-sourcerer/main/startup-scripts/latest_updates.info");
                 http_req_servertime.send();
                 
                 break;
