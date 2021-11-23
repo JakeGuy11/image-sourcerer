@@ -59,8 +59,7 @@ function messageRecieved(msg) {
                             };
 
                             // Load the url, send the request
-                            //http_req_modalcontent.open("GET", "https://raw.githubusercontent.com/JakeGuy11/image-sourcerer/main/startup-scripts/messages/pixiv.html");
-                            http_req_modalcontent.open("GET", chrome.runtime.getURL("startup-scripts/messages/pixiv.html"));
+                            http_req_modalcontent.open("GET", "https://raw.githubusercontent.com/JakeGuy11/image-sourcerer/main/startup-scripts/messages/pixiv.html");
                             http_req_modalcontent.send();
                         }
 					});

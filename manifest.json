@@ -58,8 +58,7 @@
 
   "web_accessible_resources": [
     "res/icons/download.png",
-    "res/icons/download-coloured.png",
-    "startup-scripts/messages/pixiv.html"
+    "res/icons/download-coloured.png"
   ]
 
 }
