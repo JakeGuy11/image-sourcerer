@@ -3,9 +3,20 @@ notifySignal({ "intent": "relay", "content": "=====================" });
 notifySignal({ "intent": "relay", "content": "Starting Pixiv Script" });
 notifySignal({ "intent": "relay", "content": "=====================" });
 
+const DarkMode = {
+	OPNode: 'sc-10gpz4q-6 iJAMDQ',
+	SeeAllButton: 'emr523-0 cwSjFV',
+	BottomPosts: 'sc-iasfms-3 jDiPOg',
+	SidePosts: 'sc-iasfms-3 hQJkLh',
+	FarBottomPosts: 'sc-iasfms-3 jDiQFZ'
+};
+
+// Set which mode it is
+mode = DarkMode;
+
 // Handle the download
-function startDownload(src, post_link, op) {
-    if (op == "") op = document.getElementsByClassName("sc-10gpz4q-6 iJAMDQ")[0].innerText.replace("\nAccepting requests", "");
+function startDownload(src, post_link, op, mode) {
+    if (op == "") op = document.getElementsByClassName(mode.OPNode)[0].innerText.replace("\nAccepting requests", "");
     notifySignal({ "intent": "relay", "content": "Asked to download image at " + post_link + " by " + op });
 
     var extention = "";
@@ -60,7 +71,7 @@ function startParse()
         // Get all the info we'll need
         var source = document.URL;
         var img_src = current_item.childNodes[0].href;
-        var op = document.getElementsByClassName("sc-10gpz4q-6 iJAMDQ")[0].innerText.replace("\nAccepting requests", "");
+        var op = document.getElementsByClassName(mode.OPNode)[0].innerText.replace("\nAccepting requests", "");
 
         var button_element = '<idl_button style="position:absolute;float:left;top:10px;left:10px;z-index:99"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" width=32></a></idl_button>';
         current_item.style.position = "relative";
@@ -71,9 +82,9 @@ function startParse()
     }
 
     // Add listeners to every suggested post to reload the page after clicked
-    let bottom_posts = Array.from(document.getElementsByClassName("sc-iasfms-3 jDiPOg"));
-    let side_posts = Array.from(document.getElementsByClassName("sc-iasfms-3 hQJkLh"));
-    let far_bottom_posts = Array.from(document.getElementsByClassName("sc-iasfms-3 jDiQFZ"));
+    let bottom_posts = Array.from(document.getElementsByClassName(mode.BottomPosts));
+    let side_posts = Array.from(document.getElementsByClassName(mode.SidePosts));
+    let far_bottom_posts = Array.from(document.getElementsByClassName(mode.FarBottomPosts));
     var posts_to_listen = bottom_posts.concat(side_posts, far_bottom_posts);
 
     for(current_preview of posts_to_listen)
@@ -91,7 +102,7 @@ function startParse()
 window.addEventListener('load', function () {
     setTimeout(function() {
         startParse();
-        let seeAllButton = document.getElementsByClassName("emr523-0 cwSjFV");
+        let seeAllButton = document.getElementsByClassName(mode.SeeAllButton);
         if (seeAllButton.length > 0)
         {
             seeAllButton[0].addEventListener("click", () => { setTimeout(() => { startParse(); }, 2000); });
