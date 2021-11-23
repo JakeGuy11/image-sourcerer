@@ -5,14 +5,20 @@ notifySignal({ "intent": "relay", "content": "=====================" });
 
 const DarkMode = {
 	OPNode: 'sc-10gpz4q-6 iJAMDQ',
-	SeeAllButton: 'emr523-0 cwSjFV',
+	BottomPosts: 'sc-iasfms-3 jDiPOg',
+	SidePosts: 'sc-iasfms-3 hQJkLh',
+	FarBottomPosts: 'sc-iasfms-3 jDiQFZ'
+};
+
+const LightMode = {
+	OPNode: 'sc-d98f2c-0 sc-10gpz4q-6 laVdFC',
 	BottomPosts: 'sc-iasfms-3 jDiPOg',
 	SidePosts: 'sc-iasfms-3 hQJkLh',
 	FarBottomPosts: 'sc-iasfms-3 jDiQFZ'
 };
 
 // Set which mode it is
-mode = DarkMode;
+mode = LightMode;
 
 // Handle the download
 function startDownload(src, post_link, op, mode) {
@@ -98,17 +104,6 @@ function startParse()
         });
     }
 }
-
-window.addEventListener('load', function () {
-    setTimeout(function() {
-        startParse();
-        let seeAllButton = document.getElementsByClassName(mode.SeeAllButton);
-        if (seeAllButton.length > 0)
-        {
-            seeAllButton[0].addEventListener("click", () => { setTimeout(() => { startParse(); }, 2000); });
-        }
-    }, 500);
-});
 
 window.onscroll = function() { startParse(); };
 
