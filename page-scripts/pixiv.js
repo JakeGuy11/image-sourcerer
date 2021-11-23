@@ -17,11 +17,11 @@ const LightMode = {
 	FarBottomPosts: 'sc-iasfms-3 jDiQFZ'
 };
 
-// Set which mode it is
-mode = LightMode;
+// Set which mode it is - will be updated periodically
+let mode = DarkMode;
 
 // Handle the download
-function startDownload(src, post_link, op, mode) {
+function startDownload(src, post_link, op) {
     if (op == "") op = document.getElementsByClassName(mode.OPNode)[0].innerText.replace("\nAccepting requests", "");
     notifySignal({ "intent": "relay", "content": "Asked to download image at " + post_link + " by " + op });
 
@@ -61,6 +61,18 @@ function startDownload(src, post_link, op, mode) {
 
 function startParse()
 {
+	// Update which mode the user is using
+	switch (document.getElementById('gtm-var-theme-kind').innerText) {
+		case 'dark':
+			mode = DarkMode;
+			break;
+		case 'default':
+			mode = LightMode;
+			break;
+		default:
+			mode = DarkMode;
+			break;
+	}
     // Find the link to the actual image
     var image_divs = Array.from(document.querySelectorAll("[role=\"presentation\"]"));
     // Remove the two elements we know we don't want
