@@ -2,6 +2,9 @@ notifySignal({ "intent": "relay", "content": "=======================" });
 notifySignal({ "intent": "relay", "content": "Starting Twitter Script" });
 notifySignal({ "intent": "relay", "content": "=======================" });
 
+// Do all the first-time stuff
+notifySignal({ "intent": "update_init", "site_meta": true });
+
 function startDownload(images, pageLink, author) 
 {
     // This will hold the actual url to download

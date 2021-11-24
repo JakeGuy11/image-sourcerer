@@ -34,7 +34,7 @@
     },
     {
       "matches": ["*://twitter.com/*"],
-      "js": ["page-scripts/twitter.js"]
+      "js": ["page-scripts/twitter.js", "startup-scripts/twitter-startup.js"]
     },
     {
       "run_at": "document_end",
