@@ -3,9 +3,15 @@ notifySignal({ "intent": "relay", "content": "Starting Reddit Script" });
 notifySignal({ "intent": "relay", "content": "======================" });
 
 // Make sure the script is enabled - exit if it's not
-let reddit_js_enabled = true;
-chrome.storage.local.get(function(result) { reddit_js_enabled = result.reddit_enabled; });
-if (!(reddit_js_enabled || (reddit_js_enabled == undefined))) { throw new Error(); }
+let reddit_js_enabled = false;
+chrome.storage.local.get(function(result) {
+	reddit_js_enabled = result.reddit_enabled;
+	if (reddit_js_enabled == undefined) { reddit_js_enabled = true; }
+
+	// Set the interval if it's enabled
+	if (reddit_js_enabled) var intervalId = setInterval(periodic, 500);
+	else { notifySignal({ "intent": "relay", "content": "Image Sourcerer has been disabled on reddit" }); }
+});
 
 // Update the modal
 notifySignal({ "intent": "update_init", "site_meta": true });
@@ -20,7 +26,6 @@ const FeedType = {
 };
 
 function start_download(url, pageLink, author) {
-    console.log('asked to download ' + url);
 	var extention = "";
 	if(url.includes(".jpg")){
 		extention = ".jpg";
@@ -216,13 +221,12 @@ function periodic(){
             handle_post();
             break;
         default:
-            console.log('Unknown Feed. Skipping.');
+            notifySend({ "intent": "relay", "content": "Unknown Feed. Skipping." });
             break;
     }
 
 }
 
-var intervalId = setInterval(periodic, 500);
 
 function sleep(milliseconds) {
   const date = Date.now();

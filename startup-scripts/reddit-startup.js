@@ -19,7 +19,6 @@ function messageRecieved(msg) {
 
                 // Add the function of what to do after the server update time is aquired
                 http_req_servertime.onload = function () {
-                    console.log("http_req_servertime loaded: given " + http_req_servertime.responseText);
                     if (http_req_servertime.readyState != 4 || http_req_servertime.status != 200) {} // Eventually, show error modal and return
                     // Check if it's newer than the local update time
                     let server_update_time = Number(http_req_servertime.responseText.split("<reddit>")[1].split("</reddit>")[0]);
@@ -27,9 +26,6 @@ function messageRecieved(msg) {
                         let local_update_time = storage_res.reddit_update_time;
                         if (local_update_time == undefined) local_update_time = 0;
                         let new_message_available = (server_update_time >= local_update_time);
-
-                        console.log("Is a new message available? " + new_message_available);
-                        console.log("server_update_time is " + server_update_time + " and local_update_time is " + local_update_time);
 
                         // if we're behind, show the new message
                         if (new_message_available) {
@@ -50,7 +46,7 @@ function messageRecieved(msg) {
                                 // Add all the listeners
                                 let close_modal = function (div, acknowledged) {
                                     div.parentNode.removeChild(div);
-                                    if (acknowledged) chrome.storage.local.set({'reddit_update_time': Math.floor((new Date).getTime()/1000)}, function() { console.log("acknowledged!"); });
+                                    if (acknowledged) chrome.storage.local.set({'reddit_update_time': Math.floor((new Date).getTime()/1000)}, function() {  });
                                     else chrome.storage.local.set({'reddit_update_time': 0}, function() { });
                                 };
                                 document.getElementById("modal_close").addEventListener("click", close_modal.bind(null, overall_div, false));
@@ -71,12 +67,15 @@ function messageRecieved(msg) {
             case 'toggle_enabled':
                 // Get the state of reddit_enabled
                 let reddit_is_enabled = false;
-                chrome.storage.local.get(function(result) { reddit_is_enabled = result.reddit_enabled; });
-                if (reddit_is_enabled == undefined) reddit_is_enabled = false;
+                chrome.storage.local.get(function(result) {
+			// Check if it's enabled
+			reddit_is_enabled = result.reddit_enabled;
+                	if (reddit_is_enabled == undefined) reddit_is_enabled = true;
 
-                // Toggle the state, write it
-                reddit_is_enabled = !reddit_is_enabled;
-                chrome.storage.local.set({'reddit_init': reddit_is_enabled}, function() { });
+                	// Toggle the state, write it
+                	reddit_is_enabled = !reddit_is_enabled;
+                	chrome.storage.local.set({'reddit_enabled': reddit_is_enabled}, function() { });
+		});
                 break;
             default:
                 // Do nothing
