@@ -25,7 +25,10 @@ let mode = DarkMode;
 
 // Handle the download
 function startDownload(src, post_link, op) {
-    if (op == "") op = document.getElementsByClassName(mode.OPNode)[0].innerText.replace("\nAccepting requests", "");
+    if (op == "") {
+        try { op = document.getElementsByClassName("sc-d98f2c-0 sc-10gpz4q-6 MJMrP")[0].innerText.replace("\nAccepting requests", ""); }
+        catch { op = document.getElementsByClassName("sc-d98f2c-0 sc-10gpz4q-6 fATptn")[0].innerText.replace("\nAccepting requests", ""); }
+    }
     notifySignal({ "intent": "relay", "content": "Asked to download image at " + post_link + " by " + op });
 
     var extention = "";
@@ -92,7 +95,9 @@ function startParse()
         // Get all the info we'll need
         var source = document.URL;
         var img_src = current_item.childNodes[0].href;
-        var op = document.getElementsByClassName(mode.OPNode)[0].innerText.replace("\nAccepting requests", "");
+        let op = undefined;
+        try { op = document.getElementsByClassName("sc-d98f2c-0 sc-10gpz4q-6 MJMrP")[0].innerText.replace("\nAccepting requests", ""); }
+        catch { op = document.getElementsByClassName("sc-d98f2c-0 sc-10gpz4q-6 fATptn")[0].innerText.replace("\nAccepting requests", ""); }
 
         var button_element = '<idl_button style="position:absolute;float:left;top:10px;left:10px;z-index:99"><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" width=32></a></idl_button>';
         current_item.style.position = "relative";
