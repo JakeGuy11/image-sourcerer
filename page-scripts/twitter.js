@@ -116,21 +116,24 @@ function get_feed_list(feed_root)
 
     var return_list;
 
+    console.log("feed root:");
+    console.log(feed_root);
+
     // We need to parse for the list of all the posts
     if (feed_root.childNodes.item(0).childNodes.item(3) != null)
     {
-        // If this evaluates to true, it's the home feed.
+        // HOME feed
         return_list = feed_root.childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
     }
     else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2) != null)
     {
-        // If this is true, it's a profile feed
+        // PROFILE feed
         return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
     }
-    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1) != null)
+    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes != null)
     {
-        // It's a single enlarged post
-        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+        // SINGLE ENLARGED POST
+        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
     }
     else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0) != null)
     {
@@ -173,11 +176,10 @@ function refreshNodes() {
     {
         // Create a blank array that will hold any images we want to download
         let interested_images = [];
+
         // Scan the post, adding any images we might want to download to the array
         for (var current_image of current_node.getElementsByTagName("img"))
-        {
             if (current_image.width >= 100 && current_image.height >= 100) interested_images.push(current_image.src);
-        }
         
         // If the list is empty, it's not a post we want to do anything else to
         if (interested_images.length == 0) continue;

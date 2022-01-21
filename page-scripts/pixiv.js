@@ -33,7 +33,7 @@ function startDownload(src, post_link, op) {
 
     var extention = "";
 
-     if(src.includes(".jpg")){
+    if(src.includes(".jpg")){
         extention = ".jpg";
     } else if(src.includes(".png")) {
         extention = ".png";
