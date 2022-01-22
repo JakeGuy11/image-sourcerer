@@ -1,6 +1,20 @@
-notifySignal({ "intent": "relay", "content": "======================" });
-notifySignal({ "intent": "relay", "content": "Starting Reddit Script" });
-notifySignal({ "intent": "relay", "content": "======================" });
+notifySignal({ "intent": "relay", "content": "=========================" });
+notifySignal({ "intent": "relay", "content": "Starting Instagram Script" });
+notifySignal({ "intent": "relay", "content": "=========================" });
+
+// Make sure the script is enabled - exit if it's not
+let insta_js_enabled = false;
+chrome.storage.local.get(function(result) {
+	insta_js_enabled = result.insta_enabled;
+	if (insta_js_enabled == undefined) { insta_js_enabled = true; }
+
+	// Set the interval if it's enabled
+	if (insta_js_enabled) var intervalId = setTimeout(periodic, 1000);
+	else { notifySignal({ "intent": "relay", "content": "Image Sourcerer has been disabled on insta" }); }
+});
+
+// Update the modal
+notifySignal({ "intent": "update_init", "site_meta": true });
 
 function start_download(url, pageLink, author) {
     console.log('asked to download ' + url);
@@ -9,8 +23,6 @@ function start_download(url, pageLink, author) {
 		extention = ".jpg";
 	} else if(url.includes(".png")) {
 		extention = ".png";
-	} else if(url.includes(".gif")) {
-		extention = ".gif";
 	} else {
 		notifySignal({ "intent": "relay", "content": "Extention could not be found." });
 		return;
@@ -28,15 +40,17 @@ function start_download(url, pageLink, author) {
         "ext": extention,
         "post_src": pageLink,
         "op": author,
-        "page": "https://www.reddit.com/",
+        "page": "https://www.instagram.com/",
     });
 }
 
+/*
 function delete_tags(node, tag) {
     for (var element of node.getElementsByTagName(tag)) {
         element.parentElement.removeChild(element);
     }
 }
+*/
 
 function parse_post(post) {
     console.log(post);
@@ -63,12 +77,6 @@ function periodic() {
     }
 }
 
-// REMOVE THE SETTIMEOUT AND UNCOMMENT THE SETINTERVAL
-// (they're for testing only)
-
-// var intervalId = setInterval(periodic, 500);
-setTimeout(periodic, 1000);
-
 function sleep(milliseconds) {
   const date = Date.now();
   let currentDate = null;
@@ -78,7 +86,7 @@ function sleep(milliseconds) {
 }
 
 function notifySignal(msg) {
-	msg.sender = "reddit.js";
+	msg.sender = "instagram.js";
 	if(!("intent" in msg)) msg.intent = "undefined_intent";
 	chrome.runtime.sendMessage(msg);
 }

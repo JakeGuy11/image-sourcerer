@@ -47,7 +47,7 @@
 	},
 	{
 	  "matches": ["*://www.instagram.com/*"],
-	  "js": ["page-scripts/instagram.js"]
+	  "js": ["page-scripts/instagram.js", "startup-scripts/instagram-startup.js"]
 	}
   ],
 
