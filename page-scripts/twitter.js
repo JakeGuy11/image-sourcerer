@@ -195,7 +195,7 @@ function refreshNodes() {
         let all_link_tags = current_node.getElementsByClassName(current_mode.LinkTags);
         let link = "";
         try { link = all_link_tags[all_link_tags.length - 1].href; }
-        catch (e) { link = document.location.href; }
+        catch (e) { link = document.URL; }
 
         // Add an IDL button to the post. If it's an enlarged post, use a modified button in a different position
         if (!is_enlarged_post(current_node, current_mode))
@@ -205,7 +205,6 @@ function refreshNodes() {
         }
         else
         {
-            link = document.URL;
             let button_code = buttonLink = '<idl_button align="right"><center><a><img src="' + chrome.runtime.getURL("res/icons/download-coloured.png") + '" height=32></a></center></idl_button>';
             current_node.getElementsByClassName(current_mode.FullInjectionSite)[0].childNodes[0].innerHTML += button_code;
         }
