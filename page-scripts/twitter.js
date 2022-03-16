@@ -116,29 +116,26 @@ function get_feed_list(feed_root)
 
     var return_list;
 
-    console.log("feed root:");
-    console.log(feed_root);
-
     // We need to parse for the list of all the posts
     if (feed_root.childNodes.item(0).childNodes.item(3) != null)
     {
         // HOME feed
-        return_list = feed_root.childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+        return_list = feed_root.childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
     }
     else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2) != null)
     {
         // PROFILE feed
-        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes;
     }
-    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes != null)
+    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1) != null)
     {
-        // SINGLE ENLARGED POST
-        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+        // HASHTAG feed
+        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
     }
-    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0) != null)
+    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0) != null)
     {
-        // It's a hashtag feed
-        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+        // SINGLE POST feed
+        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes;
     }
     else
     {
@@ -163,8 +160,6 @@ function refreshNodes() {
         console.log("Could not detect mode!");
         return;
     }
-
-    console.log(current_mode);
 
     // Define the feed root and send it to a method to get a list of all the posts. If it's null, exit the function.
     var feed_root = document.getElementsByClassName(current_mode.BaseNode)[0];
@@ -216,7 +211,6 @@ function refreshNodes() {
     }
 
 }
-
 
 setTimeout(function() { try {  var intervalId = setInterval(refreshNodes, 2000);  } catch (e) {  notifySignal({"intent": "relay", "content": "Error occurred: " + e});  }}, 5000);
 
