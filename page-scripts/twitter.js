@@ -62,28 +62,31 @@ function startDownload(images, pageLink, author)
 }
 
 const DarkMode = {
+    Mode: 'DARK',
     BaseNode: 'css-1dbjc4n r-kemksi r-1kqtdi0 r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-11wrixw r-61z16t r-1ye8kvj r-13qz1uu r-184en5c',
     FullPostIndicator: 'css-1dbjc4n r-1iusvr4 r-16y2uox r-1777fci r-1h8ys4a r-1bylmt5 r-13tjlyg r-7qyjyx r-1ftll1t',
-    OPTags: 'css-901oao css-bfa6kz r-9ilb82 r-18u37iz r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0',
-    LinkTags: 'css-4rbku5 css-18t94o4 css-901oao r-9ilb82 r-1loqt21 r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-3s2u2q r-qvutc0',
+    OPTags: 'css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21 r-1wbh5a2 r-dnmrzs r-1ny4l3l',
+    LinkTags: 'css-4rbku5 css-18t94o4 css-901oao r-1bwzh9t r-1loqt21 r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-3s2u2q r-qvutc0',
     FeedInjectionSite: 'css-1dbjc4n r-18kxxzh r-1wbh5a2 r-13qz1uu',
     FullInjectionSite: 'css-1dbjc4n r-1r5su4o'
 }
 
 const DimMode = {
+    Mode: 'DIM',
     BaseNode: 'css-1dbjc4n r-yfoy6g r-18bvks7 r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-11wrixw r-61z16t r-1ye8kvj r-13qz1uu r-184en5c',
     FullPostIndicator: 'css-1dbjc4n r-1iusvr4 r-16y2uox r-1777fci r-1h8ys4a r-1bylmt5 r-13tjlyg r-7qyjyx r-1ftll1t',
-    OPTags: 'css-901oao css-bfa6kz r-111h2gw r-18u37iz r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0',
-    LinkTags: 'css-901oao r-111h2gw r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-s1qlax r-qvutc0',
+    OPTags: 'css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21 r-1wbh5a2 r-dnmrzs r-1ny4l3l',
+    LinkTags: 'css-4rbku5 css-18t94o4 css-901oao r-115tad6 r-1loqt21 r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-3s2u2q r-qvutc0',
     FeedInjectionSite: 'css-1dbjc4n r-18kxxzh r-1wbh5a2 r-13qz1uu',
     FullInjectionSite: 'css-1dbjc4n r-1r5su4o'
 }
 
 const LightMode = {
+    Mode: 'LIGHT',
     BaseNode: 'css-1dbjc4n r-14lw9ot r-jxzhtn r-1ljd8xs r-13l2t4g r-1phboty r-1jgb5lz r-11wrixw r-61z16t r-1ye8kvj r-13qz1uu r-184en5c',
     FullPostIndicator: 'css-1dbjc4n r-1iusvr4 r-16y2uox r-1777fci r-1h8ys4a r-1bylmt5 r-13tjlyg r-7qyjyx r-1ftll1t',
-    OPTags: 'css-901oao css-bfa6kz r-14j79pv r-18u37iz r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-qvutc0',
-    LinkTags: 'css-901oao r-14j79pv r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-s1qlax r-qvutc0',
+    OPTags: 'css-4rbku5 css-18t94o4 css-1dbjc4n r-1loqt21 r-1wbh5a2 r-dnmrzs r-1ny4l3l',
+    LinkTags: 'css-4rbku5 css-18t94o4 css-901oao r-14j79pv r-1loqt21 r-1q142lx r-37j5jr r-a023e6 r-16dba41 r-rjixqe r-bcqeeo r-3s2u2q r-qvutc0',
     FeedInjectionSite: 'css-1dbjc4n r-18kxxzh r-1wbh5a2 r-13qz1uu',
     FullInjectionSite: 'css-1dbjc4n r-1r5su4o'
 }
@@ -116,31 +119,35 @@ function get_feed_list(feed_root)
 
     var return_list;
 
-    // We need to parse for the list of all the posts
-    if (feed_root.childNodes.item(0).childNodes.item(3) != null)
-    {
-        // HOME feed
-        return_list = feed_root.childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
-    }
-    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2) != null)
-    {
-        // PROFILE feed
-        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes;
-    }
-    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1) != null)
-    {
-        // HASHTAG feed
-        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
-    }
-    else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0) != null)
-    {
-        // SINGLE POST feed
-        return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes;
-    }
-    else
-    {
-        // We don't recognize it - do no parsing
-        return_list = null;
+    try {
+        // We need to parse for the list of all the posts
+        if (feed_root.childNodes.item(0).childNodes.item(3) != null)
+        {
+            // HOME feed
+            return_list = feed_root.childNodes.item(0).childNodes.item(3).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+        }
+        else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2) != null)
+        {
+            // PROFILE feed
+            return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(2).childNodes.item(1).childNodes.item(0).childNodes;
+        }
+        else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1) != null)
+        {
+            // HASHTAG feed
+            return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes.item(0).childNodes.item(1).childNodes.item(0).childNodes;
+        }
+        else if (feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0) != null)
+        {
+            // SINGLE POST feed
+            return_list = feed_root.childNodes.item(0).childNodes.item(1).childNodes.item(1).childNodes.item(0).childNodes;
+        }
+        else
+        {
+            // We don't recognize it - do no parsing
+            return_list = null;
+        }
+    } catch (err) {
+        console.error(err);
     }
     
     return return_list;
@@ -182,15 +189,13 @@ function refreshNodes() {
         // Find other elements - OP, link to the post, like button(?)
         // Get the OP
         let all_op_tags = current_node.getElementsByClassName(current_mode.OPTags);
-        let op = "";
-        if (all_op_tags.length < 1) op = "UNKNOWN";
-        else op = all_op_tags[all_op_tags.length - 1].innerText;
+        let op = all_op_tags[all_op_tags.length - 1].innerText;
 
         // Get the link
         let all_link_tags = current_node.getElementsByClassName(current_mode.LinkTags);
         let link = "";
-        if (all_link_tags.length < 1) link = "UNKNOWN";
-        else link = all_link_tags[all_link_tags.length - 1].href;
+        try { link = all_link_tags[all_link_tags.length - 1].href; }
+        catch (e) { link = document.location.href; }
 
         // Add an IDL button to the post. If it's an enlarged post, use a modified button in a different position
         if (!is_enlarged_post(current_node, current_mode))
