@@ -27,28 +27,8 @@
     {
       "matches": ["<all_urls>"],
       "js": ["main.js"]
-    },
-    {
-      "matches": ["*://www.reddit.com/*"],
-      "js": ["page-scripts/reddit.js", "startup-scripts/reddit-startup.js"]
-    },
-    {
-      "matches": ["*://twitter.com/*"],
-      "js": ["page-scripts/twitter.js", "startup-scripts/twitter-startup.js"]
-    },
-    {
-      "run_at": "document_end",
-      "matches": ["*://www.pixiv.net/*"],
-      "js": ["page-scripts/pixiv.js", "startup-scripts/pixiv-startup.js"]
-    },
-	{
-	  "matches": ["*://danbooru.donmai.us/posts/*"],
-	  "js": ["page-scripts/danbooru.js"]
-	},
-	{
-	  "matches": ["*://www.instagram.com/*"],
-	  "js": ["page-scripts/instagram.js", "startup-scripts/instagram-startup.js"]
-	}
+    }
+    
   ],
 
   "background": {
