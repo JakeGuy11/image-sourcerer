@@ -24,7 +24,7 @@ git clone git@github.com:JakeGuy11/image-sourcerer.git
 3. You will have to enable developer mode by toggling the switch usually in the upper right corner. Click "Load Unpacked", navigate to where you saved the repository and select open.
 5. Open any supported site. The extension should now be functional.
 # Supported Sites
-We'll have to see (nothing at the moment)
+We'll have to see (nothing at the moment, as all scripts must be updated).
 
 # Contact Me
 If you have any feedback, suggestions, errors or just general comments, please email me at Jake_Guy_11@protonmail.ch, or open an error through GitHub. If you have inquiries about *beta testing specifically*, read the [beta testing document](https://github.com/JakeGuy11/image-sourcerer/blob/main/beta-testing.md).
