@@ -4,7 +4,7 @@
 
 # IMPORTANT NOTICE - README!!!
 
-Up until now, this extention has been written in a not very expandable way - every single type of post needed to be defined extensively and individually. It also relied *heavily* on poorly nested try statements. Obviously, this is a bad way to do it. I've currently got a few things on my plate, but as soon as I have a few days free, I plan on rewriting nearly every page script so they run both smarter and faster. Until then, the extention may or may not work on certain sites. It shouldn't be too long before I start rewriting, so keep an eye out for new versions!
+This extension has remained unmaintained for over a year, but I'm finally beginning to re-update it! Please be patient as, yet again, I work through all site scripts and basically re-make them to work with the newer versions of the websites.
 
 ~~We are currently looking for beta testers! Find out more [here](https://github.com/JakeGuy11/image-sourcerer/blob/main/beta-testing.md)!~~
 
@@ -24,8 +24,7 @@ git clone git@github.com:JakeGuy11/image-sourcerer.git
 3. You will have to enable developer mode by toggling the switch usually in the upper right corner. Click "Load Unpacked", navigate to where you saved the repository and select open.
 5. Open any supported site. The extension should now be functional.
 # Supported Sites
-- [Reddit](https://www.reddit.com/)
-- [Twitter](https://twitter.com/home)
+We'll have to see (nothing at the moment)
 
 # Contact Me
 If you have any feedback, suggestions, errors or just general comments, please email me at Jake_Guy_11@protonmail.ch, or open an error through GitHub. If you have inquiries about *beta testing specifically*, read the [beta testing document](https://github.com/JakeGuy11/image-sourcerer/blob/main/beta-testing.md).
