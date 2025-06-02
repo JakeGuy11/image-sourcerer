@@ -4,7 +4,7 @@
 
 # IMPORTANT NOTICE
 
-This extension has remained unmaintained for over a year, but I'm finally beginning to re-update it! Please be patient as, yet again, I work through all site scripts and basically re-make them to work with the newer versions of the websites.
+Unfortunately, due to some unexpected circumstances and the natural progression of my educational journey, this project is (and is planned to remain) unmaintained. I would like to thank everyone for their support and dedication to the project. The only constant in life is change, but that won't stop me from holding dear everything that came before.
 
 ~~We are currently looking for beta testers! Find out more [here](https://github.com/JakeGuy11/image-sourcerer/blob/main/beta-testing.md)!~~
 
@@ -13,8 +13,6 @@ This extension has remained unmaintained for over a year, but I'm finally beginn
   - Instagram
   - Pixiv
   - Reddit
-  - Reddit
-  - Danbooru
 - Restyle and update website
 - Update proxy
 - Deploy to chrome store
